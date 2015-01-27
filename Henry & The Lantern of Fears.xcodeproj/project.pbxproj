@@ -28,6 +28,7 @@
 		2540F83B1A71467A00AB4625 /* Henry___The_Lantern_of_FearsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2540F83A1A71467A00AB4625 /* Henry___The_Lantern_of_FearsTests.m */; };
 		25B658761A7691F000836621 /* Ghost.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B658751A7691F000836621 /* Ghost.m */; };
 		25B658781A76937400836621 /* ghost.png in Resources */ = {isa = PBXBuildFile; fileRef = 25B658771A76937400836621 /* ghost.png */; };
+		25D3F5081A780A8B000F8912 /* henryLantern.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D3F5071A780A8B000F8912 /* henryLantern.png */; };
 		25FCDB411A714AF600B842F2 /* Henry.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FCDB401A714AF600B842F2 /* Henry.m */; };
 		25FCDB471A716B1E00B842F2 /* rightButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FCDB461A716B1E00B842F2 /* rightButton.png */; };
 		25FCDB4F1A717BF000B842F2 /* leftButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FCDB4E1A717BF000B842F2 /* leftButton.png */; };
@@ -96,6 +97,7 @@
 		25B658741A7691F000836621 /* Ghost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ghost.h; sourceTree = "<group>"; };
 		25B658751A7691F000836621 /* Ghost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ghost.m; sourceTree = "<group>"; };
 		25B658771A76937400836621 /* ghost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ghost.png; sourceTree = "<group>"; };
+		25D3F5071A780A8B000F8912 /* henryLantern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = henryLantern.png; sourceTree = "<group>"; };
 		25FCDB3F1A714AF600B842F2 /* Henry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Henry.h; path = ../Henry.h; sourceTree = "<group>"; };
 		25FCDB401A714AF600B842F2 /* Henry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Henry.m; path = ../Henry.m; sourceTree = "<group>"; };
 		25FCDB461A716B1E00B842F2 /* rightButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightButton.png; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 		250627A91A75712B00325CEE /* Henry */ = {
 			isa = PBXGroup;
 			children = (
+				25D3F5071A780A8B000F8912 /* henryLantern.png */,
 				250627B41A7579A500325CEE /* RunAnimation */,
 				250627AA1A75713C00325CEE /* IdleAnimation */,
 			);
@@ -233,12 +236,10 @@
 				2540F8231A71467A00AB4625 /* GameScene.sks */,
 				2540F8251A71467A00AB4625 /* GameViewController.h */,
 				2540F8261A71467A00AB4625 /* GameViewController.m */,
-				339EA2291A77E725003B0BBD /* WorldSelection.png */,
 				2EE9EF511A76CADF00A6A3B0 /* Mundos.h */,
 				2EE9EF521A76CADF00A6A3B0 /* Mundos.m */,
 				2540F8281A71467A00AB4625 /* Main.storyboard */,
 				2540F82B1A71467A00AB4625 /* Images.xcassets */,
-				339EA22B1A77EE66003B0BBD /* DarkBackground.jpg */,
 				2E8CA23A1A76C51F005F41E5 /* Menu.h */,
 				2E8CA2381A76C518005F41E5 /* Menu.m */,
 				250627A91A75712B00325CEE /* Henry */,
@@ -251,6 +252,8 @@
 		2540F8191A71467A00AB4625 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				339EA2291A77E725003B0BBD /* WorldSelection.png */,
+				339EA22B1A77EE66003B0BBD /* DarkBackground.jpg */,
 				339EA22D1A77FBB0003B0BBD /* ground */,
 				250628011A75F8C000325CEE /* nightForestMusic.mp3 */,
 				250628031A75F8C400325CEE /* nightForestSound.mp3 */,
@@ -407,6 +410,7 @@
 				339EA23F1A77FC77003B0BBD /* idle2.png in Resources */,
 				25FCDB531A72746800B842F2 /* x.png in Resources */,
 				339EA2391A77FBDD003B0BBD /* run2.png in Resources */,
+				25D3F5081A780A8B000F8912 /* henryLantern.png in Resources */,
 				2540F8241A71467A00AB4625 /* GameScene.sks in Resources */,
 				3BA8DEE71A769A3A00740706 /* ground.png in Resources */,
 				25FCDB4F1A717BF000B842F2 /* leftButton.png in Resources */,

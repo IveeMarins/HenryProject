@@ -296,6 +296,10 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             
             if(!_isGameOver){
             _lanternLit = YES;
+            [_henry removeActionForKey:@"idleAnimation"];
+                [_henry removeActionForKey:@"walkAnimation"];
+                [_henry removeActionForKey:@"walkLeft"];
+                [_henry removeActionForKey:@"walkRight"];
             [_henry pickLantern];
             }
         }
@@ -341,7 +345,10 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             }];
             [_henry enumerateChildNodesWithName:@"fakeLanternLight" usingBlock:^(SKNode *node, BOOL *stop) {
                 [node removeFromParent];
+                
+                
             }];
+            [_henry idleAnimation];
         }
         
     };
@@ -436,30 +443,30 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     }
     
     
-    [_henry enumerateChildNodesWithName:@"lanternLightParticle" usingBlock:^(SKNode *node, BOOL *stop) {
-        if(!_flipped){
-        
-            CGPoint nodePosition = [_world convertPoint:node.position fromNode:node.parent];
-            
-            if(_bat.position.x - nodePosition.x < 100 && _bat.position.x - nodePosition.x > 0){
-                [_bat removeFromParent];
-            }
-            
-            if (_ghost.position.x - nodePosition.x < 150 && _ghost.position.x - nodePosition.x>0) {
-                [_ghost removeFromParent];
-            }
-            
-        }
-        else{
-            CGPoint nodePosition = [_world convertPoint:node.position fromNode:node.parent];
-        
-            if(nodePosition.x - _bat.position.x < 100 && nodePosition.x - _bat.position.x > 0){
-                [_bat removeFromParent];
-            }
-            
-        }
-    }];
-    
+//    [_henry enumerateChildNodesWithName:@"lanternLightParticle" usingBlock:^(SKNode *node, BOOL *stop) {
+//        if(!_flipped){
+//        
+//            CGPoint nodePosition = [_world convertPoint:node.position fromNode:node.parent];
+//            
+//            if(_bat.position.x - nodePosition.x < 100 && _bat.position.x - nodePosition.x > 0){
+//                [_bat removeFromParent];
+//            }
+//            
+//            if (_ghost.position.x - nodePosition.x < 150 && _ghost.position.x - nodePosition.x>0) {
+//                [_ghost removeFromParent];
+//            }
+//            
+//        }
+//        else{
+//            CGPoint nodePosition = [_world convertPoint:node.position fromNode:node.parent];
+//        
+//            if(nodePosition.x - _bat.position.x < 100 && nodePosition.x - _bat.position.x > 0){
+//                [_bat removeFromParent];
+//            }
+//            
+//        }
+//    }];
+    _henry.killRect.position = CGPointMake(_henry.frame.size.width * 0.5 + 5 + _henry.killRect.frame.size.width * 0.5,- 20);
         
     
     
