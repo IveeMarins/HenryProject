@@ -12,20 +12,24 @@
 	<dict>
 		<key>CEF7BD8EE919BEDB709CF19957C560F92C371C7E</key>
 		<string>https://github.com/Drikoso/Henry-The-Lantern-of-Fears.git</string>
+		<key>E04E141399C2AFA478E015B87B6650AC81D806DD</key>
+		<string>https://github.com/IveeMarins/HenryProject.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Henry &amp; The Lantern of Fears.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>CEF7BD8EE919BEDB709CF19957C560F92C371C7E</key>
+		<string>../../../Henry%20&amp;%20The%20Lantern%20of%20Fears</string>
+		<key>E04E141399C2AFA478E015B87B6650AC81D806DD</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/Drikoso/Henry-The-Lantern-of-Fears.git</string>
+	<string>https://github.com/IveeMarins/HenryProject.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>CEF7BD8EE919BEDB709CF19957C560F92C371C7E</string>
+	<string>E04E141399C2AFA478E015B87B6650AC81D806DD</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -35,6 +39,14 @@
 			<string>CEF7BD8EE919BEDB709CF19957C560F92C371C7E</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Henry%20&amp;%20The%20Lantern%20of%20Fears</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E04E141399C2AFA478E015B87B6650AC81D806DD</string>
+			<key>IDESourceControlWCCName</key>
+			<string>HenryProject</string>
 		</dict>
 	</array>
 </dict>
