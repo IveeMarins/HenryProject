@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D585EBCC-5D2E-41E8-AB3B-699DB6F37388</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Henry &amp; The Lantern of Fears</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>CEF7BD8EE919BEDB709CF19957C560F92C371C7E</key>
+		<string>https://github.com/Drikoso/Henry-The-Lantern-of-Fears.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Henry &amp; The Lantern of Fears.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>CEF7BD8EE919BEDB709CF19957C560F92C371C7E</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Drikoso/Henry-The-Lantern-of-Fears.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>CEF7BD8EE919BEDB709CF19957C560F92C371C7E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>CEF7BD8EE919BEDB709CF19957C560F92C371C7E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Henry%20&amp;%20The%20Lantern%20of%20Fears</string>
+		</dict>
+	</array>
+</dict>
+</plist>

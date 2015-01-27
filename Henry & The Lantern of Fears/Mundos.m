@@ -1,0 +1,91 @@
+//
+//  Mundos.m
+//  Henry & The Lantern of Fears
+//
+//  Created by Bruno Baring on 1/26/15.
+//  Copyright (c) 2015 ABHI. All rights reserved.
+//
+
+#import "Mundos.h"
+#import "GameScene.h"
+
+@implementation Mundos
+{
+    SKSpriteNode *_world;
+    SKSpriteNode *_world1;
+    SKLabelNode *_carregando;
+
+}
+-(id)initWithSize:(CGSize)size {
+    if (self = [super initWithSize:size]) {
+        
+        
+        self.backgroundColor = [UIColor whiteColor];
+        
+        _world = [SKSpriteNode spriteNodeWithImageNamed:(@"worldSelection")];
+        _world.position = CGPointMake(self.scene.frame.size.width * 0.5 , self.scene.frame.size.height * 0.5 - 20);
+        _world.size = CGSizeMake(self.scene.frame.size.width , self.scene.frame.size.height + 100 ) ;
+        [self addChild: _world];
+        
+        _world1 = [SKSpriteNode spriteNodeWithImageNamed:@"magicStone"];
+        _world1.position = CGPointMake(58, 315);
+        _world1.size = CGSizeMake(80, 80);
+        _world1.name = @"mundo1";
+        
+        [self addChild: _world1];
+        [self animateWithPulse: _world1];
+        
+        
+    }
+    return self;
+}
+
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    for (UITouch *touch in touches) {
+        SKNode *n = [self nodeAtPoint:[touch locationInNode:self]];
+        if([n.name isEqualToString:@"mundo1"]){
+            NSLog(@"entrou no jogo %@",n.name);
+            
+            _carregando = [SKLabelNode labelNodeWithFontNamed:@"Helvetica"];
+            _carregando.text = @"Carregando...";
+            _carregando.fontColor = [UIColor redColor];
+            _carregando.fontSize = 30;
+            _carregando.position = CGPointMake(self.frame.size.width * 0.5, self.frame.size.height * 0.5);
+            _carregando.name = @"carregando";
+            
+            [self addChild:_carregando];
+        }
+
+    }
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    for (UITouch *touch in touches) {
+        SKNode *n = [self nodeAtPoint:[touch locationInNode:self]];
+        if([n.name isEqualToString:@"mundo1"]){
+            NSLog(@"entrou no jogo %@",n.name);
+            
+            GameScene *scene = [[GameScene alloc] initWithSize:self.view.bounds.size];
+            scene.anchorPoint = CGPointMake(0.5, 0.5);
+            scene.scaleMode = SKSceneScaleModeAspectFill;
+            
+            // Present the scene.
+            SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+            [self.view presentScene:scene transition: reveal];
+            
+        }
+    }
+}
+
+-(void)animateWithPulse:(SKNode *)node
+{
+    SKAction *disappear = [SKAction fadeAlphaTo:0.0 duration:0.8];
+    SKAction *appear = [SKAction fadeAlphaTo:1.0 duration:0.8];
+    SKAction *pulse = [SKAction sequence:@[disappear,appear]];
+    [node runAction:[SKAction repeatActionForever:pulse]];
+}
+
+@end
