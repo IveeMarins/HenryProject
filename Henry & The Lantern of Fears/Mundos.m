@@ -24,19 +24,18 @@
         
         self.backgroundColor = [UIColor whiteColor];
         
-        _world = [SKSpriteNode spriteNodeWithImageNamed:(@"WorldSelection")];
-        _world.position = CGPointMake(self.scene.frame.size.width * 0.5 , self.scene.frame.size.height * 0.5 - 20);
-        _world.size = CGSizeMake(self.scene.frame.size.width , self.scene.frame.size.height + 100 ) ;
+        _world = [SKSpriteNode spriteNodeWithImageNamed:(@"worldScene")];
+        _world.position = CGPointMake(self.scene.frame.size.width * 0.5 , self.scene.frame.size.height * 0.5);
+        _world.size = CGSizeMake(self.scene.frame.size.width , self.scene.frame.size.height) ;
         [self addChild: _world];
         
-        _world1 = [SKSpriteNode spriteNodeWithImageNamed:@"magicStone"];
-        _world1.position = CGPointMake(58, 315);
+        _world1 = [SKSpriteNode spriteNodeWithImageNamed:@"cristalVerde"];
+        _world1.position = CGPointMake(58, 280);
         _world1.size = CGSizeMake(80, 80);
         _world1.name = @"mundo1";
         
         [self addChild: _world1];
         [self animateWithPulse: _world1];
-        
         
         _circle = [SKShapeNode shapeNodeWithCircleOfRadius:12.0];
         _circle.position = CGPointMake( self.scene.frame.size.width *0.5 +300, self.scene.frame.size.height * 0.5 + 170);
@@ -46,7 +45,7 @@
         
         _configuracao = [SKSpriteNode spriteNodeWithImageNamed:@"gear"];
         _configuracao.size = CGSizeMake(20.0,20.0);
-        _configuracao.position = CGPointMake( self.scene.frame.size.width *0.5 +320, self.scene.frame.size.height * 0.5 + 170);
+        _configuracao.position = CGPointMake( self.scene.frame.size.width *0.5 +300, self.scene.frame.size.height * 0.5 + 170);
         _configuracao.zPosition=1;
         [self addChild:_circle];
         [self addChild:_configuracao];
