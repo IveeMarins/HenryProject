@@ -362,7 +362,8 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             }];
             
         }
-        else{
+        else if(![n.name isEqualToString:@"jumpButton"]){
+            
             _rightButtonPressed = NO;
             _leftButtonPressed = NO;
             _lanternLit = NO;
@@ -372,6 +373,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             [_henry removeActionForKey:@"walkAnimation"];
             [_henry idleAnimation];
         }
+        
     };
     
 }
