@@ -18,20 +18,16 @@
     if (self = [super initWithSize:size])
     {
         SKSpriteNode *Background;
-        Background = [SKSpriteNode spriteNodeWithImageNamed: @"DarkBackground.jpg"];
+        Background = [SKSpriteNode spriteNodeWithImageNamed: @"startScreenBackground.jpg"];
         Background.position = CGPointMake(self.scene.frame.size.width *0.5, self.scene.frame.size.height * 0.5);
         Background.size = CGSizeMake(self.scene.frame.size.width + 50, self.scene.frame.size.height);
+        [Background setScale:1.05];
         [self addChild:Background];
         
-        SKLabelNode *título = [SKLabelNode labelNodeWithFontNamed:@"Bodoni 72 Smallcaps"];
-        título.text = @"Henry & The Lantern of Fears";
-        título.position = CGPointMake( self.scene.frame.size.width * 0.5 - 70 , self.scene.frame.size.height * 0.5 + 100);
-        título.fontSize = 40;
-        [self addChild: título];
         SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"Bodoni 72 Smallcaps"];
         label.text = @"Start";
         label.fontSize = 30;
-        label.position = CGPointMake(200,200);
+        label.position = CGPointMake(self.scene.frame.size.width * 0.5 ,self.scene.frame.size.height * 0.5 - 180);
         label.name = @"start";
         
         [self addChild:label];
