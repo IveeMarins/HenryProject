@@ -13,12 +13,11 @@
 
 +(id)kopp:(Henry *)henry
 {
-    
-    Kopp *kopp = [Kopp spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(20, 20)];
+    Kopp *kopp = [Kopp spriteNodeWithImageNamed: @"kopp"];
+    kopp.size = CGSizeMake(50, 50);
+    //Kopp *kopp = [Kopp spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(20, 20)];
     [henry addChild:kopp];
-    kopp.position = CGPointMake(-henry.frame.size.width * 0.5 -kopp.frame.size.width, 30);
-    
-    
+    kopp.position = CGPointMake(-henry.frame.size.width * 0.5 -kopp.frame.size.width + 15, 30);
     
     return kopp;
 }

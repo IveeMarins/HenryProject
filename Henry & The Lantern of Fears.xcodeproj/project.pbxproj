@@ -51,6 +51,7 @@
 		339EA2431A7927F9003B0BBD /* startScreenBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 339EA2421A7927F9003B0BBD /* startScreenBackground.jpg */; };
 		339EA2491A7940CD003B0BBD /* cristalVerde.png in Resources */ = {isa = PBXBuildFile; fileRef = 339EA2481A7940CD003B0BBD /* cristalVerde.png */; };
 		339EA24B1A7940DB003B0BBD /* worldScene.png in Resources */ = {isa = PBXBuildFile; fileRef = 339EA24A1A7940DB003B0BBD /* worldScene.png */; };
+		339EA24F1A7943F7003B0BBD /* kopp.png in Resources */ = {isa = PBXBuildFile; fileRef = 339EA24E1A7943F7003B0BBD /* kopp.png */; };
 		3BA8DEDF1A768A1700740706 /* backgroundTrees2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA8DEDE1A768A1700740706 /* backgroundTrees2.png */; };
 		3BA8DEE11A768A4D00740706 /* backgroundTrees.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA8DEE01A768A4D00740706 /* backgroundTrees.png */; };
 		3BA8DEE31A768AB000740706 /* backgroundMountain.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA8DEE21A768AB000740706 /* backgroundMountain.png */; };
@@ -126,6 +127,7 @@
 		339EA2421A7927F9003B0BBD /* startScreenBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = startScreenBackground.jpg; sourceTree = "<group>"; };
 		339EA2481A7940CD003B0BBD /* cristalVerde.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cristalVerde.png; sourceTree = "<group>"; };
 		339EA24A1A7940DB003B0BBD /* worldScene.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = worldScene.png; sourceTree = "<group>"; };
+		339EA24E1A7943F7003B0BBD /* kopp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kopp.png; sourceTree = "<group>"; };
 		3BA8DEDE1A768A1700740706 /* backgroundTrees2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundTrees2.png; sourceTree = "<group>"; };
 		3BA8DEE01A768A4D00740706 /* backgroundTrees.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundTrees.png; sourceTree = "<group>"; };
 		3BA8DEE21A768AB000740706 /* backgroundMountain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundMountain.png; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 		2540F8191A71467A00AB4625 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				339EA24E1A7943F7003B0BBD /* kopp.png */,
 				339EA24A1A7940DB003B0BBD /* worldScene.png */,
 				339EA2481A7940CD003B0BBD /* cristalVerde.png */,
 				339EA2421A7927F9003B0BBD /* startScreenBackground.jpg */,
@@ -403,6 +406,7 @@
 				339EA23E1A77FC77003B0BBD /* idle1.png in Resources */,
 				339EA24B1A7940DB003B0BBD /* worldScene.png in Resources */,
 				339EA22A1A77E725003B0BBD /* WorldSelection.png in Resources */,
+				339EA24F1A7943F7003B0BBD /* kopp.png in Resources */,
 				25FCDB471A716B1E00B842F2 /* rightButton.png in Resources */,
 				250627951A72F54300325CEE /* lanternLight.sks in Resources */,
 				25FCDB5E1A72A7A000B842F2 /* bat.png in Resources */,
