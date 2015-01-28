@@ -170,28 +170,41 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     
     [_HUD addChild:lanternButton];
     
+    SKShapeNode *circle1 = [SKShapeNode shapeNodeWithCircleOfRadius:13.0];
+    circle1.position = CGPointMake(0,0);
+    circle1.fillColor = [UIColor whiteColor];
+    
     SKSpriteNode *configButton = [SKSpriteNode spriteNodeWithImageNamed:@"gear"];
     configButton.size = CGSizeMake(20, 20);
     configButton.name = @"configButton";
     configButton.position = CGPointMake(self.frame.size.width * 0.5 - configButton.frame.size.width * 0.5 - 5,
                                          self.frame.size.height * 0.5 - configButton.frame.size.height * 0.5 - 5);
-    
+    [configButton addChild:circle1];
     [_HUD addChild:configButton];
+    
+    
+    SKShapeNode *circle2 = [SKShapeNode shapeNodeWithCircleOfRadius:13.0];
+    circle2.position = CGPointMake(0,0);
+    circle2.fillColor = [UIColor whiteColor];
     
     SKSpriteNode *encyclopediaButton = [SKSpriteNode spriteNodeWithImageNamed:@"book"];
     encyclopediaButton.size = CGSizeMake(20, 20);
     encyclopediaButton.name = @"encyclopediaButton";
     encyclopediaButton.position = CGPointMake(self.frame.size.width * 0.5 - encyclopediaButton.frame.size.width * 2.0 - 10,
                                         self.frame.size.height * 0.5 - encyclopediaButton.frame.size.height * 0.5 - 5);
-    
+    [encyclopediaButton addChild:circle2];
     [_HUD addChild:encyclopediaButton];
+    
+    SKShapeNode *circle3 = [SKShapeNode shapeNodeWithCircleOfRadius:13.0];
+    circle3.position = CGPointMake(0,0);
+    circle3.fillColor = [UIColor whiteColor];
     
     SKSpriteNode *changeStoneButton = [SKSpriteNode spriteNodeWithImageNamed:@"magicStone"];
     changeStoneButton.size = CGSizeMake(20, 20);
     changeStoneButton.name = @"changeStoneButton";
     changeStoneButton.position = CGPointMake(self.frame.size.width * 0.5 - changeStoneButton.frame.size.width * 4.0 - 10,
                                               self.frame.size.height * 0.5 - changeStoneButton.frame.size.height * 0.5 - 5);
-    
+    [changeStoneButton addChild:circle3];
     [_HUD addChild:changeStoneButton];
     
     // Inserting Life and Score

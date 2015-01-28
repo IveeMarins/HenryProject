@@ -13,6 +13,7 @@
 
 @implementation Menu
 
+
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size])
     {
@@ -27,7 +28,6 @@
         título.position = CGPointMake( self.scene.frame.size.width * 0.5 - 70 , self.scene.frame.size.height * 0.5 + 100);
         título.fontSize = 40;
         [self addChild: título];
-        
         SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"Bodoni 72 Smallcaps"];
         label.text = @"Start";
         label.fontSize = 30;
@@ -36,6 +36,9 @@
         
         [self addChild:label];
         [self animateWithPulse:label];
+        
+        
+        
         
     }
     return self;
