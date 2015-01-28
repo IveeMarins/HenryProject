@@ -42,9 +42,13 @@
     [polygonShapeBezierPath addLineToPoint:CGPointMake(henry.frame.size.width * 0.5 + 5, 10)];
     henry.killPolygon.path = polygonShapeBezierPath.CGPath;
     henry.killPolygon.position = CGPointMake(henry.killPolygon.position.x,henry.killPolygon.position.y - 20);
-    henry.killPolygon.fillColor = [UIColor blueColor];
+    henry.killPolygon.strokeColor = [UIColor clearColor];
+    henry.killPolygon.fillColor = [UIColor clearColor];
     henry.killPolygon.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:henry.killPolygon.path];
     henry.killPolygon.physicsBody.dynamic = NO;
+    henry.killPolygon.physicsBody.categoryBitMask = 0x1 << 3;
+    henry.killPolygon.physicsBody.collisionBitMask = 0x1 << 1;
+    henry.killPolygon.physicsBody.contactTestBitMask = 0x1 << 2;
     [henry addChild:henry.killPolygon];
     
     

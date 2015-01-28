@@ -50,12 +50,11 @@
 static const uint32_t GROUND_CATEGORY = 0x1;
 static const uint32_t PLAYER_CATEGORY = 0x1 << 1;
 static const uint32_t ENEMY_CATEGORY = 0x1 << 2;
+static const uint32_t KILL_ENEMY_CATEGORY = 0x1 << 3;
 static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 
 -(void)didMoveToView:(SKView *)view {
     /* Setup your scene here */
-    
-    self.backgroundColor = [UIColor redColor];
     
     
     //Setting Delegate
@@ -121,7 +120,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     _bat.position = CGPointMake(1000, 30);
     _bat.physicsBody.categoryBitMask = ENEMY_CATEGORY;
     _bat.physicsBody.collisionBitMask = PLAYER_CATEGORY;
-    _bat.physicsBody.contactTestBitMask = PLAYER_CATEGORY;
+    _bat.physicsBody.contactTestBitMask = PLAYER_CATEGORY | KILL_ENEMY_CATEGORY;
     _bat.shadowCastBitMask = LIGHT_CATEGORY;
     
     [_world addChild:_bat];
@@ -130,7 +129,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     _ghost.position = CGPointMake(700, 100);
     _ghost.physicsBody.categoryBitMask = ENEMY_CATEGORY;
     _ghost.physicsBody.collisionBitMask = PLAYER_CATEGORY;
-    _ghost.physicsBody.contactTestBitMask = PLAYER_CATEGORY;
+    _ghost.physicsBody.contactTestBitMask = PLAYER_CATEGORY | KILL_ENEMY_CATEGORY;
     _ghost.shadowCastBitMask = LIGHT_CATEGORY;
     
     [_world addChild:_ghost];
@@ -342,13 +341,13 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             [_henry removeActionForKey:@"walkRight"];
             [_henry idleAnimation];
         }
-        if ([n.name isEqualToString:@"leftButton"]) {
+        else if ([n.name isEqualToString:@"leftButton"]) {
             _leftButtonPressed = NO;
             _moving = NO;
             [_henry idleAnimation];
             [_henry removeActionForKey:@"walkLeft"];
         }
-        if([n.name isEqualToString:@"lanternButton"]){
+        else if([n.name isEqualToString:@"lanternButton"]){
             _lanternLit = NO;
             [_henry enumerateChildNodesWithName:@"lanternLightParticle" usingBlock:^(SKNode *node, BOOL *stop) {
                 [node removeFromParent];
@@ -361,9 +360,18 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
                 
                 
             }];
+            
+        }
+        else{
+            _rightButtonPressed = NO;
+            _leftButtonPressed = NO;
+            _lanternLit = NO;
+            _moving = NO;
+            [_henry removeActionForKey:@"walkLeft"];
+            [_henry removeActionForKey:@"walkRight"];
+            [_henry removeActionForKey:@"walkAnimation"];
             [_henry idleAnimation];
         }
-        
     };
     
 }
@@ -429,6 +437,14 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         [_henry removeFromParent];
         [self gameOver];
     }
+    else if(firstBody.categoryBitMask == ENEMY_CATEGORY && secondBody.categoryBitMask == KILL_ENEMY_CATEGORY){
+        if(_lanternLit)
+        {
+            [firstBody.node removeFromParent];
+        }
+        
+        
+    }
     
 }
 
@@ -456,30 +472,8 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     }
     
     
-//    [_henry enumerateChildNodesWithName:@"lanternLightParticle" usingBlock:^(SKNode *node, BOOL *stop) {
-//        if(!_flipped){
-//        
-//            CGPoint nodePosition = [_world convertPoint:node.position fromNode:node.parent];
-//            
-//            if(_bat.position.x - nodePosition.x < 100 && _bat.position.x - nodePosition.x > 0){
-//                [_bat removeFromParent];
-//            }
-//            
-//            if (_ghost.position.x - nodePosition.x < 150 && _ghost.position.x - nodePosition.x>0) {
-//                [_ghost removeFromParent];
-//            }
-//            
-//        }
-//        else{
-//            CGPoint nodePosition = [_world convertPoint:node.position fromNode:node.parent];
-//        
-//            if(nodePosition.x - _bat.position.x < 100 && nodePosition.x - _bat.position.x > 0){
-//                [_bat removeFromParent];
-//            }
-//            
-//        }
-//    }];
-    _henry.killPolygon.position = CGPointMake(_henry.killPolygon.position.x,_henry.killPolygon.position.y - 20);
+
+    _henry.killPolygon.position = CGPointMake(_henry.killPolygon.position.x, -20);
         
     
     

@@ -24,7 +24,7 @@
         
         self.backgroundColor = [UIColor whiteColor];
         
-        _world = [SKSpriteNode spriteNodeWithImageNamed:(@"worldSelection")];
+        _world = [SKSpriteNode spriteNodeWithImageNamed:(@"WorldSelection")];
         _world.position = CGPointMake(self.scene.frame.size.width * 0.5 , self.scene.frame.size.height * 0.5 - 20);
         _world.size = CGSizeMake(self.scene.frame.size.width , self.scene.frame.size.height + 100 ) ;
         [self addChild: _world];

@@ -29,6 +29,8 @@
 		25B658761A7691F000836621 /* Ghost.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B658751A7691F000836621 /* Ghost.m */; };
 		25B658781A76937400836621 /* ghost.png in Resources */ = {isa = PBXBuildFile; fileRef = 25B658771A76937400836621 /* ghost.png */; };
 		25D3F5081A780A8B000F8912 /* henryLantern.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D3F5071A780A8B000F8912 /* henryLantern.png */; };
+		25D3F5101A793CA4000F8912 /* idle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 25D3F50F1A793CA4000F8912 /* idle.atlas */; };
+		25D3F5121A793CD7000F8912 /* run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 25D3F5111A793CD7000F8912 /* run.atlas */; };
 		25FCDB411A714AF600B842F2 /* Henry.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FCDB401A714AF600B842F2 /* Henry.m */; };
 		25FCDB471A716B1E00B842F2 /* rightButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FCDB461A716B1E00B842F2 /* rightButton.png */; };
 		25FCDB4F1A717BF000B842F2 /* leftButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FCDB4E1A717BF000B842F2 /* leftButton.png */; };
@@ -98,6 +100,8 @@
 		25B658751A7691F000836621 /* Ghost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ghost.m; sourceTree = "<group>"; };
 		25B658771A76937400836621 /* ghost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ghost.png; sourceTree = "<group>"; };
 		25D3F5071A780A8B000F8912 /* henryLantern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = henryLantern.png; sourceTree = "<group>"; };
+		25D3F50F1A793CA4000F8912 /* idle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = idle.atlas; sourceTree = "<group>"; };
+		25D3F5111A793CD7000F8912 /* run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = run.atlas; sourceTree = "<group>"; };
 		25FCDB3F1A714AF600B842F2 /* Henry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Henry.h; path = ../Henry.h; sourceTree = "<group>"; };
 		25FCDB401A714AF600B842F2 /* Henry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Henry.m; path = ../Henry.m; sourceTree = "<group>"; };
 		25FCDB461A716B1E00B842F2 /* rightButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightButton.png; sourceTree = "<group>"; };
@@ -150,6 +154,8 @@
 			isa = PBXGroup;
 			children = (
 				25D3F5071A780A8B000F8912 /* henryLantern.png */,
+				25D3F5111A793CD7000F8912 /* run.atlas */,
+				25D3F50F1A793CA4000F8912 /* idle.atlas */,
 				250627B41A7579A500325CEE /* RunAnimation */,
 				250627AA1A75713C00325CEE /* IdleAnimation */,
 			);
@@ -391,6 +397,7 @@
 				250627961A72F54300325CEE /* spark.png in Resources */,
 				339EA2311A77FBB0003B0BBD /* groundBig.png in Resources */,
 				25B658781A76937400836621 /* ghost.png in Resources */,
+				25D3F5101A793CA4000F8912 /* idle.atlas in Resources */,
 				339EA23B1A77FBDD003B0BBD /* run4.png in Resources */,
 				339EA2431A7927F9003B0BBD /* startScreenBackground.jpg in Resources */,
 				339EA2321A77FBB0003B0BBD /* groundGap.png in Resources */,
@@ -408,6 +415,7 @@
 				2540F82C1A71467A00AB4625 /* Images.xcassets in Resources */,
 				250627FA1A75DF0D00325CEE /* backgroundSky.png in Resources */,
 				339EA23F1A77FC77003B0BBD /* idle2.png in Resources */,
+				25D3F5121A793CD7000F8912 /* run.atlas in Resources */,
 				25FCDB531A72746800B842F2 /* x.png in Resources */,
 				339EA2391A77FBDD003B0BBD /* run2.png in Resources */,
 				25D3F5081A780A8B000F8912 /* henryLantern.png in Resources */,

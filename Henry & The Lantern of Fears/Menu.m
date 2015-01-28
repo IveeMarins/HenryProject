@@ -27,7 +27,7 @@
         SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"Bodoni 72 Smallcaps"];
         label.text = @"Start";
         label.fontSize = 30;
-        label.position = CGPointMake(self.scene.frame.size.width * 0.5 ,self.scene.frame.size.height * 0.5 - 180);
+        label.position = CGPointMake(self.scene.frame.size.width * 0.5 ,self.scene.frame.size.height * 0.5 /*- 180*/);
         label.name = @"start";
         
         [self addChild:label];
