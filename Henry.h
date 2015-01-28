@@ -10,8 +10,8 @@
 
 @interface Henry : SKSpriteNode
 
-@property (strong, nonatomic) SKSpriteNode *killRect;
-@property (strong, nonatomic) SKSpriteNode *killTriangule;
+@property (strong, nonatomic) SKShapeNode *killPolygon;
+
 
 +(id)henry;
 -(void)walkRight;

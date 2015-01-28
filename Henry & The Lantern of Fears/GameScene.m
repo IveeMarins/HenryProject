@@ -479,7 +479,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 //            
 //        }
 //    }];
-    _henry.killRect.position = CGPointMake(_henry.frame.size.width * 0.5 + 5 + _henry.killRect.frame.size.width * 0.5,- 20);
+    _henry.killPolygon.position = CGPointMake(_henry.killPolygon.position.x,_henry.killPolygon.position.y - 20);
         
     
     
