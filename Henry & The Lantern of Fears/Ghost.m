@@ -30,7 +30,7 @@
 -(void)attackPlayer:(Henry *)henry
 {
     
-    SKAction *sequence = [SKAction sequence:@[[SKAction rotateByAngle:M_PI duration:1], [SKAction moveBy:CGVectorMake(-(self.position.x - henry.position.x),-(self.position.y - henry.position.y)) duration:2],[SKAction moveBy:CGVectorMake(0,0) duration:0]]];
+    SKAction *sequence = [SKAction sequence:@[[SKAction rotateByAngle:M_PI duration:1], [SKAction moveBy:CGVectorMake(-(self.position.x - henry.position.x),-(self.position.y - henry.position.y)) duration:40],[SKAction moveBy:CGVectorMake(0,0) duration:0]]];
     [self runAction:[SKAction repeatActionForever:sequence]];
     
     

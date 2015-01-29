@@ -49,6 +49,7 @@
     henry.killPolygon.physicsBody.categoryBitMask = 0x1 << 3;
     henry.killPolygon.physicsBody.collisionBitMask = 0x1 << 1;
     henry.killPolygon.physicsBody.contactTestBitMask = 0x1 << 2;
+    henry.killPolygon.zPosition = 1;
     [henry addChild:henry.killPolygon];
     
     
