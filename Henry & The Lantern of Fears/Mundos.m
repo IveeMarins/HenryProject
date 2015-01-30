@@ -8,6 +8,7 @@
 
 #import "Mundos.h"
 #import "GameScene.h"
+#import "FasesMundo1.h"
 
 @implementation Mundos
 {
@@ -55,41 +56,41 @@
     return self;
 }
 
-
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    for (UITouch *touch in touches) {
-        SKNode *n = [self nodeAtPoint:[touch locationInNode:self]];
-        if([n.name isEqualToString:@"mundo1"]){
-            NSLog(@"entrou no jogo %@",n.name);
-            
-            SKShapeNode *rec = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(200,50)];
-            rec.fillColor = [UIColor blackColor];
-            rec.position = CGPointMake(0,10);
-            
-            _carregando = [SKLabelNode labelNodeWithFontNamed:@"Helvetica"];
-            _carregando.text = @"Carregando...";
-            _carregando.fontColor = [UIColor whiteColor];
-            _carregando.fontSize = 30;
-            _carregando.position = CGPointMake(self.frame.size.width * 0.5, self.frame.size.height * 0.5);
-            _carregando.name = @"carregando";
-            _carregando.zPosition = 1;
-            
-            [_carregando addChild:rec];
-            [self addChild:_carregando];
-        }
-
-    }
-}
-
+//
+//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+//{
+//    for (UITouch *touch in touches) {
+//        SKNode *n = [self nodeAtPoint:[touch locationInNode:self]];
+//        if([n.name isEqualToString:@"mundo1"]){
+//            NSLog(@"entrou no jogo %@",n.name);
+//            
+//            SKShapeNode *rec = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(200,50)];
+//            rec.fillColor = [UIColor blackColor];
+//            rec.position = CGPointMake(0,10);
+//            
+//            _carregando = [SKLabelNode labelNodeWithFontNamed:@"Helvetica"];
+//            _carregando.text = @"Carregando...";
+//            _carregando.fontColor = [UIColor whiteColor];
+//            _carregando.fontSize = 30;
+//            _carregando.position = CGPointMake(self.frame.size.width * 0.5, self.frame.size.height * 0.5);
+//            _carregando.name = @"carregando";
+//            _carregando.zPosition = 1;
+//            
+//            [_carregando addChild:rec];
+//            [self addChild:_carregando];
+//        }
+//
+//    }
+//}
+//
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     for (UITouch *touch in touches) {
         SKNode *n = [self nodeAtPoint:[touch locationInNode:self]];
         if([n.name isEqualToString:@"mundo1"]){
             NSLog(@"entrou no jogo %@",n.name);
-            
-            GameScene *scene = [[GameScene alloc] initWithSize:self.view.bounds.size];
+            FasesMundo1 *scene = [[FasesMundo1 alloc] initWithSize:self.view.bounds.size];
+            //GameScene *scene = [[GameScene alloc] initWithSize:self.view.bounds.size];
             scene.anchorPoint = CGPointMake(0.5, 0.5);
             scene.scaleMode = SKSceneScaleModeAspectFill;
             

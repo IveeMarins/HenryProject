@@ -52,6 +52,7 @@
 		339EA2491A7940CD003B0BBD /* cristalVerde.png in Resources */ = {isa = PBXBuildFile; fileRef = 339EA2481A7940CD003B0BBD /* cristalVerde.png */; };
 		339EA24B1A7940DB003B0BBD /* worldScene.png in Resources */ = {isa = PBXBuildFile; fileRef = 339EA24A1A7940DB003B0BBD /* worldScene.png */; };
 		339EA24F1A7943F7003B0BBD /* kopp.png in Resources */ = {isa = PBXBuildFile; fileRef = 339EA24E1A7943F7003B0BBD /* kopp.png */; };
+		339EA2531A7BEC96003B0BBD /* FasesMundo1.m in Sources */ = {isa = PBXBuildFile; fileRef = 339EA2521A7BEC96003B0BBD /* FasesMundo1.m */; };
 		3BA8DEDF1A768A1700740706 /* backgroundTrees2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA8DEDE1A768A1700740706 /* backgroundTrees2.png */; };
 		3BA8DEE11A768A4D00740706 /* backgroundTrees.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA8DEE01A768A4D00740706 /* backgroundTrees.png */; };
 		3BA8DEE31A768AB000740706 /* backgroundMountain.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA8DEE21A768AB000740706 /* backgroundMountain.png */; };
@@ -128,6 +129,8 @@
 		339EA2481A7940CD003B0BBD /* cristalVerde.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cristalVerde.png; sourceTree = "<group>"; };
 		339EA24A1A7940DB003B0BBD /* worldScene.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = worldScene.png; sourceTree = "<group>"; };
 		339EA24E1A7943F7003B0BBD /* kopp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kopp.png; sourceTree = "<group>"; };
+		339EA2511A7BEC96003B0BBD /* FasesMundo1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasesMundo1.h; sourceTree = "<group>"; };
+		339EA2521A7BEC96003B0BBD /* FasesMundo1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasesMundo1.m; sourceTree = "<group>"; };
 		3BA8DEDE1A768A1700740706 /* backgroundTrees2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundTrees2.png; sourceTree = "<group>"; };
 		3BA8DEE01A768A4D00740706 /* backgroundTrees.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundTrees.png; sourceTree = "<group>"; };
 		3BA8DEE21A768AB000740706 /* backgroundMountain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundMountain.png; sourceTree = "<group>"; };
@@ -242,12 +245,14 @@
 				2540F8231A71467A00AB4625 /* GameScene.sks */,
 				2540F8251A71467A00AB4625 /* GameViewController.h */,
 				2540F8261A71467A00AB4625 /* GameViewController.m */,
-				2EE9EF511A76CADF00A6A3B0 /* Mundos.h */,
-				2EE9EF521A76CADF00A6A3B0 /* Mundos.m */,
-				2540F8281A71467A00AB4625 /* Main.storyboard */,
-				2540F82B1A71467A00AB4625 /* Images.xcassets */,
 				2E8CA23A1A76C51F005F41E5 /* Menu.h */,
 				2E8CA2381A76C518005F41E5 /* Menu.m */,
+				2EE9EF511A76CADF00A6A3B0 /* Mundos.h */,
+				2EE9EF521A76CADF00A6A3B0 /* Mundos.m */,
+				339EA2511A7BEC96003B0BBD /* FasesMundo1.h */,
+				339EA2521A7BEC96003B0BBD /* FasesMundo1.m */,
+				2540F8281A71467A00AB4625 /* Main.storyboard */,
+				2540F82B1A71467A00AB4625 /* Images.xcassets */,
 				250627A91A75712B00325CEE /* Henry */,
 				25FCDB5C1A729C3700B842F2 /* Enemies */,
 				2540F8191A71467A00AB4625 /* Supporting Files */,
@@ -453,6 +458,7 @@
 			files = (
 				25FCDB561A72905C00B842F2 /* Enemy.m in Sources */,
 				2540F8271A71467A00AB4625 /* GameViewController.m in Sources */,
+				339EA2531A7BEC96003B0BBD /* FasesMundo1.m in Sources */,
 				2540F81F1A71467A00AB4625 /* AppDelegate.m in Sources */,
 				2EE9EF531A76CADF00A6A3B0 /* Mundos.m in Sources */,
 				25B658761A7691F000836621 /* Ghost.m in Sources */,
