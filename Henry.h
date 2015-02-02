@@ -10,7 +10,6 @@
 
 @interface Henry : SKSpriteNode
 
-@property (strong, nonatomic) SKShapeNode *killPolygon;
 
 
 +(id)henry;
