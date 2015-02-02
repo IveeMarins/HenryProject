@@ -48,6 +48,7 @@
     BOOL _flipped; //If Henry's image is flipped to walk left
     
     
+    
 }
 
 static const uint32_t GROUND_CATEGORY = 0x1;
