@@ -12,6 +12,7 @@
 {
     
     NSArray *_idleAnimationFrames;
+    NSArray *_lanternAnimationFrames;
     NSArray *_walkAnimationFrames;
 }
 
@@ -103,6 +104,8 @@
 {
     
     [self setTexture:[SKTexture textureWithImageNamed:@"spriteHenryLantern"]];
+    [self setSize:CGSizeMake(80, 100)];
+    
     
     NSString *lanternLightEmmiterPath = [[NSBundle mainBundle] pathForResource:@"lanternLight" ofType:@"sks"];
     SKEmitterNode *lanternLightEmmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:lanternLightEmmiterPath];
@@ -141,13 +144,32 @@
     
 }
 
+-(void)lanternAnimation
+{
+    
+    NSMutableArray *lanternFrames = [NSMutableArray array];
+    SKTextureAtlas *lanternHenryAtlas = [SKTextureAtlas atlasNamed:@"lantern"];
+    
+    
+    for (int i = 1; i <= lanternHenryAtlas.textureNames.count; i++) {
+        NSString *textureName = [NSString stringWithFormat:@"lantern%d", i];
+        SKTexture *temp = [lanternHenryAtlas textureNamed:textureName];
+        [lanternFrames addObject:temp];
+    }
+    
+    _lanternAnimationFrames = lanternFrames;
+    
+    [self runAction: [SKAction repeatActionForever:[SKAction animateWithTextures:_lanternAnimationFrames
+                                                                    timePerFrame:3]]withKey:@"lanternAnimation"];
+    
+}
+
 -(void)idleAnimation
 {
     
 //    SKAction *idleAnimation = [SKAction repeatActionForever:[SKAction animateWithTextures:@[[SKTexture textureWithImageNamed:@"idle1"],[SKTexture textureWithImageNamed:@"idle2"],[SKTexture textureWithImageNamed:@"idle1"]] timePerFrame:1]];
 //    
 //    [self runAction:idleAnimation withKey:@"idleAnimation"];
-    
     
     NSMutableArray *idleFrames = [NSMutableArray array];
     SKTextureAtlas *idleHenryAtlas = [SKTextureAtlas atlasNamed:@"idle"];
@@ -158,11 +180,6 @@
     }
     
     _idleAnimationFrames = idleFrames;
-    
-    
-    
-    
-    
     
     [self runAction: [SKAction repeatActionForever:[SKAction animateWithTextures:_idleAnimationFrames
                                                                     timePerFrame:3]]withKey:@"idleAnimation"];
