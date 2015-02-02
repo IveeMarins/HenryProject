@@ -39,8 +39,6 @@
     SKAction *chasePlayer = [SKAction repeatActionForever:[SKAction moveTo:henry.position duration:2]];
     [self runAction:chasePlayer];
     
-    
-    
 }
 
 

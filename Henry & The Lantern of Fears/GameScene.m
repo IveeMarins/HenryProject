@@ -16,6 +16,8 @@
 
 @property BOOL isStarted;
 @property BOOL isGameOver;
+@property BOOL isGamePaused;
+@property BOOL isPlaying;
 
 @end
 
@@ -47,8 +49,14 @@
     BOOL _lanternLit;
     BOOL _flipped; //If Henry's image is flipped to walk left
     
+<<<<<<< Updated upstream
     
     
+=======
+    SKSpriteNode *_resume;
+    SKSpriteNode *_rectConfig;
+    SKSpriteNode *_som;
+>>>>>>> Stashed changes
 }
 
 static const uint32_t GROUND_CATEGORY = 0x1;
@@ -182,6 +190,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     SKShapeNode *circle1 = [SKShapeNode shapeNodeWithCircleOfRadius:13.0];
     circle1.position = CGPointMake(0,0);
     circle1.fillColor = [UIColor whiteColor];
+    circle1.name = @"configButtonCircle";
     
     SKSpriteNode *configButton = [SKSpriteNode spriteNodeWithImageNamed:@"gear"];
     configButton.size = CGSizeMake(20, 20);
@@ -258,18 +267,42 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     
 //Defining Inicial Values
     self.numberOfLives = 3;
+<<<<<<< Updated upstream
     self.score = 0;
+=======
+    _isPlaying = YES;
+>>>>>>> Stashed changes
     
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
 /////////////////////////////////////////////////////////Defining Sound/////////////////////////////////////////////////////////
     
-    _backgroundSound = [SKAction repeatActionForever:[SKAction playSoundFileNamed:@"nightForestSound.mp3" waitForCompletion:YES]];
-    [self runAction:_backgroundSound];
+    NSURL *urlSound = [NSURL fileURLWithPath: [NSString stringWithFormat:@"%@/nightForestSound.mp3", [[NSBundle mainBundle] resourcePath]] ];
+    NSError *error;
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:urlSound error:&error];
+    self.audioPlayer.numberOfLoops=-1;
     
-    _backgroundMusic = [SKAction repeatActionForever:[SKAction playSoundFileNamed:@"nightForestMusic.mp3" waitForCompletion:YES]];
-    [self runAction:_backgroundMusic];
+    if(!self.audioPlayer)
+        NSLog([error localizedDescription]);
+    else
+        [self.audioPlayer play];
     
+    NSURL *urlMusic = [NSURL fileURLWithPath: [NSString stringWithFormat:@"%@/nightForestMusic.mp3", [[NSBundle mainBundle] resourcePath]] ];
+    NSError *error1;
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:urlMusic error:&error1];
+    self.audioPlayer.numberOfLoops=-1;
+    
+    if(!self.audioPlayer)
+        NSLog([error localizedDescription]);
+    else
+        [self.audioPlayer play];
+    
+//    _backgroundSound = [SKAction repeatActionForever:[SKAction playSoundFileNamed:@"nightForestSound.mp3" waitForCompletion:YES]];
+//    [self runAction:_backgroundSound withKey:@"backgroundSound"];
+//    
+//    _backgroundMusic = [SKAction repeatActionForever:[SKAction playSoundFileNamed:@"nightForestMusic.mp3" waitForCompletion:YES]];
+//    [self runAction:_backgroundMusic withKey:@"backgroundMusic"];
+//    
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
 }
@@ -332,6 +365,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         else if([n.name isEqualToString:@"lanternButton"]){
             
             if(!_isGameOver){
+<<<<<<< Updated upstream
             _lanternLit = YES;
             [_henry removeActionForKey:@"idleAnimation"];
             [_henry removeActionForKey:@"walkAnimation"];
@@ -339,8 +373,17 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             [_henry removeActionForKey:@"walkRight"];
             [_henry pickLantern];
             //_henry.size = CGSizeMake(80, 100);
+=======
+                _lanternLit = YES;
+                [_henry removeActionForKey:@"idleAnimation"];
+                [_henry removeActionForKey:@"walkAnimation"];
+                [_henry removeActionForKey:@"walkLeft"];
+                [_henry removeActionForKey:@"walkRight"];
+                [_henry pickLantern];
+>>>>>>> Stashed changes
             }
         }
+
         
     }
     
@@ -398,11 +441,69 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             [_henry removeActionForKey:@"walkAnimation"];
             [_henry idleAnimation];
         }
+        if([n.name isEqualToString:@"configButton"] || [n.name isEqualToString:@"configButtonCircle"]){
+            
+            _rectConfig = [SKSpriteNode spriteNodeWithImageNamed:@"configBackGround"];
+            _rectConfig.size = CGSizeMake(250, 250);
+            _rectConfig.position = CGPointMake(0,0);
+            
+            _resume = [SKSpriteNode spriteNodeWithImageNamed:@"playbutton"];
+            _resume.size = CGSizeMake(100, 40);
+            _resume.position = CGPointMake(0,-90);
+            _resume.name = @"play";
+            
+            if (_isPlaying) {
+                _som = [SKSpriteNode spriteNodeWithImageNamed:@"somOn"];
+            }else{
+                _som = [SKSpriteNode spriteNodeWithImageNamed:@"somOff"];
+            }
         
-    };
-    
+            _som.size = CGSizeMake(70, 70);
+            _som.position = CGPointMake(0, 0);
+            _som.zPosition = 1;
+            _som.name = @"som";
+     
+            [_HUD addChild:_rectConfig];
+            [_rectConfig addChild:_som];
+            [_rectConfig addChild:_resume];
+            
+            [self pauseGame];
+        }
+        else if([n.name isEqualToString:@"play"]){
+            [_rectConfig removeFromParent];
+            [self unpauseGame];
+        }
+        else if([n.name isEqualToString:@"som"]){
+            if(_isPlaying == YES){
+                _isPlaying = NO;
+                [_som setTexture:[SKTexture textureWithImageNamed:@"somOff"]];
+                [self.audioPlayer stop];
+                [self.musicPLayer stop];
+                //[self removeActionForKey:@"backgroundSound"];
+                //[self removeActionForKey:@"backgroundMusic"];
+            }
+            else if(_isPlaying==NO){
+                _isPlaying = YES;
+                [_som setTexture:[SKTexture textureWithImageNamed:@"somOn"]];
+                [self.audioPlayer play];
+                [self.musicPLayer play];
+//                [self runAction:_backgroundSound withKey:@"backgroundSound"];
+//                [self runAction:_backgroundMusic withKey:@"backgroundMusic"];
+            }
+        }
+    }
 }
-                             
+
+-(void)pauseGame {
+    _isGamePaused = YES; //Set pause flag to true
+    self.paused = YES; //Pause scene and physics simulation
+}
+
+-(void)unpauseGame {
+    _isGamePaused = NO; //Set pause flag to false
+    self.paused = NO; //Resume scene and physics simulation
+}
+
 
 -(void)gameOver
 {
