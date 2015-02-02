@@ -26,7 +26,6 @@
 		2540F82A1A71467A00AB4625 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2540F8281A71467A00AB4625 /* Main.storyboard */; };
 		2540F82C1A71467A00AB4625 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2540F82B1A71467A00AB4625 /* Images.xcassets */; };
 		2540F83B1A71467A00AB4625 /* Henry___The_Lantern_of_FearsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2540F83A1A71467A00AB4625 /* Henry___The_Lantern_of_FearsTests.m */; };
-		2570F0A21A8012B00057E24C /* spriteHenryLanternLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 2570F0A11A8012B00057E24C /* spriteHenryLanternLeft.png */; };
 		25B658761A7691F000836621 /* Ghost.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B658751A7691F000836621 /* Ghost.m */; };
 		25B658781A76937400836621 /* ghost.png in Resources */ = {isa = PBXBuildFile; fileRef = 25B658771A76937400836621 /* ghost.png */; };
 		25FB5C2B1A7AFD1000E1A2B6 /* run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 25FB5C2A1A7AFD1000E1A2B6 /* run.atlas */; };
@@ -40,10 +39,6 @@
 		25FCDB561A72905C00B842F2 /* Enemy.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FCDB551A72905C00B842F2 /* Enemy.m */; };
 		25FCDB5E1A72A7A000B842F2 /* bat.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FCDB5D1A72A7A000B842F2 /* bat.png */; };
 		2E8CA2391A76C518005F41E5 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8CA2381A76C518005F41E5 /* Menu.m */; };
-		2EB4B6EC1A7FFB590018B458 /* configBackGround.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EB4B6EB1A7FFB590018B458 /* configBackGround.png */; };
-		2EB4B6EE1A7FFB9B0018B458 /* playbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EB4B6ED1A7FFB9B0018B458 /* playbutton.png */; };
-		2EB4B6F01A7FFDF80018B458 /* somOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EB4B6EF1A7FFDF80018B458 /* somOn.png */; };
-		2EB4B6F21A7FFDFF0018B458 /* somOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EB4B6F11A7FFDFF0018B458 /* somOff.png */; };
 		2EE9EF531A76CADF00A6A3B0 /* Mundos.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE9EF521A76CADF00A6A3B0 /* Mundos.m */; };
 		339EA22A1A77E725003B0BBD /* WorldSelection.png in Resources */ = {isa = PBXBuildFile; fileRef = 339EA2291A77E725003B0BBD /* WorldSelection.png */; };
 		339EA2311A77FBB0003B0BBD /* groundBig.png in Resources */ = {isa = PBXBuildFile; fileRef = 339EA22E1A77FBB0003B0BBD /* groundBig.png */; };
@@ -100,7 +95,6 @@
 		2540F8341A71467A00AB4625 /* Henry & The Lantern of FearsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Henry & The Lantern of FearsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2540F8391A71467A00AB4625 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2540F83A1A71467A00AB4625 /* Henry___The_Lantern_of_FearsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Henry___The_Lantern_of_FearsTests.m"; sourceTree = "<group>"; };
-		2570F0A11A8012B00057E24C /* spriteHenryLanternLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spriteHenryLanternLeft.png; sourceTree = "<group>"; };
 		25B658741A7691F000836621 /* Ghost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ghost.h; sourceTree = "<group>"; };
 		25B658751A7691F000836621 /* Ghost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ghost.m; sourceTree = "<group>"; };
 		25B658771A76937400836621 /* ghost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ghost.png; sourceTree = "<group>"; };
@@ -118,10 +112,6 @@
 		25FCDB5D1A72A7A000B842F2 /* bat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bat.png; sourceTree = "<group>"; };
 		2E8CA2381A76C518005F41E5 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menu.m; sourceTree = "<group>"; };
 		2E8CA23A1A76C51F005F41E5 /* Menu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
-		2EB4B6EB1A7FFB590018B458 /* configBackGround.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = configBackGround.png; sourceTree = "<group>"; };
-		2EB4B6ED1A7FFB9B0018B458 /* playbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playbutton.png; sourceTree = "<group>"; };
-		2EB4B6EF1A7FFDF80018B458 /* somOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = somOn.png; sourceTree = "<group>"; };
-		2EB4B6F11A7FFDFF0018B458 /* somOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = somOff.png; sourceTree = "<group>"; };
 		2EE9EF511A76CADF00A6A3B0 /* Mundos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mundos.h; sourceTree = "<group>"; };
 		2EE9EF521A76CADF00A6A3B0 /* Mundos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mundos.m; sourceTree = "<group>"; };
 		339EA2291A77E725003B0BBD /* WorldSelection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WorldSelection.png; sourceTree = "<group>"; };
@@ -163,7 +153,6 @@
 			isa = PBXGroup;
 			children = (
 				25FB5C3E1A7B1CCA00E1A2B6 /* spriteHenryLantern.png */,
-				2570F0A11A8012B00057E24C /* spriteHenryLanternLeft.png */,
 				25FB5C401A7B200300E1A2B6 /* idle.atlas */,
 				25FB5C2A1A7AFD1000E1A2B6 /* run.atlas */,
 				250627AA1A75713C00325CEE /* IdleAnimation */,
@@ -210,10 +199,6 @@
 			children = (
 				250627931A72F54300325CEE /* lanternLight.sks */,
 				250627941A72F54300325CEE /* spark.png */,
-				2EB4B6EB1A7FFB590018B458 /* configBackGround.png */,
-				2EB4B6ED1A7FFB9B0018B458 /* playbutton.png */,
-				2EB4B6EF1A7FFDF80018B458 /* somOn.png */,
-				2EB4B6F11A7FFDFF0018B458 /* somOff.png */,
 				2540F8181A71467A00AB4625 /* Henry & The Lantern of Fears */,
 				2540F8371A71467A00AB4625 /* Henry & The Lantern of FearsTests */,
 				2540F8171A71467A00AB4625 /* Products */,
@@ -417,7 +402,6 @@
 				339EA2331A77FBB0003B0BBD /* groundRamp.png in Resources */,
 				250628041A75F8C400325CEE /* nightForestSound.mp3 in Resources */,
 				250627BE1A758AF200325CEE /* gear.png in Resources */,
-				2EB4B6F21A7FFDFF0018B458 /* somOff.png in Resources */,
 				250628021A75F8C000325CEE /* nightForestMusic.mp3 in Resources */,
 				2540F82C1A71467A00AB4625 /* Images.xcassets in Resources */,
 				250627FA1A75DF0D00325CEE /* backgroundSky.png in Resources */,
@@ -428,18 +412,11 @@
 				3BA8DEE71A769A3A00740706 /* ground.png in Resources */,
 				25FCDB4F1A717BF000B842F2 /* leftButton.png in Resources */,
 				2540F82A1A71467A00AB4625 /* Main.storyboard in Resources */,
-				2EB4B6F01A7FFDF80018B458 /* somOn.png in Resources */,
-				2EB4B6EE1A7FFB9B0018B458 /* playbutton.png in Resources */,
 				25FCDB511A718DAA00B842F2 /* jumpButton.png in Resources */,
 				250627921A72EB5200325CEE /* lantern.png in Resources */,
 				3BA8DEDF1A768A1700740706 /* backgroundTrees2.png in Resources */,
 				339EA2491A7940CD003B0BBD /* cristalVerde.png in Resources */,
 				250627C01A758F3F00325CEE /* book.png in Resources */,
-<<<<<<< Updated upstream
-				2570F0A21A8012B00057E24C /* spriteHenryLanternLeft.png in Resources */,
-=======
-				2EB4B6EC1A7FFB590018B458 /* configBackGround.png in Resources */,
->>>>>>> Stashed changes
 				250627C21A7593AB00325CEE /* magicStone.png in Resources */,
 				3BA8DEE11A768A4D00740706 /* backgroundTrees.png in Resources */,
 			);

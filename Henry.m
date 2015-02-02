@@ -102,16 +102,9 @@
 }
 -(void)pickLantern
 {
-    if (self.xScale == 1) {
-        [self setTexture:[SKTexture textureWithImageNamed:@"spriteHenryLantern"]];
-        [self setSize:CGSizeMake(80, 100)];
-    }
-    else{
-        [self setTexture:[SKTexture textureWithImageNamed:@"spriteHenryLanternLeft"]];
-        [self setSize:CGSizeMake(80, 100)];
-        
-    }
     
+    [self setTexture:[SKTexture textureWithImageNamed:@"spriteHenryLantern"]];
+    [self setSize:CGSizeMake(80, 100)];
     
     
     NSString *lanternLightEmmiterPath = [[NSBundle mainBundle] pathForResource:@"lanternLight" ofType:@"sks"];
