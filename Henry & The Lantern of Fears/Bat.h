@@ -13,4 +13,5 @@
 
 +(id)bat;
 -(void)attackPlayer:(Henry *)henry;
++(int)giveScore;
 @end

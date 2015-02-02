@@ -32,6 +32,8 @@
     SKAction *_backgroundMusic;
     SKAction *_backgroundSound;
     
+    SKLabelNode *_labelScore;
+    
     Henry *_henry;
     
     NSMutableArray *_enemies;
@@ -236,17 +238,25 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     [_HUD addChild:xSeparator];
     
     _lifeLabel = [SKLabelNode labelNodeWithFontNamed:@"DIN Alternate"];
-    _lifeLabel.fontColor = [UIColor blackColor];
+    _lifeLabel.fontColor = [UIColor whiteColor];
     _lifeLabel.fontSize = 25;
     
     _lifeLabel.position = CGPointMake(xSeparator.position.x + 15 , xSeparator.position.y - 5);
     
     [_HUD addChild:_lifeLabel];
     
+    _labelScore = [SKLabelNode labelNodeWithFontNamed:@"Helvetica"];
+    _labelScore.position = CGPointMake(_lifeLabel.position.x + 100, _lifeLabel.position.y);
+    _labelScore.fontSize = 20;
+    _labelScore.fontColor = [UIColor whiteColor];
+    
+    [_HUD addChild:_labelScore];
+    
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
 //Defining Inicial Values
     self.numberOfLives = 3;
+    self.score = 0;
     
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
@@ -272,6 +282,13 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     
     
 }
+
+-(void)setScore:(int)score
+{
+    _score = score;
+    _labelScore.text = [NSString stringWithFormat:@"Score: %d",score];
+}
+
 
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -449,6 +466,11 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         if(_lanternLit)
         {
             [firstBody.node removeFromParent];
+            if ([firstBody.node isMemberOfClass:(Bat.class)])
+            {
+                self.score += [Bat giveScore];
+            }
+            
         }
         
         

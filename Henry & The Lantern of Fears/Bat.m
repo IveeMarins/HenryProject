@@ -23,7 +23,14 @@
     bat.physicsBody.allowsRotation = NO;
     
     
+    
     return bat;
+}
+
++(int)giveScore
+{
+    int score = 100;
+    return score;
 }
 
 -(void)attackPlayer:(Henry *)henry

@@ -11,5 +11,5 @@
 @interface GameScene : SKScene <SKPhysicsContactDelegate>
 @property (strong, nonatomic) SKLabelNode *lifeLabel;
 @property (nonatomic) int numberOfLives;
-
+@property (nonatomic) int score;
 @end
