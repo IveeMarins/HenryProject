@@ -97,7 +97,9 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     //Inserting Ground
     _currentGroundX = 0;
     [self generateWorldWithImage:@"ground" repeat:4];
-    
+    [self generateWorldWithImage:@"groundBig" repeat:3];
+    [self generateWorldWithImage:@"ground" repeat:4];
+    [self generateWorldWithImage:@"groundRamp" repeat:1];
    //Creating Background
     [self generateBackgroundIn:_backgroundMountainLayer withImage:@"backgroundMountain" repeat:10];
     [self generateBackgroundIn:_backgroundTreeLayer2 withImage:@"backgroundTrees2" repeat:10];
@@ -313,10 +315,10 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             if(!_isGameOver){
             _lanternLit = YES;
             [_henry removeActionForKey:@"idleAnimation"];
-                [_henry removeActionForKey:@"walkAnimation"];
-                [_henry removeActionForKey:@"walkLeft"];
-                [_henry removeActionForKey:@"walkRight"];
-                [_henry pickLantern];
+            [_henry removeActionForKey:@"walkAnimation"];
+            [_henry removeActionForKey:@"walkLeft"];
+            [_henry removeActionForKey:@"walkRight"];
+            [_henry pickLantern];
             }
         }
         
@@ -530,8 +532,37 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         
         
     }
-    
-    
+    else if([groundImageName isEqualToString:@"groundBig"]){
+        
+        for (int i = 0; i < times; i++) {
+            SKSpriteNode *ground = [SKSpriteNode spriteNodeWithImageNamed:@"groundBig"];
+            ground.size = CGSizeMake(self.frame.size.width , 160);
+            ground.position = CGPointMake(_currentGroundX, -self.frame.size.height * 0.5 + ground.frame.size.height * 0.5);
+            ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.frame.size.width - 20, 80)];
+            ground.physicsBody.dynamic = NO;
+            ground.physicsBody.categoryBitMask = GROUND_CATEGORY;
+            [_world addChild:ground];
+            _currentGroundX += ground.frame.size.width;
+        }
+        
+        
+    }
+    else if([groundImageName isEqualToString:@"groundRamp"]){
+        
+        for (int i = 0; i < times; i++) {
+            SKSpriteNode *ground = [SKSpriteNode spriteNodeWithImageNamed:@"groundRamp"];
+            ground.size = CGSizeMake(self.frame.size.width , 140);
+            ground.position = CGPointMake(_currentGroundX, -self.frame.size.height * 0.5 + ground.frame.size.height * 0.5);
+            ground.physicsBody = [SKPhysicsBody bodyWithTexture:[SKTexture textureWithImageNamed:@"groundRamp"] size:ground.size];
+            ground.physicsBody.dynamic = NO;
+            ground.physicsBody.categoryBitMask = GROUND_CATEGORY;
+            [_world addChild:ground];
+            _currentGroundX += ground.frame.size.width;
+            
+        }
+        
+        
+    }
 }
 
 
