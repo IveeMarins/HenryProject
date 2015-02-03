@@ -385,6 +385,8 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
                 [node removeFromParent];
             }];
             
+            [_henry idleAnimation];
+            
         }
         else if(![n.name isEqualToString:@"jumpButton"]){
             
