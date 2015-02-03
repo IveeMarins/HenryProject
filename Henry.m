@@ -103,7 +103,6 @@
 {
     
     [self setTexture:[SKTexture textureWithImageNamed:@"spriteHenryLantern"]];
-    [self setSize:CGSizeMake(80, 100)];
     
     NSString *lanternLightEmmiterPath = [[NSBundle mainBundle] pathForResource:@"lanternLight" ofType:@"sks"];
     SKEmitterNode *lanternLightEmmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:lanternLightEmmiterPath];
