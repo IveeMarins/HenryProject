@@ -99,9 +99,9 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     //Inserting Ground
     _currentGroundX = 0;
     [self generateWorldWithImage:@"ground" repeat:4];
-    //[self generateWorldWithImage:@"groundBig" repeat:3];
-    //[self generateWorldWithImage:@"ground" repeat:4];
-    //[self generateWorldWithImage:@"groundRamp" repeat:1];
+    [self generateWorldWithImage:@"groundBig" repeat:3];
+    [self generateWorldWithImage:@"ground" repeat:4];
+    [self generateWorldWithImage:@"groundRamp" repeat:1];
    //Creating Background
     [self generateBackgroundIn:_backgroundMountainLayer withImage:@"backgroundMountain" repeat:10];
     [self generateBackgroundIn:_backgroundTreeLayer2 withImage:@"backgroundTrees2" repeat:10];
@@ -141,7 +141,6 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     _ghost.zPosition = 1;
     
     [_world addChild:_ghost];
-    
     
     //Inserting Hud Controls
     
@@ -358,7 +357,6 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             [_henry removeActionForKey:@"walkLeft"];
             [_henry removeActionForKey:@"walkRight"];
             [_henry pickLantern];
-            //_henry.size = CGSizeMake(80, 100);
             }
         }
         
@@ -394,7 +392,6 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             [_henry removeActionForKey:@"walkLeft"];
         }
         else if([n.name isEqualToString:@"lanternButton"]){
-            
             _lanternLit = NO;
             [_henry enumerateChildNodesWithName:@"lanternLightParticle" usingBlock:^(SKNode *node, BOOL *stop) {
                 [node removeFromParent];
@@ -404,9 +401,9 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             }];
             [_henry enumerateChildNodesWithName:@"fakeLanternLight" usingBlock:^(SKNode *node, BOOL *stop) {
                 [node removeFromParent];
+                
+                
             }];
-            
-            [_henry idleAnimation];
             
         }
         else if(![n.name isEqualToString:@"jumpButton"]){
@@ -605,9 +602,9 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         
         for (int i = 0; i < times; i++) {
             SKSpriteNode *ground = [SKSpriteNode spriteNodeWithImageNamed:@"groundRamp"];
-            ground.size = CGSizeMake(self.frame.size.width , 145);
+            ground.size = CGSizeMake(self.frame.size.width , 140);
             ground.position = CGPointMake(_currentGroundX, -self.frame.size.height * 0.5 + ground.frame.size.height * 0.5);
-            //ground.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(_currentGroundX, <#CGFloat y#>) toPoint:<#(CGPoint)#>];
+            ground.physicsBody = [SKPhysicsBody bodyWithTexture:[SKTexture textureWithImageNamed:@"groundRamp"] size:ground.size];
             ground.physicsBody.dynamic = NO;
             ground.physicsBody.categoryBitMask = GROUND_CATEGORY;
             [_world addChild:ground];
