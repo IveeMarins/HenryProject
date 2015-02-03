@@ -180,6 +180,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     SKShapeNode *circle1 = [SKShapeNode shapeNodeWithCircleOfRadius:13.0];
     circle1.position = CGPointMake(0,0);
     circle1.fillColor = [UIColor whiteColor];
+    circle1.name = @"circle1";
     
     SKSpriteNode *configButton = [SKSpriteNode spriteNodeWithImageNamed:@"gear"];
     configButton.size = CGSizeMake(20, 20);
@@ -246,7 +247,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     [_HUD addChild:_lifeLabel];
     
     _labelScore = [SKLabelNode labelNodeWithFontNamed:@"Helvetica"];
-    _labelScore.position = CGPointMake(_lifeLabel.position.x + 100, _lifeLabel.position.y);
+    _labelScore.position = CGPointMake(_lifeLabel.position.x, _lifeLabel.position.y-40);
     _labelScore.fontSize = 20;
     _labelScore.fontColor = [UIColor whiteColor];
     
@@ -261,12 +262,32 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
 /////////////////////////////////////////////////////////Defining Sound/////////////////////////////////////////////////////////
+
+    NSURL *url1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@nightForestSound.mp3", [[NSBundle mainBundle] resourcePath]]];
+    NSURL *url2 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@nightForestMusic.mp3", [[NSBundle mainBundle] resourcePath]]];
     
-    _backgroundSound = [SKAction repeatActionForever:[SKAction playSoundFileNamed:@"nightForestSound.mp3" waitForCompletion:YES]];
-    [self runAction:_backgroundSound];
+    NSError *error;
     
-    _backgroundMusic = [SKAction repeatActionForever:[SKAction playSoundFileNamed:@"nightForestMusic.mp3" waitForCompletion:YES]];
-    [self runAction:_backgroundMusic];
+    self.soundPlayer = [[ AVAudioPlayer alloc ] initWithContentsOfURL:url1 error:&error];
+    self.soundPlayer.numberOfLoops = -1;
+    
+    self.musicPlayer = [[ AVAudioPlayer alloc ] initWithContentsOfURL:url2 error:&error];
+    self.musicPlayer.numberOfLoops = -1;
+    
+    if(!self.soundPlayer || !self.musicPlayer)
+        NSLog([error localizedDescription]);
+    else
+    {
+        [self.soundPlayer play];
+        [self.musicPlayer play];
+    }
+    
+//
+//    _backgroundSound = [SKAction repeatActionForever:[SKAction playSoundFileNamed:@"nightForestSound.mp3" waitForCompletion:YES]];
+//    [self runAction:_backgroundSound];
+//    
+//    _backgroundMusic = [SKAction repeatActionForever:[SKAction playSoundFileNamed:@"nightForestMusic.mp3" waitForCompletion:YES]];
+//    [self runAction:_backgroundMusic];
     
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
@@ -286,7 +307,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 -(void)setScore:(int)score
 {
     _score = score;
-    _labelScore.text = [NSString stringWithFormat:@"Score: %d",score];
+    _labelScore.text = [NSString stringWithFormat:@"%d",score];
 }
 
 
@@ -396,8 +417,16 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             [_henry removeActionForKey:@"walkAnimation"];
             [_henry idleAnimation];
         }
+        if ([n.name isEqualToString:@"configButton"] || [n.name isEqualToString:@"circle1"] )
+        {
+            SKSpriteNode *backgroundConfigButton = [SKSpriteNode spriteNodeWithImageNamed:@"backgroundConfigButton"];
+            backgroundConfigButton.position = CGPointMake(0,0);
+            backgroundConfigButton.size = CGSizeMake(30,50);
+            
+            [_HUD addChild: backgroundConfigButton];
+        }
         
-    };
+    }
     
 }
                              
