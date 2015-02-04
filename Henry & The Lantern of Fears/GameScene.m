@@ -16,6 +16,7 @@
 
 @property BOOL isStarted;
 @property BOOL isGameOver;
+@property BOOL isGamePaused;
 
 @end
 
@@ -28,15 +29,24 @@
     SKNode *_backgroundSkyLayer;
     SKNode *_HUD;
     CGFloat _currentGroundX;
+    int _time;
+    
+    UIScrollView *_pageScroller;
     
     SKAction *_backgroundMusic;
     SKAction *_backgroundSound;
     
+    SKSpriteNode *_sound;
+    SKSpriteNode *_backgroundMenus;
+    SKSpriteNode *_xMenu;
+    
     SKLabelNode *_labelScore;
+    SKLabelNode *_labelTimer;
     
     Henry *_henry;
     
     NSMutableArray *_enemies;
+    NSTimer *_timer;
     Bat *_bat;
     Ghost *_ghost;
     
@@ -45,6 +55,7 @@
     BOOL _jumping;
     BOOL _moving;
     BOOL _lanternLit;
+    BOOL _soundOn;
     BOOL _flipped; //If Henry's image is flipped to walk left
     
     
@@ -62,8 +73,8 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     
     //Setting Delegate
     self.physicsWorld.contactDelegate = self;
-  
-///////////////////////////////////////////////////////////Creating Layers//////////////////////////////////////////////////////////////
+    
+    ///////////////////////////////////////////////////////////Creating Layers//////////////////////////////////////////////////////////////
     
     //Creating background Layers (Holds the backgrounds)
     _backgroundTreeLayer = [SKNode node];
@@ -92,9 +103,9 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     [self addChild:_HUD];
     
     
- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
- ///////////////////////////////////////////////////////////Inserting Objects//////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////Inserting Objects//////////////////////////////////////////////////////////////
     
     //Inserting Ground
     _currentGroundX = 0;
@@ -102,7 +113,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     [self generateWorldWithImage:@"groundBig" repeat:3];
     [self generateWorldWithImage:@"ground" repeat:4];
     [self generateWorldWithImage:@"groundRamp" repeat:1];
-   //Creating Background
+    //Creating Background
     [self generateBackgroundIn:_backgroundMountainLayer withImage:@"backgroundMountain" repeat:10];
     [self generateBackgroundIn:_backgroundTreeLayer2 withImage:@"backgroundTrees2" repeat:10];
     [self generateBackgroundIn:_backgroundTreeLayer withImage:@"backgroundTrees" repeat:10];
@@ -157,7 +168,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     leftButton.size = CGSizeMake(60, 60);
     leftButton.name = @"leftButton";
     leftButton.position = CGPointMake(-self.frame.size.width * 0.5 +leftButton.frame.size.width * 0.5,
-                                       -self.frame.size.height * 0.5 + leftButton.frame.size.height * 0.5);
+                                      -self.frame.size.height * 0.5 + leftButton.frame.size.height * 0.5);
     
     [_HUD addChild:leftButton];
     
@@ -179,38 +190,41 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     
     SKShapeNode *circle1 = [SKShapeNode shapeNodeWithCircleOfRadius:13.0];
     circle1.position = CGPointMake(0,0);
+    circle1.name = @"circle1";
     circle1.fillColor = [UIColor whiteColor];
     
     SKSpriteNode *configButton = [SKSpriteNode spriteNodeWithImageNamed:@"gear"];
     configButton.size = CGSizeMake(20, 20);
     configButton.name = @"configButton";
     configButton.position = CGPointMake(self.frame.size.width * 0.5 - configButton.frame.size.width * 0.5 - 5,
-                                         self.frame.size.height * 0.5 - configButton.frame.size.height * 0.5 - 5);
+                                        self.frame.size.height * 0.5 - configButton.frame.size.height * 0.5 - 5);
     [configButton addChild:circle1];
     [_HUD addChild:configButton];
     
     
     SKShapeNode *circle2 = [SKShapeNode shapeNodeWithCircleOfRadius:13.0];
     circle2.position = CGPointMake(0,0);
+    circle2.name = @"circle2";
     circle2.fillColor = [UIColor whiteColor];
     
     SKSpriteNode *encyclopediaButton = [SKSpriteNode spriteNodeWithImageNamed:@"book"];
     encyclopediaButton.size = CGSizeMake(20, 20);
     encyclopediaButton.name = @"encyclopediaButton";
     encyclopediaButton.position = CGPointMake(self.frame.size.width * 0.5 - encyclopediaButton.frame.size.width * 2.0 - 10,
-                                        self.frame.size.height * 0.5 - encyclopediaButton.frame.size.height * 0.5 - 5);
+                                              self.frame.size.height * 0.5 - encyclopediaButton.frame.size.height * 0.5 - 5);
     [encyclopediaButton addChild:circle2];
     [_HUD addChild:encyclopediaButton];
     
     SKShapeNode *circle3 = [SKShapeNode shapeNodeWithCircleOfRadius:13.0];
     circle3.position = CGPointMake(0,0);
+    circle3.name = @"circle3";
     circle3.fillColor = [UIColor whiteColor];
     
     SKSpriteNode *changeStoneButton = [SKSpriteNode spriteNodeWithImageNamed:@"magicStone"];
     changeStoneButton.size = CGSizeMake(20, 20);
     changeStoneButton.name = @"changeStoneButton";
     changeStoneButton.position = CGPointMake(self.frame.size.width * 0.5 - changeStoneButton.frame.size.width * 4.0 - 10,
-                                              self.frame.size.height * 0.5 - changeStoneButton.frame.size.height * 0.5 - 5);
+                                             self.frame.size.height * 0.5 - changeStoneButton.frame.size.height * 0.5 - 5);
     [changeStoneButton addChild:circle3];
     [_HUD addChild:changeStoneButton];
     
@@ -246,30 +260,87 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     [_HUD addChild:_lifeLabel];
     
     _labelScore = [SKLabelNode labelNodeWithFontNamed:@"Helvetica"];
-    _labelScore.position = CGPointMake(_lifeLabel.position.x + 100, _lifeLabel.position.y);
+    _labelScore.position = CGPointMake(_lifeLabel.position.x - 10, _lifeLabel.position.y - 30);
     _labelScore.fontSize = 20;
     _labelScore.fontColor = [UIColor whiteColor];
     
     [_HUD addChild:_labelScore];
     
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    [self timer];
+    [self startTimer];
     
-//Defining Inicial Values
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    //Defining Inicial Values
     self.numberOfLives = 3;
     self.score = 0;
+    _time = 0;
     
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-/////////////////////////////////////////////////////////Defining Sound/////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////Defining Sound/////////////////////////////////////////////////////////
     
-    _backgroundSound = [SKAction repeatActionForever:[SKAction playSoundFileNamed:@"nightForestSound.mp3" waitForCompletion:YES]];
-    [self runAction:_backgroundSound];
     
-    _backgroundMusic = [SKAction repeatActionForever:[SKAction playSoundFileNamed:@"nightForestMusic.mp3" waitForCompletion:YES]];
-    [self runAction:_backgroundMusic];
+    NSURL *url1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/nightForestSound.mp3", [[NSBundle mainBundle] resourcePath]]];
+    NSURL *url2 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/nightForestMusic.mp3", [[NSBundle mainBundle] resourcePath]]];
     
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    NSError *error;
     
+    self.soundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url1 error:&error];
+    self.soundPlayer.numberOfLoops = -1;
+    
+    self.musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url2 error:&error];
+    self.musicPlayer.numberOfLoops = -1;
+    
+    if (!self.soundPlayer || !self.musicPlayer)
+        NSLog([error localizedDescription]);
+    else
+    {
+        _soundOn= YES;
+        [self.soundPlayer play];
+        [self.musicPlayer play];
+    }
+    //    _backgroundSound = [SKAction repeatActionForever:[SKAction playSoundFileNamed:@"nightForestSound.mp3" waitForCompletion:YES]];
+    //    [self runAction:_backgroundSound];
+    //
+    //    _backgroundMusic = [SKAction repeatActionForever:[SKAction playSoundFileNamed:@"nightForestMusic.mp3" waitForCompletion:YES]];
+    //    [self runAction:_backgroundMusic];
+    //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+}
+
+- (void)timer
+{
+    _labelTimer = [SKLabelNode labelNodeWithText:@"00:00"];
+    
+    _labelTimer.fontName = @"DKCoolCrayon";
+    _labelTimer.position = CGPointMake(0, _lifeLabel.position.y);
+    _labelTimer.fontSize = 20;
+    _labelTimer.name = @"timer";
+    _labelTimer.fontColor = [UIColor whiteColor];
+    _labelTimer.zPosition = 1;
+    
+    [_labelTimer setScale:0.9];
+    [_HUD addChild:_labelTimer];
+    
+}
+-(void)startTimer
+{
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(increaseTimer) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSDefaultRunLoopMode];
+}
+
+-(void)increaseTimer
+{
+    _time++;
+    
+    _labelTimer.text = [NSString stringWithFormat:@"%d",_time];
+}
+
+- (void)stopTimer
+{
+    [_timer invalidate];
 }
 
 -(void)setNumberOfLives:(int)numberOfLives
@@ -318,7 +389,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             [_henry walkLeft];
         }
         else if([n.name isEqualToString:@"jumpButton"]){
-
+            
             if(!_jumping){
                 _jumping = YES;
                 [_henry jump];
@@ -327,6 +398,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         else if([n.name isEqualToString:@"lanternButton"]){
             
             if(!_isGameOver){
+
             _lanternLit = YES;
             [_henry removeActionForKey:@"idleAnimation"];
             [_henry removeActionForKey:@"walkAnimation"];
@@ -345,6 +417,14 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             }
                 
             [_henry pickLantern];
+
+                _lanternLit = YES;
+                [_henry removeActionForKey:@"idleAnimation"];
+                [_henry removeActionForKey:@"walkAnimation"];
+                [_henry removeActionForKey:@"walkLeft"];
+                [_henry removeActionForKey:@"walkRight"];
+                [_henry pickLantern];
+
             }
         }
         
@@ -410,10 +490,118 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             }
         }
         
-    };
+        if([n.name isEqualToString:@"configButton"] || [n.name isEqualToString:@"circle1"])
+        {
+            [self backgroundButtons];
+            
+            SKLabelNode *tituloLabel = [SKLabelNode labelNodeWithText: @"Configurações:"];
+            tituloLabel.position = CGPointMake(0, 90);
+            tituloLabel.fontSize = 20;
+            tituloLabel.fontColor = [UIColor blackColor];
+            
+            
+            if (_soundOn == YES)
+            {
+                _sound = [SKSpriteNode spriteNodeWithImageNamed:@"soundOn"];
+            }
+            else if( _soundOn == NO)
+            {
+                _sound = [SKSpriteNode spriteNodeWithImageNamed:@"soundOff"];
+            }
+            
+            _sound.position = CGPointMake(0,0);
+            _sound.size = CGSizeMake(50,50);
+            _sound.name = @"sound";
+            _sound.zPosition = 1;
+            
+            
+            
+            [_backgroundMenus addChild:tituloLabel];
+            [_backgroundMenus addChild:_sound];
+            
+        }
+        
+        else if([n.name isEqualToString:@"encyclopediaButton"] || [n.name isEqualToString:@"circle2"] )
+        {
+            
+            [self backgroundButtons];
+            
+            
+        }
+        
+        else if([n.name isEqualToString:@"changeStoneButton"] || [n.name isEqualToString:@"circle3"] )
+        {
+            [self backgroundButtons];
+            
+        }
+        
+        
+        if ([n.name isEqualToString:@"x"])
+        {
+            [_backgroundMenus removeFromParent];
+            [self unpauseGame];
+        }
+        
+        else if ([n.name isEqualToString:@"sound"])
+        {
+            if (_soundOn == YES)
+            {
+                _soundOn = NO;
+                [_sound setTexture:[SKTexture textureWithImageNamed:@"soundOff"]];
+                [self.musicPlayer stop];
+                [self.soundPlayer stop];
+            }
+            else if( _soundOn == NO)
+            {
+                _soundOn =YES;
+                [_sound setTexture:[SKTexture textureWithImageNamed:@"soundOn"]];
+                [self.musicPlayer play];
+                [self.soundPlayer play];
+            }
+        }
+        
+    }
     
 }
-                             
+
+- (void)willMoveFromView:(SKView *)view
+{
+    [super willMoveFromView:view];
+    [_pageScroller removeFromSuperview];
+}
+
+-(void)backgroundButtons
+{
+    _backgroundMenus = [SKSpriteNode spriteNodeWithImageNamed:@"backgroundConfigButton.jpg"];
+    _backgroundMenus.position = CGPointMake(0, 0);
+    _backgroundMenus.size = CGSizeMake(300, 250);
+    _backgroundMenus.zPosition = 1;
+    
+    _xMenu =[SKSpriteNode spriteNodeWithImageNamed:@"x"];
+    _xMenu.position = CGPointMake(_backgroundMenus.frame.size.width * 0.5, _backgroundMenus.frame.size.height * 0.5);
+    _xMenu.size = CGSizeMake(15,15);
+    _xMenu.name = @"x";
+    _xMenu.zPosition = 1;
+    
+    [self pauseGame];
+    [_HUD addChild:_backgroundMenus];
+    
+    [_backgroundMenus addChild:_xMenu];
+}
+
+-(void)pauseGame
+{
+    _isGamePaused = YES; //Set pause flag to true
+    self.paused = YES; //Pause scene and physics simulation
+}
+
+
+-(void)unpauseGame
+{
+    _isGamePaused = NO; //Set pause flag to false
+    self.paused = NO; //Resume scene and physics simulation
+}
+
 
 -(void)gameOver
 {
@@ -451,7 +639,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 -(void)didBeginContact:(SKPhysicsContact *)contact
 {
     
-
+    
     SKPhysicsBody *firstBody;
     SKPhysicsBody *secondBody;
     
@@ -495,7 +683,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 -(void)didSimulatePhysics
 {
     if(!_isGameOver){
-    [self centerOnNode:_henry];
+        [self centerOnNode:_henry];
     }
     
     [_world enumerateChildNodesWithName:@"henry" usingBlock:^(SKNode *node, BOOL *stop) {
@@ -533,18 +721,18 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     _world.position = CGPointMake(_world.position.x - positionInScene.x, _world.position.y);
     
     
-   
+    
     _backgroundTreeLayer.position = CGPointMake(_backgroundTreeLayer.position.x - positionInScene.x * 0.7 ,
                                                 _backgroundTreeLayer.position.y);
     
     
-   _backgroundTreeLayer2.position = CGPointMake(_backgroundTreeLayer2.position.x - positionInScene.x * 0.3 ,
-                                                _backgroundTreeLayer2.position.y);
+    _backgroundTreeLayer2.position = CGPointMake(_backgroundTreeLayer2.position.x - positionInScene.x * 0.3 ,
+                                                 _backgroundTreeLayer2.position.y);
     
     
     _backgroundMountainLayer.position = CGPointMake(_backgroundMountainLayer.position.x - positionInScene.x * 0.1,
-                                                 _backgroundMountainLayer.position.y);
-
+                                                    _backgroundMountainLayer.position.y);
+    
     
 }
 
