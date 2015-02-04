@@ -26,6 +26,7 @@
 		2540F82A1A71467A00AB4625 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2540F8281A71467A00AB4625 /* Main.storyboard */; };
 		2540F82C1A71467A00AB4625 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2540F82B1A71467A00AB4625 /* Images.xcassets */; };
 		2540F83B1A71467A00AB4625 /* Henry___The_Lantern_of_FearsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2540F83A1A71467A00AB4625 /* Henry___The_Lantern_of_FearsTests.m */; };
+		2570F0A41A824DAF0057E24C /* spriteHenryLanternLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 2570F0A31A824DAF0057E24C /* spriteHenryLanternLeft.png */; };
 		25B658761A7691F000836621 /* Ghost.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B658751A7691F000836621 /* Ghost.m */; };
 		25B658781A76937400836621 /* ghost.png in Resources */ = {isa = PBXBuildFile; fileRef = 25B658771A76937400836621 /* ghost.png */; };
 		25FB5C2B1A7AFD1000E1A2B6 /* run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 25FB5C2A1A7AFD1000E1A2B6 /* run.atlas */; };
@@ -95,6 +96,7 @@
 		2540F8341A71467A00AB4625 /* Henry & The Lantern of FearsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Henry & The Lantern of FearsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2540F8391A71467A00AB4625 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2540F83A1A71467A00AB4625 /* Henry___The_Lantern_of_FearsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Henry___The_Lantern_of_FearsTests.m"; sourceTree = "<group>"; };
+		2570F0A31A824DAF0057E24C /* spriteHenryLanternLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spriteHenryLanternLeft.png; sourceTree = "<group>"; };
 		25B658741A7691F000836621 /* Ghost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ghost.h; sourceTree = "<group>"; };
 		25B658751A7691F000836621 /* Ghost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ghost.m; sourceTree = "<group>"; };
 		25B658771A76937400836621 /* ghost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ghost.png; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				25FB5C3E1A7B1CCA00E1A2B6 /* spriteHenryLantern.png */,
+				2570F0A31A824DAF0057E24C /* spriteHenryLanternLeft.png */,
 				25FB5C401A7B200300E1A2B6 /* idle.atlas */,
 				25FB5C2A1A7AFD1000E1A2B6 /* run.atlas */,
 				250627AA1A75713C00325CEE /* IdleAnimation */,
@@ -417,6 +420,7 @@
 				3BA8DEDF1A768A1700740706 /* backgroundTrees2.png in Resources */,
 				339EA2491A7940CD003B0BBD /* cristalVerde.png in Resources */,
 				250627C01A758F3F00325CEE /* book.png in Resources */,
+				2570F0A41A824DAF0057E24C /* spriteHenryLanternLeft.png in Resources */,
 				250627C21A7593AB00325CEE /* magicStone.png in Resources */,
 				3BA8DEE11A768A4D00740706 /* backgroundTrees.png in Resources */,
 			);
