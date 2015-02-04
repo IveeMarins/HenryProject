@@ -77,7 +77,7 @@
 {
     
     NSMutableArray *walkFrames = [NSMutableArray array];
-    SKTextureAtlas *walkHenryAtlas = [SKTextureAtlas atlasNamed:@"run"];
+    SKTextureAtlas *walkHenryAtlas = [SKTextureAtlas atlasNamed:@"runLeft"];
     for (int i = 1; i <= walkHenryAtlas.textureNames.count; i++) {
         NSString *textureName = [NSString stringWithFormat:@"run%d", i];
         SKTexture *temp = [walkHenryAtlas textureNamed:textureName];
@@ -144,10 +144,6 @@
 -(void)idleAnimation
 {
     
-//    SKAction *idleAnimation = [SKAction repeatActionForever:[SKAction animateWithTextures:@[[SKTexture textureWithImageNamed:@"idle1"],[SKTexture textureWithImageNamed:@"idle2"],[SKTexture textureWithImageNamed:@"idle1"]] timePerFrame:1]];
-//    
-//    [self runAction:idleAnimation withKey:@"idleAnimation"];
-    
     
     NSMutableArray *idleFrames = [NSMutableArray array];
     SKTextureAtlas *idleHenryAtlas = [SKTextureAtlas atlasNamed:@"idle"];
@@ -159,9 +155,23 @@
     
     _idleAnimationFrames = idleFrames;
     
+
+    [self runAction: [SKAction repeatActionForever:[SKAction animateWithTextures:_idleAnimationFrames
+                                                                    timePerFrame:3]]withKey:@"idleAnimation"];
     
+}
+-(void)idleAnimationLeft
+{
     
+    NSMutableArray *idleFrames = [NSMutableArray array];
+    SKTextureAtlas *idleHenryAtlas = [SKTextureAtlas atlasNamed:@"idleLeft"];
+    for (int i = 1; i <= idleHenryAtlas.textureNames.count; i++) {
+        NSString *textureName = [NSString stringWithFormat:@"idle%d", i];
+        SKTexture *temp = [idleHenryAtlas textureNamed:textureName];
+        [idleFrames addObject:temp];
+    }
     
+    _idleAnimationFrames = idleFrames;
     
     
     [self runAction: [SKAction repeatActionForever:[SKAction animateWithTextures:_idleAnimationFrames
