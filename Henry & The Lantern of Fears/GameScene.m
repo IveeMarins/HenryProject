@@ -303,10 +303,8 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             _rightButtonPressed = YES;
             _moving = YES;
             [_henry removeActionForKey:@"idleAnimation"];
-            if(_henry.xScale == -1){
-                _henry.xScale = 1;
-                _flipped = NO;
-            }
+            _flipped = NO;
+            
             [_henry walkRight];
         }
         else if([n.name isEqualToString:@"leftButton"]){
@@ -314,10 +312,9 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             _leftButtonPressed = YES;
             _moving = YES;
             [_henry removeActionForKey:@"idleAnimation"];
-            if(_henry.xScale == 1){
-                _henry.xScale = -1;
-                _flipped = YES;
-            }
+            
+            _flipped = YES;
+            
             [_henry walkLeft];
         }
         else if([n.name isEqualToString:@"jumpButton"]){
@@ -335,6 +332,18 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             [_henry removeActionForKey:@"walkAnimation"];
             [_henry removeActionForKey:@"walkLeft"];
             [_henry removeActionForKey:@"walkRight"];
+            if (_flipped) {
+                [_henry setTexture:[SKTexture textureWithImageNamed:@"spriteHenryLanternLeft"]];
+                _henry.size = CGSizeMake(80, 100);
+                    
+                    
+            }
+            else{
+                [_henry setTexture:[SKTexture textureWithImageNamed:@"spriteHenryLantern"]];
+                _henry.size = CGSizeMake(80, 100);
+                    
+            }
+                
             [_henry pickLantern];
             }
         }
@@ -380,9 +389,8 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             }];
             [_henry enumerateChildNodesWithName:@"fakeLanternLight" usingBlock:^(SKNode *node, BOOL *stop) {
                 [node removeFromParent];
-                
-                
             }];
+            
             
         }
         else if(![n.name isEqualToString:@"jumpButton"]){
@@ -394,7 +402,12 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             [_henry removeActionForKey:@"walkLeft"];
             [_henry removeActionForKey:@"walkRight"];
             [_henry removeActionForKey:@"walkAnimation"];
-            [_henry idleAnimation];
+            if (_flipped) {
+                [_henry idleAnimationLeft];
+            }
+            else{
+                [_henry idleAnimation];
+            }
         }
         
     };
