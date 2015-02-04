@@ -30,6 +30,8 @@
     SKNode *_HUD;
     CGFloat _currentGroundX;
     int _time;
+    int _timeSec;
+    int _timeMin;
     
     UIScrollView *_pageScroller;
     
@@ -334,9 +336,19 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 -(void)increaseTimer
 {
     _time++;
+    _timeSec++;
+
+    if (_timeSec == 60)
+    {
+        _timeSec = 0;
+        _timeMin++;
+    }
     
-    _labelTimer.text = [NSString stringWithFormat:@"%d",_time];
+    
+    NSString *timeNow = [NSString stringWithFormat:@"%02d:%02d", _timeMin, _timeSec];
+    _labelTimer.text = timeNow;
 }
+
 
 - (void)stopTimer
 {
