@@ -13,6 +13,7 @@
     
     NSArray *_idleAnimationFrames;
     NSArray *_walkAnimationFrames;
+    BOOL _flipped;
 }
 
 +(id)henry
@@ -24,6 +25,7 @@
     
     SKSpriteNode *lightBlocker = [SKSpriteNode spriteNodeWithColor:[UIColor grayColor] size:CGSizeMake(1,20)];
     lightBlocker.zPosition = -10;
+    lightBlocker.name = @"lightBlocker";
     lightBlocker.position = CGPointMake(henry.frame.size.width * 0.5 + 5,-20);
     lightBlocker.shadowCastBitMask = 0x1 << 30;
     [henry addChild:lightBlocker];
@@ -72,6 +74,26 @@
                                                                     timePerFrame:0.2]]withKey:@"walkAnimation"];
     
     [self runAction:incrementRight withKey:@"walkRight"];
+    
+    if (_flipped){
+        [self enumerateChildNodesWithName:@"killerLine" usingBlock:^(SKNode *node, BOOL *stop) {
+            node.xScale = 1;
+            node.position = CGPointMake(-node.position.x, node.position.y);
+            
+        }];
+        [self enumerateChildNodesWithName:@"kopp" usingBlock:^(SKNode *node, BOOL *stop) {
+            node.xScale = 1;
+            node.position = CGPointMake(-node.position.x, node.position.y);
+        }];
+        [self enumerateChildNodesWithName:@"lightBlocker" usingBlock:^(SKNode *node, BOOL *stop) {
+            node.xScale = 1;
+            node.position = CGPointMake(-node.position.x, node.position.y);
+            
+        }];
+        _flipped = NO;
+    }
+    
+    
 }
 -(void)walkLeft
 {
@@ -91,6 +113,26 @@
     
     SKAction *incrementLeft = [SKAction repeatActionForever:[SKAction moveByX:-30 y:0 duration:0.3]];
     [self runAction:incrementLeft withKey:@"walkLeft"];
+        
+        if (!_flipped){
+            [self enumerateChildNodesWithName:@"killerLine" usingBlock:^(SKNode *node, BOOL *stop) {
+                node.xScale = -1;
+                node.position = CGPointMake(-node.position.x, node.position.y);
+            }];
+            [self enumerateChildNodesWithName:@"kopp" usingBlock:^(SKNode *node, BOOL *stop) {
+                node.xScale = -1;
+                node.position = CGPointMake(-node.position.x, node.position.y);
+                
+            }];
+            [self enumerateChildNodesWithName:@"lightBlocker" usingBlock:^(SKNode *node, BOOL *stop) {
+                node.xScale = -1;
+                node.position = CGPointMake(-node.position.x, node.position.y);
+                
+            }];
+            
+            _flipped = YES;
+        }
+    
 }
 -(void)jump
 {
@@ -102,7 +144,7 @@
 -(void)pickLantern
 {
     
-    [self setTexture:[SKTexture textureWithImageNamed:@"spriteHenryLantern"]];
+    
     
     NSString *lanternLightEmmiterPath = [[NSBundle mainBundle] pathForResource:@"lanternLight" ofType:@"sks"];
     SKEmitterNode *lanternLightEmmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:lanternLightEmmiterPath];
@@ -135,7 +177,11 @@
     
     fakeLanternLight.position = CGPointMake(self.frame.size.width * 0.5 - 3,-20);
     
-    
+    if(_flipped){
+        
+        fakeLanternLight.position = CGPointMake(-fakeLanternLight.position.x, fakeLanternLight.position.y);
+        lanternLightEmmitter.position = CGPointMake(-lanternLightEmmitter.position.x, lanternLightEmmitter.position.y);
+    }
     
     [self addChild:fakeLanternLight];
     

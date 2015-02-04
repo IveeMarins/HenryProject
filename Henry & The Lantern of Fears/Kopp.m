@@ -18,7 +18,6 @@
     kopp.name = @"kopp";
     [henry addChild:kopp];
     kopp.position = CGPointMake(-henry.frame.size.width * 0.5 -kopp.frame.size.width + 15, 30);
-    
     return kopp;
 }
 
