@@ -31,6 +31,9 @@
 		2570F0AC1A8283B50057E24C /* runLeft.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2570F0AB1A8283B50057E24C /* runLeft.atlas */; };
 		25B658761A7691F000836621 /* Ghost.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B658751A7691F000836621 /* Ghost.m */; };
 		25B658781A76937400836621 /* ghost.png in Resources */ = {isa = PBXBuildFile; fileRef = 25B658771A76937400836621 /* ghost.png */; };
+		25C7C5261A82B8EB0075A061 /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C5241A82B8EB0075A061 /* bokeh.png */; };
+		25C7C52A1A82BCCF0075A061 /* LanternMagicFirstScreen.sks in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C5291A82BCCF0075A061 /* LanternMagicFirstScreen.sks */; };
+		25C7C52C1A82BD7D0075A061 /* DyingEnemy.sks in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C52B1A82BD7D0075A061 /* DyingEnemy.sks */; };
 		25FB5C2B1A7AFD1000E1A2B6 /* run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 25FB5C2A1A7AFD1000E1A2B6 /* run.atlas */; };
 		25FB5C3F1A7B1CCA00E1A2B6 /* spriteHenryLantern.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FB5C3E1A7B1CCA00E1A2B6 /* spriteHenryLantern.png */; };
 		25FB5C411A7B200300E1A2B6 /* idle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 25FB5C401A7B200300E1A2B6 /* idle.atlas */; };
@@ -107,6 +110,9 @@
 		25B658741A7691F000836621 /* Ghost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ghost.h; sourceTree = "<group>"; };
 		25B658751A7691F000836621 /* Ghost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ghost.m; sourceTree = "<group>"; };
 		25B658771A76937400836621 /* ghost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ghost.png; sourceTree = "<group>"; };
+		25C7C5241A82B8EB0075A061 /* bokeh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bokeh.png; sourceTree = "<group>"; };
+		25C7C5291A82BCCF0075A061 /* LanternMagicFirstScreen.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LanternMagicFirstScreen.sks; sourceTree = "<group>"; };
+		25C7C52B1A82BD7D0075A061 /* DyingEnemy.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DyingEnemy.sks; sourceTree = "<group>"; };
 		25FB5C2A1A7AFD1000E1A2B6 /* run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = run.atlas; sourceTree = "<group>"; };
 		25FB5C3E1A7B1CCA00E1A2B6 /* spriteHenryLantern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spriteHenryLantern.png; sourceTree = "<group>"; };
 		25FB5C401A7B200300E1A2B6 /* idle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = idle.atlas; sourceTree = "<group>"; };
@@ -212,6 +218,9 @@
 		2540F80D1A71467A00AB4625 = {
 			isa = PBXGroup;
 			children = (
+				25C7C52B1A82BD7D0075A061 /* DyingEnemy.sks */,
+				25C7C5291A82BCCF0075A061 /* LanternMagicFirstScreen.sks */,
+				25C7C5241A82B8EB0075A061 /* bokeh.png */,
 				250627931A72F54300325CEE /* lanternLight.sks */,
 				250627941A72F54300325CEE /* spark.png */,
 				2540F8181A71467A00AB4625 /* Henry & The Lantern of Fears */,
@@ -405,14 +414,17 @@
 			files = (
 				250627961A72F54300325CEE /* spark.png in Resources */,
 				339EA2311A77FBB0003B0BBD /* groundBig.png in Resources */,
+				25C7C52C1A82BD7D0075A061 /* DyingEnemy.sks in Resources */,
 				25B658781A76937400836621 /* ghost.png in Resources */,
 				25FB5C2B1A7AFD1000E1A2B6 /* run.atlas in Resources */,
 				339EA2431A7927F9003B0BBD /* startScreenBackground.jpg in Resources */,
+				25C7C52A1A82BCCF0075A061 /* LanternMagicFirstScreen.sks in Resources */,
 				339EA2321A77FBB0003B0BBD /* groundGap.png in Resources */,
 				339EA23E1A77FC77003B0BBD /* idle1.png in Resources */,
 				339EA24B1A7940DB003B0BBD /* worldScene.png in Resources */,
 				339EA22A1A77E725003B0BBD /* WorldSelection.png in Resources */,
 				339EA24F1A7943F7003B0BBD /* kopp.png in Resources */,
+				25C7C5261A82B8EB0075A061 /* bokeh.png in Resources */,
 				25FCDB471A716B1E00B842F2 /* rightButton.png in Resources */,
 				3386CF2C1A828466005371BD /* soundOff.png in Resources */,
 				250627951A72F54300325CEE /* lanternLight.sks in Resources */,
