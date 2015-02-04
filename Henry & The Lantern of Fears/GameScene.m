@@ -22,6 +22,8 @@
 
 @implementation GameScene{
     
+    BOOL _teste;
+    
     SKNode *_world;
     SKNode *_backgroundTreeLayer;
     SKNode *_backgroundTreeLayer2;
@@ -31,7 +33,6 @@
     CGFloat _currentGroundX;
     int _time;
     
-    UIScrollView *_pageScroller;
     
     SKAction *_backgroundMusic;
     SKAction *_backgroundSound;
@@ -66,6 +67,8 @@ static const uint32_t PLAYER_CATEGORY = 0x1 << 1;
 static const uint32_t ENEMY_CATEGORY = 0x1 << 2;
 static const uint32_t KILL_ENEMY_CATEGORY = 0x1 << 3;
 static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
+
+
 
 -(void)didMoveToView:(SKView *)view {
     /* Setup your scene here */
@@ -383,7 +386,6 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             _leftButtonPressed = YES;
             _moving = YES;
             [_henry removeActionForKey:@"idleAnimation"];
-            
             _flipped = YES;
             
             [_henry walkLeft];
@@ -409,21 +411,13 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
                 _henry.size = CGSizeMake(80, 100);
                     
                     
-            }
-            else{
+            }else{
                 [_henry setTexture:[SKTexture textureWithImageNamed:@"spriteHenryLantern"]];
                 _henry.size = CGSizeMake(80, 100);
                     
             }
-                
+            
             [_henry pickLantern];
-
-                _lanternLit = YES;
-                [_henry removeActionForKey:@"idleAnimation"];
-                [_henry removeActionForKey:@"walkAnimation"];
-                [_henry removeActionForKey:@"walkLeft"];
-                [_henry removeActionForKey:@"walkRight"];
-                [_henry pickLantern];
 
             }
         }
@@ -451,13 +445,15 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             _rightButtonPressed = NO;
             _moving = NO;
             [_henry removeActionForKey:@"walkRight"];
+            [_henry removeActionForKey:@"walkLeft"];
             [_henry idleAnimation];
         }
         else if ([n.name isEqualToString:@"leftButton"]) {
             _leftButtonPressed = NO;
             _moving = NO;
-            [_henry idleAnimation];
+            [_henry removeActionForKey:@"walkRight"];
             [_henry removeActionForKey:@"walkLeft"];
+            [_henry idleAnimationLeft];
         }
         else if([n.name isEqualToString:@"lanternButton"]){
             _lanternLit = NO;
@@ -470,8 +466,12 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             [_henry enumerateChildNodesWithName:@"fakeLanternLight" usingBlock:^(SKNode *node, BOOL *stop) {
                 [node removeFromParent];
             }];
-            
-            
+            if (_flipped) {
+                [_henry idleAnimationLeft];
+            }
+            else{
+                [_henry idleAnimation];
+            }
         }
         else if(![n.name isEqualToString:@"jumpButton"]){
             
@@ -482,12 +482,16 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             [_henry removeActionForKey:@"walkLeft"];
             [_henry removeActionForKey:@"walkRight"];
             [_henry removeActionForKey:@"walkAnimation"];
-            if (_flipped) {
-                [_henry idleAnimationLeft];
-            }
-            else{
-                [_henry idleAnimation];
-            }
+            [_henry enumerateChildNodesWithName:@"lanternLightParticle" usingBlock:^(SKNode *node, BOOL *stop) {
+                [node removeFromParent];
+            }];
+            [_henry enumerateChildNodesWithName:@"lanternLight" usingBlock:^(SKNode *node, BOOL *stop) {
+                [node removeFromParent];
+            }];
+            [_henry enumerateChildNodesWithName:@"fakeLanternLight" usingBlock:^(SKNode *node, BOOL *stop) {
+                [node removeFromParent];
+            }];
+            
         }
         
         if([n.name isEqualToString:@"configButton"] || [n.name isEqualToString:@"circle1"])
@@ -564,11 +568,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     
 }
 
-- (void)willMoveFromView:(SKView *)view
-{
-    [super willMoveFromView:view];
-    [_pageScroller removeFromSuperview];
-}
+
 
 -(void)backgroundButtons
 {
