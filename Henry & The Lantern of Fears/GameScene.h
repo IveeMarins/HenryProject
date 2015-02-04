@@ -7,9 +7,12 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface GameScene : SKScene <SKPhysicsContactDelegate>
 @property (strong, nonatomic) SKLabelNode *lifeLabel;
 @property (nonatomic) int numberOfLives;
 @property (nonatomic) int score;
+@property (strong, nonatomic) AVAudioPlayer *musicPlayer;
+@property (strong, nonatomic) AVAudioPlayer *soundPlayer;
 @end
