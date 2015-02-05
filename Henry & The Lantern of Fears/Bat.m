@@ -57,6 +57,8 @@
 }
 -(void)death
 {
+    self.physicsBody.categoryBitMask = 0;
+    self.physicsBody.collisionBitMask = 0;
     [self removeActionForKey:@"flyAnimation"];
     [self setTexture:[SKTexture textureWithImageNamed:@"batDead"]];
     
@@ -72,6 +74,8 @@
     SKAction *removeBat = [SKAction sequence:@[[SKAction waitForDuration:1.5], [SKAction removeFromParent]]];
     
     [self runAction:removeBat];
+    
+    
 }
 
 @end

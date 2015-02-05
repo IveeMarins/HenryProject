@@ -50,9 +50,7 @@
 		25FCDB471A716B1E00B842F2 /* rightButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FCDB461A716B1E00B842F2 /* rightButton.png */; };
 		25FCDB4F1A717BF000B842F2 /* leftButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FCDB4E1A717BF000B842F2 /* leftButton.png */; };
 		25FCDB511A718DAA00B842F2 /* jumpButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FCDB501A718DAA00B842F2 /* jumpButton.png */; };
-		25FCDB531A72746800B842F2 /* x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FCDB521A72746800B842F2 /* x.png */; };
 		25FCDB561A72905C00B842F2 /* Enemy.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FCDB551A72905C00B842F2 /* Enemy.m */; };
-		25FCDB5E1A72A7A000B842F2 /* bat.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FCDB5D1A72A7A000B842F2 /* bat.png */; };
 		2E8CA2391A76C518005F41E5 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8CA2381A76C518005F41E5 /* Menu.m */; };
 		2EE9EF531A76CADF00A6A3B0 /* Mundos.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE9EF521A76CADF00A6A3B0 /* Mundos.m */; };
 		3386CF2C1A828466005371BD /* soundOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 3386CF2B1A828466005371BD /* soundOff.png */; };
@@ -139,10 +137,8 @@
 		25FCDB461A716B1E00B842F2 /* rightButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightButton.png; sourceTree = "<group>"; };
 		25FCDB4E1A717BF000B842F2 /* leftButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftButton.png; sourceTree = "<group>"; };
 		25FCDB501A718DAA00B842F2 /* jumpButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jumpButton.png; sourceTree = "<group>"; };
-		25FCDB521A72746800B842F2 /* x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = x.png; sourceTree = "<group>"; };
 		25FCDB541A72905C00B842F2 /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
 		25FCDB551A72905C00B842F2 /* Enemy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy.m; sourceTree = "<group>"; };
-		25FCDB5D1A72A7A000B842F2 /* bat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bat.png; sourceTree = "<group>"; };
 		2E8CA2381A76C518005F41E5 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menu.m; sourceTree = "<group>"; };
 		2E8CA23A1A76C51F005F41E5 /* Menu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
 		2EE9EF511A76CADF00A6A3B0 /* Mundos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mundos.h; sourceTree = "<group>"; };
@@ -232,7 +228,6 @@
 				250627BD1A758AF200325CEE /* gear.png */,
 				250627911A72EB5200325CEE /* lantern.png */,
 				250627C11A7593AB00325CEE /* magicStone.png */,
-				25FCDB521A72746800B842F2 /* x.png */,
 				25FCDB501A718DAA00B842F2 /* jumpButton.png */,
 				25FCDB4E1A717BF000B842F2 /* leftButton.png */,
 				25FCDB461A716B1E00B842F2 /* rightButton.png */,
@@ -348,7 +343,6 @@
 				25C7C53B1A83EFCA0075A061 /* Bat */,
 				25FCDB541A72905C00B842F2 /* Enemy.h */,
 				25FCDB551A72905C00B842F2 /* Enemy.m */,
-				25FCDB5D1A72A7A000B842F2 /* bat.png */,
 				25B658771A76937400836621 /* ghost.png */,
 				25B658741A7691F000836621 /* Ghost.h */,
 				25B658751A7691F000836621 /* Ghost.m */,
@@ -467,7 +461,6 @@
 				25FCDB471A716B1E00B842F2 /* rightButton.png in Resources */,
 				3386CF2C1A828466005371BD /* soundOff.png in Resources */,
 				250627951A72F54300325CEE /* lanternLight.sks in Resources */,
-				25FCDB5E1A72A7A000B842F2 /* bat.png in Resources */,
 				25C7C5361A83ED6C0075A061 /* henryLife.png in Resources */,
 				3BA8DEE31A768AB000740706 /* backgroundMountain.png in Resources */,
 				3386CF2E1A82846E005371BD /* soundOn.png in Resources */,
@@ -477,7 +470,6 @@
 				250628021A75F8C000325CEE /* nightForestMusic.mp3 in Resources */,
 				2540F82C1A71467A00AB4625 /* Images.xcassets in Resources */,
 				250627FA1A75DF0D00325CEE /* backgroundSky.png in Resources */,
-				25FCDB531A72746800B842F2 /* x.png in Resources */,
 				25FB5C3F1A7B1CCA00E1A2B6 /* spriteHenryLantern.png in Resources */,
 				2540F8241A71467A00AB4625 /* GameScene.sks in Resources */,
 				25FB5C411A7B200300E1A2B6 /* idle.atlas in Resources */,

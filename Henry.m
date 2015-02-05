@@ -136,8 +136,12 @@
 }
 -(void)jump
 {
-    
-    [self.physicsBody applyImpulse:CGVectorMake(0, 130)];
+    if (_flipped) {
+        [self.physicsBody applyImpulse:CGVectorMake(-28, 100)];
+    }
+    else{
+        [self.physicsBody applyImpulse:CGVectorMake(28, 100)];
+    }
     
     
 }

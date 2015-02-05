@@ -124,7 +124,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     [self generateWorldWithImage:@"ground" repeat:1];
     [self generateWorldWithImage:@"groundRamp" repeat:1];
     [self generateWorldWithImage:@"spikes" repeat:1];
-    [self generateWorldWithImage:@"ground" repeat:1];
+    [self generateWorldWithImage:@"ground" repeat:2];
     //Creating Background
     [self generateBackgroundIn:_backgroundMountainLayer withImage:@"backgroundMountain" repeat:10];
     [self generateBackgroundIn:_backgroundTreeLayer2 withImage:@"backgroundTrees2" repeat:10];
@@ -351,7 +351,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 -(void)setScore:(int)score
 {
     _score = score;
-    _labelScore.text = [NSString stringWithFormat:@"Score: %d",score];
+    _labelScore.text = [NSString stringWithFormat:@"%d",score];
 }
 
 
@@ -359,62 +359,65 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
-    for (UITouch *touch in touches) {
+    if (!_isDead) {
         
-        SKNode *n = [_HUD nodeAtPoint:[touch locationInNode:_HUD]];
         
-        if([n.name isEqualToString:@"rightButton"]){
+        for (UITouch *touch in touches) {
             
-            _rightButtonPressed = YES;
-            _moving = YES;
-            [_henry removeActionForKey:@"idleAnimation"];
-            _flipped = NO;
+            SKNode *n = [_HUD nodeAtPoint:[touch locationInNode:_HUD]];
             
-            [_henry walkRight];
-        }
-        else if([n.name isEqualToString:@"leftButton"]){
-            
-            _leftButtonPressed = YES;
-            _moving = YES;
-            [_henry removeActionForKey:@"idleAnimation"];
-            _flipped = YES;
-            
-            [_henry walkLeft];
-        }
-        else if([n.name isEqualToString:@"jumpButton"]){
-            
-            if(!_jumping){
-                _jumping = YES;
-                [_henry jump];
+            if([n.name isEqualToString:@"rightButton"]){
+                
+                _rightButtonPressed = YES;
+                _moving = YES;
+                [_henry removeActionForKey:@"idleAnimation"];
+                _flipped = NO;
+                
+                [_henry walkRight];
             }
-        }
-        else if([n.name isEqualToString:@"lanternButton"]){
-            
-            if(!_isDead){
-
-            _lanternLit = YES;
-            [_henry removeActionForKey:@"idleAnimation"];
-            [_henry removeActionForKey:@"walkAnimation"];
-            [_henry removeActionForKey:@"walkLeft"];
-            [_henry removeActionForKey:@"walkRight"];
-            if (_flipped) {
-                [_henry setTexture:[SKTexture textureWithImageNamed:@"spriteHenryLanternLeft"]];
-                _henry.size = CGSizeMake(80, 100);
+            else if([n.name isEqualToString:@"leftButton"]){
+                
+                _leftButtonPressed = YES;
+                _moving = YES;
+                [_henry removeActionForKey:@"idleAnimation"];
+                _flipped = YES;
+                
+                [_henry walkLeft];
+            }
+            else if([n.name isEqualToString:@"jumpButton"]){
+                
+                if(!_jumping){
+                    _jumping = YES;
+                    [_henry jump];
+                }
+            }
+            else if([n.name isEqualToString:@"lanternButton"]){
+                
+                if(!_isDead){
                     
+                    _lanternLit = YES;
+                    [_henry removeActionForKey:@"idleAnimation"];
+                    [_henry removeActionForKey:@"walkAnimation"];
+                    [_henry removeActionForKey:@"walkLeft"];
+                    [_henry removeActionForKey:@"walkRight"];
+                    if (_flipped) {
+                        [_henry setTexture:[SKTexture textureWithImageNamed:@"spriteHenryLanternLeft"]];
+                        _henry.size = CGSizeMake(80, 100);
+                        
+                        
+                    }else{
+                        [_henry setTexture:[SKTexture textureWithImageNamed:@"spriteHenryLantern"]];
+                        _henry.size = CGSizeMake(80, 100);
+                        
+                    }
                     
-            }else{
-                [_henry setTexture:[SKTexture textureWithImageNamed:@"spriteHenryLantern"]];
-                _henry.size = CGSizeMake(80, 100);
+                    [_henry pickLantern];
                     
+                }
             }
             
-            [_henry pickLantern];
-
-            }
         }
-        
     }
-    
 }
 
 -(void)clear{
@@ -436,162 +439,165 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    for (UITouch *touch in touches) {
+    if (!_isDead) {
         
-        SKNode *n = [_HUD nodeAtPoint:[touch locationInNode:_HUD]];
         
-        if ([n.name isEqualToString:@"rightButton"]) {
-            _rightButtonPressed = NO;
-            _moving = NO;
-            [_henry removeActionForKey:@"walkRight"];
-            [_henry removeActionForKey:@"walkLeft"];
-            [_henry idleAnimation];
-        }
-        else if ([n.name isEqualToString:@"leftButton"]) {
-            _leftButtonPressed = NO;
-            _moving = NO;
-            [_henry removeActionForKey:@"walkRight"];
-            [_henry removeActionForKey:@"walkLeft"];
-            [_henry idleAnimationLeft];
-        }
-        else if([n.name isEqualToString:@"lanternButton"]){
-            _lanternLit = NO;
-            [_henry enumerateChildNodesWithName:@"lanternLightParticle" usingBlock:^(SKNode *node, BOOL *stop) {
-                [node removeFromParent];
-            }];
-            [_henry enumerateChildNodesWithName:@"lanternLight" usingBlock:^(SKNode *node, BOOL *stop) {
-                [node removeFromParent];
-            }];
-            [_henry enumerateChildNodesWithName:@"fakeLanternLight" usingBlock:^(SKNode *node, BOOL *stop) {
-                [node removeFromParent];
-            }];
-            if (_flipped) {
-                [_henry idleAnimationLeft];
-            }
-            else{
+        for (UITouch *touch in touches) {
+            
+            SKNode *n = [_HUD nodeAtPoint:[touch locationInNode:_HUD]];
+            
+            if ([n.name isEqualToString:@"rightButton"]) {
+                _rightButtonPressed = NO;
+                _moving = NO;
+                [_henry removeActionForKey:@"walkRight"];
+                [_henry removeActionForKey:@"walkLeft"];
                 [_henry idleAnimation];
             }
-        }
-        else if(![n.name isEqualToString:@"jumpButton"]){
-            
-            _rightButtonPressed = NO;
-            _leftButtonPressed = NO;
-            _lanternLit = NO;
-            _moving = NO;
-            [_henry removeActionForKey:@"walkLeft"];
-            [_henry removeActionForKey:@"walkRight"];
-            [_henry removeActionForKey:@"walkAnimation"];
-            [_henry enumerateChildNodesWithName:@"lanternLightParticle" usingBlock:^(SKNode *node, BOOL *stop) {
-                [node removeFromParent];
-            }];
-            [_henry enumerateChildNodesWithName:@"lanternLight" usingBlock:^(SKNode *node, BOOL *stop) {
-                [node removeFromParent];
-            }];
-            [_henry enumerateChildNodesWithName:@"fakeLanternLight" usingBlock:^(SKNode *node, BOOL *stop) {
-                [node removeFromParent];
-            }];
-            
-        }
-        
-        
-        if([n.name isEqualToString:@"configButton"] || [n.name isEqualToString:@"circle1"])
-        {
-            [self backgroundButtons];
-            
-            
-            _tituloLabelButton.text = @"Configurações:";
-            
-            _currentLanguageImage = [SKSpriteNode spriteNodeWithImageNamed:@""];
-            _currentLanguageImage.position = CGPointMake(0,0);
-            _currentLanguageImage.size = CGSizeMake(_sound.frame.size.width, _sound.frame.size.height);
-            _currentLanguageImage.zPosition = 1;
-            [self defineLanguage:_currentLanguage];
-        
-            
-            if (_soundOn == YES)
-            {
-                _sound = [SKSpriteNode spriteNodeWithImageNamed:@"soundOn"];
+            else if ([n.name isEqualToString:@"leftButton"]) {
+                _leftButtonPressed = NO;
+                _moving = NO;
+                [_henry removeActionForKey:@"walkRight"];
+                [_henry removeActionForKey:@"walkLeft"];
+                [_henry idleAnimationLeft];
             }
-            else if( _soundOn == NO)
-            {
-                _sound = [SKSpriteNode spriteNodeWithImageNamed:@"soundOff"];
+            else if([n.name isEqualToString:@"lanternButton"]){
+                _lanternLit = NO;
+                [_henry enumerateChildNodesWithName:@"lanternLightParticle" usingBlock:^(SKNode *node, BOOL *stop) {
+                    [node removeFromParent];
+                }];
+                [_henry enumerateChildNodesWithName:@"lanternLight" usingBlock:^(SKNode *node, BOOL *stop) {
+                    [node removeFromParent];
+                }];
+                [_henry enumerateChildNodesWithName:@"fakeLanternLight" usingBlock:^(SKNode *node, BOOL *stop) {
+                    [node removeFromParent];
+                }];
+                if (_flipped) {
+                    [_henry idleAnimationLeft];
+                }
+                else{
+                    [_henry idleAnimation];
+                }
             }
-            
-            _sound.position = CGPointMake(0 + _backgroundMenus.frame.size.width * 0.25 ,_backgroundMenus.frame.size.height * 0.15);
-            _sound.name = @"sound";
-            _sound.zPosition = 1;
-            [_sound setScale:0.2];
-            
-            _currentLanguageImage = [SKSpriteNode spriteNodeWithImageNamed:@""];
-            _currentLanguageImage.position = CGPointMake(0 + _backgroundMenus.frame.size.width * 0.25 , 0 - _backgroundMenus.frame.size.height * 0.15);
-            _currentLanguageImage.size = CGSizeMake(_sound.frame.size.width, _sound.frame.size.height);
-            _currentLanguageImage.zPosition = 1;
-            _currentLanguageImage.name = @"currentLanguageImage";
-            [self defineLanguage:_currentLanguage];
-            
-            
-            [_backgroundMenus addChild:_sound];
-            [_backgroundMenus addChild:_currentLanguageImage];
-        }
-        
-        else if([n.name isEqualToString:@"encyclopediaButton"] || [n.name isEqualToString:@"circle2"] )
-        {
-            
-            [self backgroundButtons];
-            _tituloLabelButton.text = @"Enciclopédia";
-            
-            
-        }
-        
-        else if([n.name isEqualToString:@"changeStoneButton"] || [n.name isEqualToString:@"circle3"] )
-        {
-            [self backgroundButtons];
-            _tituloLabelButton.text = @"Pedras";
-            
-        }
-        
-        
-        if ([n.name isEqualToString:@"x"])
-        {
-            [_backgroundMenus removeFromParent];
-            [self unpauseGame];
-        }
-        
-        else if ([n.name isEqualToString:@"sound"])
-        {
-            if (_soundOn == YES)
-            {
-                _soundOn = NO;
-                [_sound setTexture:[SKTexture textureWithImageNamed:@"soundOff"]];
-                [self.musicPlayer stop];
-                [self.soundPlayer stop];
-            }
-            else if( _soundOn == NO)
-            {
-                _soundOn =YES;
-                [_sound setTexture:[SKTexture textureWithImageNamed:@"soundOn"]];
-                [self.musicPlayer play];
-                [self.soundPlayer play];
-            }
-        }
-        
-        else if ( [n.name isEqualToString:@"currentLanguageImage"])
-        {
-            if ([_currentLanguage isEqualToString:@"Portugues"])
-            {
-                _currentLanguage = @"Ingles";
-                [self defineLanguage: _currentLanguage];
-            }
-            else if ([_currentLanguage isEqualToString:@"Ingles"])
-            {
-                _currentLanguage = @"Portugues";
-                [self defineLanguage: _currentLanguage];
+            else if(![n.name isEqualToString:@"jumpButton"]){
+                
+                _rightButtonPressed = NO;
+                _leftButtonPressed = NO;
+                _lanternLit = NO;
+                _moving = NO;
+                [_henry removeActionForKey:@"walkLeft"];
+                [_henry removeActionForKey:@"walkRight"];
+                [_henry removeActionForKey:@"walkAnimation"];
+                [_henry enumerateChildNodesWithName:@"lanternLightParticle" usingBlock:^(SKNode *node, BOOL *stop) {
+                    [node removeFromParent];
+                }];
+                [_henry enumerateChildNodesWithName:@"lanternLight" usingBlock:^(SKNode *node, BOOL *stop) {
+                    [node removeFromParent];
+                }];
+                [_henry enumerateChildNodesWithName:@"fakeLanternLight" usingBlock:^(SKNode *node, BOOL *stop) {
+                    [node removeFromParent];
+                }];
+                
             }
             
+            
+            if([n.name isEqualToString:@"configButton"] || [n.name isEqualToString:@"circle1"])
+            {
+                [self backgroundButtons];
+                
+                
+                _tituloLabelButton.text = @"Configurações:";
+                
+                _currentLanguageImage = [SKSpriteNode spriteNodeWithImageNamed:@""];
+                _currentLanguageImage.position = CGPointMake(0,0);
+                _currentLanguageImage.size = CGSizeMake(_sound.frame.size.width, _sound.frame.size.height);
+                _currentLanguageImage.zPosition = 1;
+                [self defineLanguage:_currentLanguage];
+                
+                
+                if (_soundOn == YES)
+                {
+                    _sound = [SKSpriteNode spriteNodeWithImageNamed:@"soundOn"];
+                }
+                else if( _soundOn == NO)
+                {
+                    _sound = [SKSpriteNode spriteNodeWithImageNamed:@"soundOff"];
+                }
+                
+                _sound.position = CGPointMake(0 + _backgroundMenus.frame.size.width * 0.25 ,_backgroundMenus.frame.size.height * 0.15);
+                _sound.name = @"sound";
+                _sound.zPosition = 1;
+                [_sound setScale:0.2];
+                
+                _currentLanguageImage = [SKSpriteNode spriteNodeWithImageNamed:@""];
+                _currentLanguageImage.position = CGPointMake(0 + _backgroundMenus.frame.size.width * 0.25 , 0 - _backgroundMenus.frame.size.height * 0.15);
+                _currentLanguageImage.size = CGSizeMake(_sound.frame.size.width, _sound.frame.size.height);
+                _currentLanguageImage.zPosition = 1;
+                _currentLanguageImage.name = @"currentLanguageImage";
+                [self defineLanguage:_currentLanguage];
+                
+                
+                [_backgroundMenus addChild:_sound];
+                [_backgroundMenus addChild:_currentLanguageImage];
+            }
+            
+            else if([n.name isEqualToString:@"encyclopediaButton"] || [n.name isEqualToString:@"circle2"] )
+            {
+                
+                [self backgroundButtons];
+                _tituloLabelButton.text = @"Enciclopédia";
+                
+                
+            }
+            
+            else if([n.name isEqualToString:@"changeStoneButton"] || [n.name isEqualToString:@"circle3"] )
+            {
+                [self backgroundButtons];
+                _tituloLabelButton.text = @"Pedras";
+                
+            }
+            
+            
+            if ([n.name isEqualToString:@"x"])
+            {
+                [_backgroundMenus removeFromParent];
+                [self unpauseGame];
+            }
+            
+            else if ([n.name isEqualToString:@"sound"])
+            {
+                if (_soundOn == YES)
+                {
+                    _soundOn = NO;
+                    [_sound setTexture:[SKTexture textureWithImageNamed:@"soundOff"]];
+                    [self.musicPlayer stop];
+                    [self.soundPlayer stop];
+                }
+                else if( _soundOn == NO)
+                {
+                    _soundOn =YES;
+                    [_sound setTexture:[SKTexture textureWithImageNamed:@"soundOn"]];
+                    [self.musicPlayer play];
+                    [self.soundPlayer play];
+                }
+            }
+            
+            else if ( [n.name isEqualToString:@"currentLanguageImage"])
+            {
+                if ([_currentLanguage isEqualToString:@"Portugues"])
+                {
+                    _currentLanguage = @"Ingles";
+                    [self defineLanguage: _currentLanguage];
+                }
+                else if ([_currentLanguage isEqualToString:@"Ingles"])
+                {
+                    _currentLanguage = @"Portugues";
+                    [self defineLanguage: _currentLanguage];
+                }
+                
+            }
+            
         }
-        
     }
-    
 }
 
 //Define Language
@@ -623,9 +629,9 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     
     _tituloLabelButton = [SKLabelNode labelNodeWithFontNamed:_fontName];
     _tituloLabelButton.position = CGPointMake(0, 90);
-    _tituloLabelButton.fontSize = 20;
+    _tituloLabelButton.fontSize = 25;
     _tituloLabelButton.name = @"tituloLabel";
-    _tituloLabelButton.fontColor = [UIColor blackColor];
+    _tituloLabelButton.fontColor = [UIColor colorWithRed:36/255 green:64/255 blue:96/255 alpha:1];
     
     
     [self pauseGame];
@@ -845,7 +851,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             SKSpriteNode *ground = [SKSpriteNode spriteNodeWithImageNamed:@"groundRamp"];
             ground.size = CGSizeMake(self.frame.size.width , 160);
             ground.position = CGPointMake(_currentGroundX, -self.frame.size.height * 0.5 + ground.frame.size.height * 0.5);
-            ground.physicsBody = [SKPhysicsBody bodyWithTexture:[SKTexture textureWithImageNamed:@"groundRamp"] size:CGSizeMake(ground.frame.size.width, ground.frame.size.height - 70)];
+            ground.physicsBody = [SKPhysicsBody bodyWithTexture:[SKTexture textureWithImageNamed:@"groundRamp"] size:CGSizeMake(ground.frame.size.width, ground.frame.size.height - 78)];
             ground.physicsBody.dynamic = NO;
             ground.physicsBody.categoryBitMask = GROUND_CATEGORY;
             [_world addChild:ground];

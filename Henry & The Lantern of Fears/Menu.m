@@ -24,7 +24,7 @@
         [Background setScale:1.05];
         [self addChild:Background];
         
-        SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"Bodoni 72 Smallcaps"];
+        SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"KGLuckoftheIrish"];
         label.text = @"Start";
         label.fontSize = 30;
         label.position = CGPointMake(self.scene.frame.size.width * 0.5 ,self.scene.frame.size.height * 0.5 /*- 180*/);
