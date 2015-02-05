@@ -9,39 +9,69 @@
 #import "Bat.h"
 #import "Henry.h"
 
-@implementation Bat
+@implementation Bat{
+    
+    NSArray *_animationFrames;
+}
 
 +(id)bat
 {
     
-    SKSpriteNode *bat = [Bat spriteNodeWithImageNamed:@"bat"];
+    Bat *bat = [Bat spriteNodeWithImageNamed:@"bat"];
     
-    bat.size = CGSizeMake(61, 38);
+    bat.size = CGSizeMake(56, 60);
     
     bat.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:15];
     bat.physicsBody.affectedByGravity = NO;
     bat.physicsBody.allowsRotation = NO;
+    bat.name = @"bat";
     
-    
-    
+    [bat animate];
     return bat;
-}
-
-+(int)giveScore
-{
-    int score = 100;
-    return score;
 }
 
 -(void)attackPlayer:(Henry *)henry
 {
     
-    SKAction *chasePlayer = [SKAction repeatActionForever:[SKAction moveTo:henry.position duration:2]];
-    [self runAction:chasePlayer];
+    
+    [self runAction:[SKAction repeatActionForever:[SKAction moveTo:henry.position duration:2]]];
     
     
     
 }
 
+-(void)animate{
+    
+    NSMutableArray *flyingFrames = [NSMutableArray array];
+    SKTextureAtlas *flyingBatAtlas = [SKTextureAtlas atlasNamed:@"batFlying"];
+    for (int i = 1; i <= flyingBatAtlas.textureNames.count; i++) {
+        NSString *textureName = [NSString stringWithFormat:@"batfly%d", i];
+        SKTexture *temp = [flyingBatAtlas textureNamed:textureName];
+        [flyingFrames addObject:temp];
+    }
+    
+    _animationFrames = flyingFrames;
+    
+    [self runAction: [SKAction repeatActionForever:[SKAction animateWithTextures:_animationFrames
+                                                                    timePerFrame:0.1]]withKey:@"flyAnimation"];
+}
+-(void)death
+{
+    [self removeActionForKey:@"flyAnimation"];
+    [self setTexture:[SKTexture textureWithImageNamed:@"batDead"]];
+    
+    NSString *deathSmokePath = [[NSBundle mainBundle] pathForResource:@"DyingEnemy" ofType:@"sks"];
+    SKEmitterNode *deathSmoke = [NSKeyedUnarchiver unarchiveObjectWithFile:deathSmokePath];
+    
+    [self addChild:deathSmoke];
+    
+    SKAction *removeSmoke = [SKAction sequence:@[[SKAction waitForDuration:1.5], [SKAction removeFromParent]]];
+    
+    [deathSmoke runAction:removeSmoke];
+    
+    SKAction *removeBat = [SKAction sequence:@[[SKAction waitForDuration:1.5], [SKAction removeFromParent]]];
+    
+    [self runAction:removeBat];
+}
 
 @end

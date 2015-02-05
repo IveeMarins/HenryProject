@@ -136,7 +136,7 @@
 -(void)jump
 {
     
-    [self.physicsBody applyImpulse:CGVectorMake(0, 120)];
+    [self.physicsBody applyImpulse:CGVectorMake(0, 130)];
     
     
 }

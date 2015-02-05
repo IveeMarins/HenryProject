@@ -61,7 +61,6 @@
     for (UITouch *touch in touches) {
         SKNode *n = [self nodeAtPoint:[touch locationInNode:self]];
         if([n.name isEqualToString:@"fase1"]){
-            NSLog(@"entrou no jogo %@",n.name);
             
             SKShapeNode *rec = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(200,50)];
             rec.fillColor = [UIColor blackColor];
@@ -87,7 +86,6 @@
     for (UITouch *touch in touches) {
         SKNode *n = [self nodeAtPoint:[touch locationInNode:self]];
         if([n.name isEqualToString:@"fase1"]){
-            NSLog(@"entrou no jogo %@",n.name);
             
             GameScene *scene = [[GameScene alloc] initWithSize:self.view.bounds.size];
             scene.anchorPoint = CGPointMake(0.5, 0.5);

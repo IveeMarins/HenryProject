@@ -22,7 +22,7 @@
     ghost.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:23];
     ghost.physicsBody.affectedByGravity = NO;
     ghost.physicsBody.allowsRotation = NO;
-    
+    ghost.name = @"ghost";
     
     return ghost;
 }

@@ -430,6 +430,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     _henry.physicsBody.contactTestBitMask = GROUND_CATEGORY;
     _henry.position = CGPointMake(0, 0);
     [_world addChild:_henry];
+    Kopp *kopp = [Kopp kopp:_henry];
     
 }
 
@@ -719,12 +720,15 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 
         if(_lanternLit){
             
-            [firstBody.node removeFromParent];
-            if ([firstBody.node isMemberOfClass:(Bat.class)])
-            {
-                self.score += [Bat giveScore];
-            }
             
+            if ([firstBody.node.name isEqualToString:@"bat"])
+            {
+                [_bat death];
+                
+            }
+            else if([firstBody.node.name isEqualToString:@"ghost"]){
+                [firstBody.node removeFromParent];
+            }
         }
         
         
