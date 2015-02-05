@@ -13,6 +13,7 @@
     
     NSArray *_idleAnimationFrames;
     NSArray *_walkAnimationFrames;
+    NSArray *_deathAnimationFrames;
     BOOL _flipped;
 }
 
@@ -223,5 +224,34 @@
                                                                     timePerFrame:3]]withKey:@"idleAnimation"];
     
 }
-
+-(void)deathAnimation{
+    
+    NSMutableArray *deathFrames = [NSMutableArray array];
+    SKTextureAtlas *deathHenryAtlas = [SKTextureAtlas atlasNamed:@"henryDeath"];
+    for (int i = 1; i <= deathHenryAtlas.textureNames.count; i++) {
+        NSString *textureName = [NSString stringWithFormat:@"morteHenry%d", i];
+        SKTexture *temp = [deathHenryAtlas textureNamed:textureName];
+        [deathFrames addObject:temp];
+    }
+    
+    _deathAnimationFrames = deathFrames;
+    
+    [self runAction:[SKAction sequence:@[ [SKAction animateWithTextures:_deathAnimationFrames timePerFrame:0.2],[SKAction waitForDuration:2.2],[SKAction removeFromParent]]]];
+    
+    
+}
+-(void)deathAnimationLeft{
+    
+    NSMutableArray *deathFrames = [NSMutableArray array];
+    SKTextureAtlas *deathHenryAtlas = [SKTextureAtlas atlasNamed:@"henryDeathLeft"];
+    for (int i = 1; i <= deathHenryAtlas.textureNames.count; i++) {
+        NSString *textureName = [NSString stringWithFormat:@"morteHenry%d", i];
+        SKTexture *temp = [deathHenryAtlas textureNamed:textureName];
+        [deathFrames addObject:temp];
+    }
+    
+    _deathAnimationFrames = deathFrames;
+    
+    [self runAction:[SKAction sequence:@[ [SKAction animateWithTextures:_deathAnimationFrames timePerFrame:0.1],[SKAction waitForDuration:4],[SKAction removeFromParent]]]];
+}
 @end

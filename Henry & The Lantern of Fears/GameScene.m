@@ -668,10 +668,15 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         }];
     }
     
+    [_henry removeActionForKey:@"walkLeft"];
+    [_henry removeActionForKey:@"walkRight"];
+    [_henry removeActionForKey:@"walkAnimation"];
+    [_henry removeActionForKey:@"idleAnimation"];
+    
     
     if (self.numberOfLives >= 0){
         
-        [self performSelector:@selector(clear) withObject:self afterDelay:1];
+        [self performSelector:@selector(clear) withObject:self afterDelay:4];
         
     }else{
         
@@ -713,7 +718,12 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     }
     else if(firstBody.categoryBitMask == PLAYER_CATEGORY && secondBody.categoryBitMask == ENEMY_CATEGORY){
         
-        [_henry removeFromParent];
+        if (_flipped) {
+            [_henry deathAnimationLeft];
+        }
+        else{
+            [_henry deathAnimation];
+        }
         [self henryDead];
         
     }else if(firstBody.categoryBitMask == ENEMY_CATEGORY && secondBody.categoryBitMask == KILL_ENEMY_CATEGORY){
@@ -746,8 +756,12 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     [_world enumerateChildNodesWithName:@"henry" usingBlock:^(SKNode *node, BOOL *stop) {
         if(node.position.y + node.frame.size.height < (-self.frame.size.height * 0.5))
         {
-            
-            [node removeFromParent];
+            if (_flipped) {
+                [_henry deathAnimationLeft];
+            }
+            else{
+                [_henry deathAnimation];
+            }
             [self henryDead];
         }
     }];
