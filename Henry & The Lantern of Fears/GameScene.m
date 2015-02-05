@@ -31,6 +31,7 @@
     SKNode *_backgroundSkyLayer;
     SKNode *_HUD;
     CGFloat _currentGroundX;
+    
     int _time;
     int _timeSec;
     int _timeMin;
@@ -39,14 +40,21 @@
     SKSpriteNode *_sound;
     SKSpriteNode *_backgroundMenus;
     SKSpriteNode *_xMenu;
+    SKSpriteNode *_currentLanguageImage;
     
     SKLabelNode *_labelScore;
     SKLabelNode *_labelTimer;
-    
-    Henry *_henry;
+    SKLabelNode *_tituloLabelButton;
     
     NSMutableArray *_enemies;
     NSTimer *_timer;
+    
+    UIFont *_font;
+    
+    NSString *_currentLanguage;
+    NSString *_fontName;
+    
+    Henry *_henry;
     Bat *_bat;
     Ghost *_ghost;
     
@@ -164,22 +172,22 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     rightButton.size = CGSizeMake(60, 60);
     rightButton.name = @"rightButton";
     rightButton.position = CGPointMake(-self.frame.size.width * 0.5 +rightButton.frame.size.width * 0.5 + rightButton.frame.size.width + 5,
-                                       -self.frame.size.height * 0.5 + rightButton.frame.size.height * 0.5);
+                                       -self.frame.size.height * 0.5 + rightButton.frame.size.height * 0.5 +10);
     
     [_HUD addChild:rightButton];
     
     SKSpriteNode *leftButton = [SKSpriteNode spriteNodeWithImageNamed:@"leftButton"];
     leftButton.size = CGSizeMake(60, 60);
     leftButton.name = @"leftButton";
-    leftButton.position = CGPointMake(-self.frame.size.width * 0.5 +leftButton.frame.size.width * 0.5,
-                                      -self.frame.size.height * 0.5 + leftButton.frame.size.height * 0.5);
+    leftButton.position = CGPointMake(-self.frame.size.width * 0.5 +leftButton.frame.size.width * 0.5 + 10,
+                                      -self.frame.size.height * 0.5 + leftButton.frame.size.height * 0.5 + leftButton.frame.size.height);
     
     [_HUD addChild:leftButton];
     
     SKSpriteNode *jumpButton = [SKSpriteNode spriteNodeWithImageNamed:@"jumpButton"];
     jumpButton.size = CGSizeMake(60, 60);
     jumpButton.name = @"jumpButton";
-    jumpButton.position = CGPointMake(self.frame.size.width * 0.5 - jumpButton.frame.size.width * 0.5,
+    jumpButton.position = CGPointMake(self.frame.size.width * 0.5 - jumpButton.frame.size.width * 0.5 - 10 ,
                                       -self.frame.size.height * 0.5 + jumpButton.frame.size.height * 0.5 + jumpButton.frame.size.height);
     
     [_HUD addChild:jumpButton];
@@ -188,69 +196,43 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     lanternButton.size = CGSizeMake(60, 60);
     lanternButton.name = @"lanternButton";
     lanternButton.position = CGPointMake(self.frame.size.width * 0.5 - 3 * lanternButton.frame.size.width * 0.5,
-                                         -self.frame.size.height * 0.5 + lanternButton.frame.size.height * 0.5);
+                                         -self.frame.size.height * 0.5 + lanternButton.frame.size.height * 0.5 + 10);
     
     [_HUD addChild:lanternButton];
     
-    SKShapeNode *circle1 = [SKShapeNode shapeNodeWithCircleOfRadius:13.0];
-    circle1.position = CGPointMake(0,0);
-    circle1.name = @"circle1";
-    circle1.fillColor = [UIColor whiteColor];
-    
     SKSpriteNode *configButton = [SKSpriteNode spriteNodeWithImageNamed:@"gear"];
-    configButton.size = CGSizeMake(20, 20);
+    configButton.size = CGSizeMake(30, 30);
     configButton.name = @"configButton";
-    configButton.position = CGPointMake(self.frame.size.width * 0.5 - configButton.frame.size.width * 0.5 - 5,
-                                        self.frame.size.height * 0.5 - configButton.frame.size.height * 0.5 - 5);
-    [configButton addChild:circle1];
+    configButton.position = CGPointMake(self.frame.size.width * 0.5 - configButton.frame.size.width * 0.5 - 15,
+                                        self.frame.size.height * 0.5 - configButton.frame.size.height * 0.5 - 15);
     [_HUD addChild:configButton];
     
     
-    SKShapeNode *circle2 = [SKShapeNode shapeNodeWithCircleOfRadius:13.0];
-    circle2.position = CGPointMake(0,0);
-    circle2.name = @"circle2";
-    circle2.fillColor = [UIColor whiteColor];
-    
     SKSpriteNode *encyclopediaButton = [SKSpriteNode spriteNodeWithImageNamed:@"book"];
-    encyclopediaButton.size = CGSizeMake(20, 20);
+    encyclopediaButton.size = CGSizeMake(30, 30);
     encyclopediaButton.name = @"encyclopediaButton";
-    encyclopediaButton.position = CGPointMake(self.frame.size.width * 0.5 - encyclopediaButton.frame.size.width * 2.0 - 10,
-                                              self.frame.size.height * 0.5 - encyclopediaButton.frame.size.height * 0.5 - 5);
-    [encyclopediaButton addChild:circle2];
+    encyclopediaButton.position = CGPointMake(configButton.position.x - encyclopediaButton.frame.size.width * 0.5 - 25 , self.frame.size.height * 0.5 - encyclopediaButton.frame.size.height * 0.5 - 15);
     [_HUD addChild:encyclopediaButton];
     
-    SKShapeNode *circle3 = [SKShapeNode shapeNodeWithCircleOfRadius:13.0];
-    circle3.position = CGPointMake(0,0);
-    circle3.name = @"circle3";
-    circle3.fillColor = [UIColor whiteColor];
-    
     SKSpriteNode *changeStoneButton = [SKSpriteNode spriteNodeWithImageNamed:@"magicStone"];
-    changeStoneButton.size = CGSizeMake(20, 20);
+    changeStoneButton.size = CGSizeMake(30, 30);
     changeStoneButton.name = @"changeStoneButton";
-    changeStoneButton.position = CGPointMake(self.frame.size.width * 0.5 - changeStoneButton.frame.size.width * 4.0 - 10,
-                                             self.frame.size.height * 0.5 - changeStoneButton.frame.size.height * 0.5 - 5);
-    [changeStoneButton addChild:circle3];
+    changeStoneButton.position = CGPointMake(encyclopediaButton.position.x - changeStoneButton.frame.size.width * 0.5 - 25 ,
+                                             self.frame.size.height * 0.5 - changeStoneButton.frame.size.height * 0.5 - 15);
     [_HUD addChild:changeStoneButton];
     
     // Inserting Life and Score
-    SKSpriteNode *life = [SKSpriteNode spriteNodeWithColor:[UIColor blackColor] size:CGSizeMake(40, 40)];
-    SKSpriteNode *leftEye = [SKSpriteNode spriteNodeWithColor:[UIColor whiteColor] size:CGSizeMake(5, 5)];
-    leftEye.position = CGPointMake(-3, 8);
-    [life addChild:leftEye];
     
-    SKSpriteNode *rightEye = [SKSpriteNode spriteNodeWithColor:[UIColor whiteColor] size:CGSizeMake(5, 5)];
-    rightEye.position = CGPointMake(13, 8);
-    [life addChild:rightEye];
-    
-    [life setScale:0.5];
+    SKSpriteNode *life = [SKSpriteNode spriteNodeWithImageNamed:@"henryLife"];
+    [life setScale:0.1];
     life.position = CGPointMake(-self.frame.size.width * 0.5 + life.frame.size.width * 0.5 + 10,
                                 self.frame.size.height * 0.5 - life.frame.size.height * 0.5 - 10);
     
     [_HUD addChild:life];
     
     SKSpriteNode *xSeparator = [SKSpriteNode spriteNodeWithImageNamed:@"x"];
-    xSeparator.size = life.size;
-    xSeparator.position = CGPointMake(life.position.x + life.frame.size.width * 0.5 + xSeparator.frame.size.width * 0.5, life.position.y - 5 );
+    xSeparator.size = CGSizeMake(life.frame.size.width*0.5, life.frame.size.height*0.5);
+    xSeparator.position = CGPointMake(life.position.x + life.frame.size.width * 0.5 + xSeparator.frame.size.width * 0.5 - 5 , life.position.y - 5 );
     
     [xSeparator setScale:0.5];
     [_HUD addChild:xSeparator];
@@ -258,7 +240,6 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     _lifeLabel = [SKLabelNode labelNodeWithFontNamed:@"DIN Alternate"];
     _lifeLabel.fontColor = [UIColor whiteColor];
     _lifeLabel.fontSize = 25;
-    
     _lifeLabel.position = CGPointMake(xSeparator.position.x + 15 , xSeparator.position.y - 5);
     
     [_HUD addChild:_lifeLabel];
@@ -279,6 +260,10 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     self.numberOfLives = 3;
     self.score = 0;
     _time = 0;
+    _font = [UIFont fontWithName:@"KGLuckoftheIrish.ttf" size:100.0f];
+    _fontName = [NSString stringWithFormat:@"KGLuckoftheIrish"];
+    _currentLanguage = [NSString stringWithFormat: @"Portugues"];
+    
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
@@ -507,15 +492,20 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             
         }
         
+        
         if([n.name isEqualToString:@"configButton"] || [n.name isEqualToString:@"circle1"])
         {
             [self backgroundButtons];
             
-            SKLabelNode *tituloLabel = [SKLabelNode labelNodeWithText: @"Configurações:"];
-            tituloLabel.position = CGPointMake(0, 90);
-            tituloLabel.fontSize = 20;
-            tituloLabel.fontColor = [UIColor blackColor];
             
+            _tituloLabelButton.text = @"Configurações:";
+            
+            _currentLanguageImage = [SKSpriteNode spriteNodeWithImageNamed:@""];
+            _currentLanguageImage.position = CGPointMake(0,0);
+            _currentLanguageImage.size = CGSizeMake(_sound.frame.size.width, _sound.frame.size.height);
+            _currentLanguageImage.zPosition = 1;
+            [self defineLanguage:_currentLanguage];
+        
             
             if (_soundOn == YES)
             {
@@ -526,22 +516,28 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
                 _sound = [SKSpriteNode spriteNodeWithImageNamed:@"soundOff"];
             }
             
-            _sound.position = CGPointMake(0,0);
-            _sound.size = CGSizeMake(50,50);
+            _sound.position = CGPointMake(0 + _backgroundMenus.frame.size.width * 0.25 ,_backgroundMenus.frame.size.height * 0.15);
             _sound.name = @"sound";
             _sound.zPosition = 1;
+            [_sound setScale:0.2];
+            
+            _currentLanguageImage = [SKSpriteNode spriteNodeWithImageNamed:@""];
+            _currentLanguageImage.position = CGPointMake(0 + _backgroundMenus.frame.size.width * 0.25 , 0 - _backgroundMenus.frame.size.height * 0.15);
+            _currentLanguageImage.size = CGSizeMake(_sound.frame.size.width, _sound.frame.size.height);
+            _currentLanguageImage.zPosition = 1;
+            _currentLanguageImage.name = @"currentLanguageImage";
+            [self defineLanguage:_currentLanguage];
             
             
-            
-            [_backgroundMenus addChild:tituloLabel];
             [_backgroundMenus addChild:_sound];
-            
+            [_backgroundMenus addChild:_currentLanguageImage];
         }
         
         else if([n.name isEqualToString:@"encyclopediaButton"] || [n.name isEqualToString:@"circle2"] )
         {
             
             [self backgroundButtons];
+            _tituloLabelButton.text = @"Enciclopédia";
             
             
         }
@@ -549,6 +545,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         else if([n.name isEqualToString:@"changeStoneButton"] || [n.name isEqualToString:@"circle3"] )
         {
             [self backgroundButtons];
+            _tituloLabelButton.text = @"Pedras";
             
         }
         
@@ -577,48 +574,83 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             }
         }
         
+        else if ( [n.name isEqualToString:@"currentLanguageImage"])
+        {
+            if ([_currentLanguage isEqualToString:@"Portugues"])
+            {
+                _currentLanguage = @"Ingles";
+                [self defineLanguage: _currentLanguage];
+            }
+            else if ([_currentLanguage isEqualToString:@"Ingles"])
+            {
+                _currentLanguage = @"Portugues";
+                [self defineLanguage: _currentLanguage];
+            }
+            
+        }
+        
     }
     
 }
 
+//Define Language
+-(void)defineLanguage:(NSString *) currentLanguage
+{
+    if ([currentLanguage isEqualToString:@"Portugues"])
+    {
+        [_currentLanguageImage setTexture: [SKTexture textureWithImageNamed:@"brasilImage"]];
+    }
+    else if ( [ currentLanguage isEqualToString:@"Ingles"])
+    {
+        [_currentLanguageImage setTexture: [SKTexture textureWithImageNamed:@"estadosunidosImage"]];
+    }
+}
 
-
+//Define BackgroundButtons
 -(void)backgroundButtons
 {
-    _backgroundMenus = [SKSpriteNode spriteNodeWithImageNamed:@"backgroundConfigButton.jpg"];
+    _backgroundMenus = [SKSpriteNode spriteNodeWithImageNamed:@"backgroundConfigButton"];
     _backgroundMenus.position = CGPointMake(0, 0);
     _backgroundMenus.size = CGSizeMake(300, 250);
     _backgroundMenus.zPosition = 1;
     
-    _xMenu =[SKSpriteNode spriteNodeWithImageNamed:@"x"];
+    _xMenu =[SKSpriteNode spriteNodeWithImageNamed:@"xButton"];
     _xMenu.position = CGPointMake(_backgroundMenus.frame.size.width * 0.5, _backgroundMenus.frame.size.height * 0.5);
-    _xMenu.size = CGSizeMake(15,15);
+    _xMenu.size = CGSizeMake(25,25);
     _xMenu.name = @"x";
     _xMenu.zPosition = 1;
     
+    _tituloLabelButton = [SKLabelNode labelNodeWithFontNamed:_fontName];
+    _tituloLabelButton.position = CGPointMake(0, 90);
+    _tituloLabelButton.fontSize = 20;
+    _tituloLabelButton.name = @"tituloLabel";
+    _tituloLabelButton.fontColor = [UIColor blackColor];
+    
+    
     [self pauseGame];
     [_HUD addChild:_backgroundMenus];
-    
     [_backgroundMenus addChild:_xMenu];
+    [_backgroundMenus addChild:_tituloLabelButton];
 }
 
+//Função para pausar o game
 -(void)pauseGame
 {
     _isGamePaused = YES; //Set pause flag to true
     self.paused = YES; //Pause scene and physics simulation
 }
 
-
+//função para despausar o game
 -(void)unpauseGame
 {
     _isGamePaused = NO; //Set pause flag to false
     self.paused = NO; //Resume scene and physics simulation
 }
 
+-(void)gameOver
+{
+    self.isDead = YES;
 
--(void)isDead{
-    
-    _isDead = YES;
     self.numberOfLives--;
     
     
