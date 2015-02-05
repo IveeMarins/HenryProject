@@ -121,10 +121,10 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     _currentGroundX = 0;
     [self generateWorldWithImage:@"ground" repeat:3];
     [self generateWorldWithImage:@"groundBig" repeat:3];
-    //[self generateWorldWithImage:@"ground" repeat:4];
-    //[self generateWorldWithImage:@"groundRamp" repeat:1];
+    [self generateWorldWithImage:@"ground" repeat:1];
+    [self generateWorldWithImage:@"groundRamp" repeat:1];
     [self generateWorldWithImage:@"spikes" repeat:1];
-    //[self generateWorldWithImage:@"ground" repeat:1];
+    [self generateWorldWithImage:@"ground" repeat:1];
     //Creating Background
     [self generateBackgroundIn:_backgroundMountainLayer withImage:@"backgroundMountain" repeat:10];
     [self generateBackgroundIn:_backgroundTreeLayer2 withImage:@"backgroundTrees2" repeat:10];
@@ -647,9 +647,9 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     self.paused = NO; //Resume scene and physics simulation
 }
 
--(void)gameOver
+-(void)henryDead
 {
-    self.isDead = YES;
+    _isDead = YES;
 
     self.numberOfLives--;
     
@@ -713,7 +713,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     else if(firstBody.categoryBitMask == PLAYER_CATEGORY && secondBody.categoryBitMask == ENEMY_CATEGORY){
         
         [_henry removeFromParent];
-        [self isDead];
+        [self henryDead];
         
     }else if(firstBody.categoryBitMask == ENEMY_CATEGORY && secondBody.categoryBitMask == KILL_ENEMY_CATEGORY){
 
@@ -744,7 +744,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         {
             
             [node removeFromParent];
-            [self isDead];
+            [self henryDead];
         }
     }];
     
