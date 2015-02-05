@@ -120,7 +120,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     //Inserting Ground
     _currentGroundX = 0;
     [self generateWorldWithImage:@"ground" repeat:3];
-    [self generateWorldWithImage:@"groundBig" repeat:3];
+    [self generateWorldWithImage:@"groundBig" repeat:2];
     [self generateWorldWithImage:@"ground" repeat:1];
     [self generateWorldWithImage:@"groundRamp" repeat:1];
     [self generateWorldWithImage:@"spikes" repeat:1];
@@ -422,18 +422,16 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 
 -(void)clear{
     
-    _isDead = NO;
+    
     [_henry removeActionForKey:@"walkLeft"];
     [_henry removeActionForKey:@"walkRight"];
     [_henry removeActionForKey:@"walkAnimation"];
     [_henry removeActionForKey:@"idleAnimation"];
-    _henry = [Henry henry];
-    _henry.physicsBody.categoryBitMask = PLAYER_CATEGORY;
-    _henry.physicsBody.collisionBitMask = GROUND_CATEGORY;
-    _henry.physicsBody.contactTestBitMask = GROUND_CATEGORY;
+
     _henry.position = CGPointMake(0, 0);
     [_world addChild:_henry];
-    Kopp *kopp = [Kopp kopp:_henry];
+    [_henry idleAnimation];
+    _isDead = NO;
     
 }
 
