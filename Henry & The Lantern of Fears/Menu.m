@@ -47,7 +47,7 @@
         SKNode *n = [self nodeAtPoint:[touch locationInNode:self]];
         if([n.name isEqualToString:@"start"])
         {
-            NSLog(@"mundou pro mundo");
+            
             
             Mundos *scene = [[Mundos alloc] initWithSize:self.view.bounds.size];
             scene.scaleMode = SKSceneScaleModeAspectFill;

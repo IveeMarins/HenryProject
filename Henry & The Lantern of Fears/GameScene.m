@@ -15,7 +15,7 @@
 @interface GameScene ()
 
 @property BOOL isStarted;
-@property BOOL isGameOver;
+@property BOOL isDead;
 @property BOOL isGamePaused;
 
 @end
@@ -35,9 +35,6 @@
     int _timeSec;
     int _timeMin;
     
-    
-    SKAction *_backgroundMusic;
-    SKAction *_backgroundSound;
     
     SKSpriteNode *_sound;
     SKSpriteNode *_backgroundMenus;
@@ -114,10 +111,12 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     
     //Inserting Ground
     _currentGroundX = 0;
-    [self generateWorldWithImage:@"ground" repeat:4];
+    [self generateWorldWithImage:@"ground" repeat:3];
     [self generateWorldWithImage:@"groundBig" repeat:3];
-    [self generateWorldWithImage:@"ground" repeat:4];
-    [self generateWorldWithImage:@"groundRamp" repeat:1];
+    //[self generateWorldWithImage:@"ground" repeat:4];
+    //[self generateWorldWithImage:@"groundRamp" repeat:1];
+    [self generateWorldWithImage:@"spikes" repeat:1];
+    //[self generateWorldWithImage:@"ground" repeat:1];
     //Creating Background
     [self generateBackgroundIn:_backgroundMountainLayer withImage:@"backgroundMountain" repeat:10];
     [self generateBackgroundIn:_backgroundTreeLayer2 withImage:@"backgroundTrees2" repeat:10];
@@ -131,9 +130,9 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     _henry = [Henry henry];
     _henry.physicsBody.categoryBitMask = PLAYER_CATEGORY;
     _henry.physicsBody.collisionBitMask = GROUND_CATEGORY;
-    _henry.physicsBody.contactTestBitMask = GROUND_CATEGORY;
-    [_world addChild:_henry];
+    _henry.physicsBody.contactTestBitMask = GROUND_CATEGORY | ENEMY_CATEGORY;
     
+    [_world addChild:_henry];
     //Inserting Kopp
     Kopp *kopp = [Kopp kopp:_henry];
     
@@ -305,12 +304,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         [self.soundPlayer play];
         [self.musicPlayer play];
     }
-    //    _backgroundSound = [SKAction repeatActionForever:[SKAction playSoundFileNamed:@"nightForestSound.mp3" waitForCompletion:YES]];
-    //    [self runAction:_backgroundSound];
-    //
-    //    _backgroundMusic = [SKAction repeatActionForever:[SKAction playSoundFileNamed:@"nightForestMusic.mp3" waitForCompletion:YES]];
-    //    [self runAction:_backgroundMusic];
-    //
+    
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
 }
@@ -411,7 +405,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         }
         else if([n.name isEqualToString:@"lanternButton"]){
             
-            if(!_isGameOver){
+            if(!_isDead){
 
             _lanternLit = YES;
             [_henry removeActionForKey:@"idleAnimation"];
@@ -438,12 +432,19 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     
 }
 
--(void)clear
-{
-    _isGameOver = NO;
+-(void)clear{
+    
+    _isDead = NO;
+    [_henry removeActionForKey:@"walkLeft"];
+    [_henry removeActionForKey:@"walkRight"];
+    [_henry removeActionForKey:@"walkAnimation"];
+    [_henry removeActionForKey:@"idleAnimation"];
+    _henry = [Henry henry];
+    _henry.physicsBody.categoryBitMask = PLAYER_CATEGORY;
+    _henry.physicsBody.collisionBitMask = GROUND_CATEGORY;
+    _henry.physicsBody.contactTestBitMask = GROUND_CATEGORY;
     _henry.position = CGPointMake(0, 0);
     [_world addChild:_henry];
-    
     
 }
 
@@ -615,10 +616,11 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 }
 
 
--(void)gameOver
-{
-    _isGameOver = YES;
+-(void)isDead{
+    
+    _isDead = YES;
     self.numberOfLives--;
+    
     
     if(_lanternLit){
         _lanternLit = NO;
@@ -631,13 +633,15 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         [_henry enumerateChildNodesWithName:@"fakeLanternLight" usingBlock:^(SKNode *node, BOOL *stop) {
             [node removeFromParent];
         }];
-        
     }
     
-    if (self.numberOfLives >= 0) {
-        [self performSelector:@selector(clear) withObject:self afterDelay:3];
-    }
-    else{
+    
+    if (self.numberOfLives >= 0){
+        
+        [self performSelector:@selector(clear) withObject:self afterDelay:1];
+        
+    }else{
+        
         
         SKLabelNode *gameOverLabel = [SKLabelNode labelNodeWithFontNamed:@"DIN Alternate"];
         gameOverLabel.position = CGPointMake(0, 0);
@@ -645,12 +649,16 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         gameOverLabel.fontSize = 40;
         gameOverLabel.text = @"Game Over";
         [_HUD addChild:gameOverLabel];
+        [_henry removeActionForKey:@"walkLeft"];
+        [_henry removeActionForKey:@"walkRight"];
+        [_henry removeActionForKey:@"walkAnimation"];
+        [_henry removeActionForKey:@"idleAnimation"];
+        
     }
 }
 
--(void)didBeginContact:(SKPhysicsContact *)contact
-{
-    
+
+-(void)didBeginContact:(SKPhysicsContact *)contact{
     
     SKPhysicsBody *firstBody;
     SKPhysicsBody *secondBody;
@@ -667,17 +675,18 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         secondBody = contact.bodyA;
     }
     
-    if(firstBody.categoryBitMask == GROUND_CATEGORY && secondBody.categoryBitMask == PLAYER_CATEGORY)
-    {
+    if(firstBody.categoryBitMask == GROUND_CATEGORY && secondBody.categoryBitMask == PLAYER_CATEGORY){
         _jumping = NO;
     }
     else if(firstBody.categoryBitMask == PLAYER_CATEGORY && secondBody.categoryBitMask == ENEMY_CATEGORY){
+        
         [_henry removeFromParent];
-        [self gameOver];
-    }
-    else if(firstBody.categoryBitMask == ENEMY_CATEGORY && secondBody.categoryBitMask == KILL_ENEMY_CATEGORY){
-        if(_lanternLit)
-        {
+        [self isDead];
+        
+    }else if(firstBody.categoryBitMask == ENEMY_CATEGORY && secondBody.categoryBitMask == KILL_ENEMY_CATEGORY){
+
+        if(_lanternLit){
+            
             [firstBody.node removeFromParent];
             if ([firstBody.node isMemberOfClass:(Bat.class)])
             {
@@ -694,7 +703,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 
 -(void)didSimulatePhysics
 {
-    if(!_isGameOver){
+    if(!_isDead){
         [self centerOnNode:_henry];
     }
     
@@ -703,7 +712,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         {
             
             [node removeFromParent];
-            [self gameOver];
+            [self isDead];
         }
     }];
     
@@ -717,8 +726,6 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     [_henry enumerateChildNodesWithName:@"killerLine" usingBlock:^(SKNode *node, BOOL *stop) {
         node.position = CGPointMake(node.position.x,-20);
     }];
-    
-    
     
     
 }
@@ -773,7 +780,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             SKSpriteNode *ground = [SKSpriteNode spriteNodeWithImageNamed:@"groundBig"];
             ground.size = CGSizeMake(self.frame.size.width , 160);
             ground.position = CGPointMake(_currentGroundX, -self.frame.size.height * 0.5 + ground.frame.size.height * 0.5);
-            ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.frame.size.width - 20, 80)];
+            ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.frame.size.width, 80)];
             ground.physicsBody.dynamic = NO;
             ground.physicsBody.categoryBitMask = GROUND_CATEGORY;
             [_world addChild:ground];
@@ -786,11 +793,27 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         
         for (int i = 0; i < times; i++) {
             SKSpriteNode *ground = [SKSpriteNode spriteNodeWithImageNamed:@"groundRamp"];
-            ground.size = CGSizeMake(self.frame.size.width , 140);
+            ground.size = CGSizeMake(self.frame.size.width , 160);
             ground.position = CGPointMake(_currentGroundX, -self.frame.size.height * 0.5 + ground.frame.size.height * 0.5);
-            ground.physicsBody = [SKPhysicsBody bodyWithTexture:[SKTexture textureWithImageNamed:@"groundRamp"] size:ground.size];
+            ground.physicsBody = [SKPhysicsBody bodyWithTexture:[SKTexture textureWithImageNamed:@"groundRamp"] size:CGSizeMake(ground.frame.size.width, ground.frame.size.height - 70)];
             ground.physicsBody.dynamic = NO;
             ground.physicsBody.categoryBitMask = GROUND_CATEGORY;
+            [_world addChild:ground];
+            _currentGroundX += ground.frame.size.width;
+            
+        }
+        
+        
+    }
+    else if([groundImageName isEqualToString:@"spikes"]){
+        
+        for (int i = 0; i < times; i++) {
+            SKSpriteNode *ground = [SKSpriteNode spriteNodeWithImageNamed:@"spikes"];
+            ground.size = CGSizeMake(self.frame.size.width * 0.25 , 80);
+            ground.position = CGPointMake(_currentGroundX - self.frame.size.width * 0.5 + ground.frame.size.width * 0.5, -self.frame.size.height * 0.5 + ground.frame.size.height * 0.5);
+            ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:ground.size];
+            ground.physicsBody.dynamic = NO;
+            ground.physicsBody.categoryBitMask = ENEMY_CATEGORY;
             [_world addChild:ground];
             _currentGroundX += ground.frame.size.width;
             

@@ -52,7 +52,7 @@
 		3386CF321A82BBE0005371BD /* KGLuckoftheIrish.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3386CF311A82BBE0005371BD /* KGLuckoftheIrish.ttf */; };
 		339EA22A1A77E725003B0BBD /* WorldSelection.png in Resources */ = {isa = PBXBuildFile; fileRef = 339EA2291A77E725003B0BBD /* WorldSelection.png */; };
 		339EA2311A77FBB0003B0BBD /* groundBig.png in Resources */ = {isa = PBXBuildFile; fileRef = 339EA22E1A77FBB0003B0BBD /* groundBig.png */; };
-		339EA2321A77FBB0003B0BBD /* groundGap.png in Resources */ = {isa = PBXBuildFile; fileRef = 339EA22F1A77FBB0003B0BBD /* groundGap.png */; };
+		339EA2321A77FBB0003B0BBD /* spikes.png in Resources */ = {isa = PBXBuildFile; fileRef = 339EA22F1A77FBB0003B0BBD /* spikes.png */; };
 		339EA2331A77FBB0003B0BBD /* groundRamp.png in Resources */ = {isa = PBXBuildFile; fileRef = 339EA2301A77FBB0003B0BBD /* groundRamp.png */; };
 		339EA23E1A77FC77003B0BBD /* idle1.png in Resources */ = {isa = PBXBuildFile; fileRef = 339EA23C1A77FC77003B0BBD /* idle1.png */; };
 		339EA2431A7927F9003B0BBD /* startScreenBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 339EA2421A7927F9003B0BBD /* startScreenBackground.jpg */; };
@@ -136,7 +136,7 @@
 		3386CF311A82BBE0005371BD /* KGLuckoftheIrish.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KGLuckoftheIrish.ttf; sourceTree = "<group>"; };
 		339EA2291A77E725003B0BBD /* WorldSelection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WorldSelection.png; sourceTree = "<group>"; };
 		339EA22E1A77FBB0003B0BBD /* groundBig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = groundBig.png; sourceTree = "<group>"; };
-		339EA22F1A77FBB0003B0BBD /* groundGap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = groundGap.png; sourceTree = "<group>"; };
+		339EA22F1A77FBB0003B0BBD /* spikes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spikes.png; sourceTree = "<group>"; };
 		339EA2301A77FBB0003B0BBD /* groundRamp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = groundRamp.png; sourceTree = "<group>"; };
 		339EA23C1A77FC77003B0BBD /* idle1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = idle1.png; sourceTree = "<group>"; };
 		339EA2421A7927F9003B0BBD /* startScreenBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = startScreenBackground.jpg; sourceTree = "<group>"; };
@@ -329,7 +329,7 @@
 			children = (
 				3BA8DEE61A769A3A00740706 /* ground.png */,
 				339EA22E1A77FBB0003B0BBD /* groundBig.png */,
-				339EA22F1A77FBB0003B0BBD /* groundGap.png */,
+				339EA22F1A77FBB0003B0BBD /* spikes.png */,
 				339EA2301A77FBB0003B0BBD /* groundRamp.png */,
 			);
 			path = ground;
@@ -422,7 +422,7 @@
 				25FB5C2B1A7AFD1000E1A2B6 /* run.atlas in Resources */,
 				339EA2431A7927F9003B0BBD /* startScreenBackground.jpg in Resources */,
 				25C7C52A1A82BCCF0075A061 /* LanternMagicFirstScreen.sks in Resources */,
-				339EA2321A77FBB0003B0BBD /* groundGap.png in Resources */,
+				339EA2321A77FBB0003B0BBD /* spikes.png in Resources */,
 				3386CF321A82BBE0005371BD /* KGLuckoftheIrish.ttf in Resources */,
 				339EA23E1A77FC77003B0BBD /* idle1.png in Resources */,
 				339EA24B1A7940DB003B0BBD /* worldScene.png in Resources */,

@@ -45,8 +45,7 @@
     
     
     henry.name = @"henry";
-    
-    henry.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:henry.size];
+    henry.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(46, 100) center:CGPointMake(-14, 0)];
     henry.physicsBody.restitution = 0.0;
     henry.physicsBody.allowsRotation  = NO;
     
@@ -58,7 +57,7 @@
 -(void)walkRight
 {
     
-    SKAction *incrementRight = [SKAction repeatActionForever:[SKAction moveByX:30 y:0 duration:0.3]];
+    SKAction *incrementRight = [SKAction repeatActionForever:[SKAction moveByX:40 y:0 duration:0.3]];
     
     NSMutableArray *walkFrames = [NSMutableArray array];
     SKTextureAtlas *walkHenryAtlas = [SKTextureAtlas atlasNamed:@"run"];
@@ -111,7 +110,7 @@
     [self runAction: [SKAction repeatActionForever:[SKAction animateWithTextures:_walkAnimationFrames
                                                                     timePerFrame:0.2]]withKey:@"walkAnimation"];
     
-    SKAction *incrementLeft = [SKAction repeatActionForever:[SKAction moveByX:-30 y:0 duration:0.3]];
+    SKAction *incrementLeft = [SKAction repeatActionForever:[SKAction moveByX:-40 y:0 duration:0.3]];
     [self runAction:incrementLeft withKey:@"walkLeft"];
         
         if (!_flipped){
@@ -137,7 +136,7 @@
 -(void)jump
 {
     
-    [self.physicsBody applyImpulse:CGVectorMake(0, 150)];
+    [self.physicsBody applyImpulse:CGVectorMake(0, 50)];
     
     
 }
