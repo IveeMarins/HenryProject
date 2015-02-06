@@ -131,12 +131,29 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     
     //Inserting Ground
     _currentGroundX = 0;
+    SKSpriteNode *firstWall = [SKSpriteNode spriteNodeWithImageNamed:@"wall"];
+    firstWall.position = CGPointMake(-self.frame.size.width * 0.5, 0);
+    firstWall.size = CGSizeMake(24,self.frame.size.height);
+    firstWall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:firstWall.size];
+    firstWall.physicsBody.dynamic = NO;
+    firstWall.physicsBody.categoryBitMask = GROUND_CATEGORY;
+    [_world addChild:firstWall];
     [self generateWorldWithImage:@"ground" repeat:3];
     [self generateWorldWithImage:@"groundBig" repeat:2];
     [self generateWorldWithImage:@"ground" repeat:1];
     [self generateWorldWithImage:@"groundRamp" repeat:1];
     [self generateWorldWithImage:@"spikes" repeat:1];
     [self generateWorldWithImage:@"ground" repeat:2];
+    [self generateWorldWithImage:@"groundBig" repeat:2];
+    [self generateWorldWithImage:@"ground" repeat:2];
+    
+    SKSpriteNode *lastWall = [SKSpriteNode spriteNodeWithImageNamed:@"wall"];
+    lastWall.position = CGPointMake(_currentGroundX  - self.frame.size.width * 0.5, 0);
+    lastWall.size = CGSizeMake(24,self.frame.size.height);
+    lastWall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:firstWall.size];
+    lastWall.physicsBody.dynamic = NO;
+    lastWall.physicsBody.categoryBitMask = GROUND_CATEGORY;
+    [_world addChild:lastWall];
     //Creating Background
     [self generateBackgroundIn:_backgroundMountainLayer withImage:@"backgroundMountain" repeat:10];
     [self generateBackgroundIn:_backgroundTreeLayer2 withImage:@"backgroundTrees2" repeat:10];
@@ -151,7 +168,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     _henry.physicsBody.categoryBitMask = PLAYER_CATEGORY;
     _henry.physicsBody.collisionBitMask = GROUND_CATEGORY;
     _henry.physicsBody.contactTestBitMask = GROUND_CATEGORY | ENEMY_CATEGORY | VICTORY_LIGHT_CATEGORY;
-    
+    _henry.zPosition = 1;
     [_world addChild:_henry];
     //Inserting Kopp
     Kopp *kopp = [Kopp kopp:_henry];
@@ -192,7 +209,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     rightButton.name = @"rightButton";
     rightButton.position = CGPointMake(-self.frame.size.width * 0.5 +rightButton.frame.size.width * 0.5 + rightButton.frame.size.width + 5,
                                        -self.frame.size.height * 0.5 + rightButton.frame.size.height * 0.5 +10);
-    
+    rightButton.zPosition = 2;
     [_HUD addChild:rightButton];
     
     SKSpriteNode *leftButton = [SKSpriteNode spriteNodeWithImageNamed:@"leftButton"];
@@ -200,7 +217,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     leftButton.name = @"leftButton";
     leftButton.position = CGPointMake(-self.frame.size.width * 0.5 +leftButton.frame.size.width * 0.5 + 10,
                                       -self.frame.size.height * 0.5 + leftButton.frame.size.height * 0.5 + leftButton.frame.size.height);
-    
+    leftButton.zPosition = 2;
     [_HUD addChild:leftButton];
     
     SKSpriteNode *jumpButton = [SKSpriteNode spriteNodeWithImageNamed:@"jumpButton"];
@@ -208,7 +225,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     jumpButton.name = @"jumpButton";
     jumpButton.position = CGPointMake(self.frame.size.width * 0.5 - jumpButton.frame.size.width * 0.5 - 10 ,
                                       -self.frame.size.height * 0.5 + jumpButton.frame.size.height * 0.5 + jumpButton.frame.size.height);
-    
+    jumpButton.zPosition = 2;
     [_HUD addChild:jumpButton];
     
     SKSpriteNode *lanternButton = [SKSpriteNode spriteNodeWithImageNamed:@"lantern"];
@@ -216,7 +233,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     lanternButton.name = @"lanternButton";
     lanternButton.position = CGPointMake(self.frame.size.width * 0.5 - 3 * lanternButton.frame.size.width * 0.5,
                                          -self.frame.size.height * 0.5 + lanternButton.frame.size.height * 0.5 + 10);
-    
+    lanternButton.zPosition = 2;
     [_HUD addChild:lanternButton];
     
     SKSpriteNode *configButton = [SKSpriteNode spriteNodeWithImageNamed:@"gear"];
@@ -224,6 +241,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     configButton.name = @"configButton";
     configButton.position = CGPointMake(self.frame.size.width * 0.5 - configButton.frame.size.width * 0.5 - 15,
                                         self.frame.size.height * 0.5 - configButton.frame.size.height * 0.5 - 15);
+    configButton.zPosition = 2;
     [_HUD addChild:configButton];
     
     
@@ -231,6 +249,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     encyclopediaButton.size = CGSizeMake(30, 30);
     encyclopediaButton.name = @"encyclopediaButton";
     encyclopediaButton.position = CGPointMake(configButton.position.x - encyclopediaButton.frame.size.width * 0.5 - 25 , self.frame.size.height * 0.5 - encyclopediaButton.frame.size.height * 0.5 - 15);
+    configButton.zPosition = 2;
     [_HUD addChild:encyclopediaButton];
     
     SKSpriteNode *changeStoneButton = [SKSpriteNode spriteNodeWithImageNamed:@"magicStone"];
@@ -238,6 +257,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     changeStoneButton.name = @"changeStoneButton";
     changeStoneButton.position = CGPointMake(encyclopediaButton.position.x - changeStoneButton.frame.size.width * 0.5 - 25 ,
                                              self.frame.size.height * 0.5 - changeStoneButton.frame.size.height * 0.5 - 15);
+    changeStoneButton.zPosition = 2;
     [_HUD addChild:changeStoneButton];
     
     // Inserting Life and Score
@@ -246,6 +266,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     [life setScale:0.1];
     life.position = CGPointMake(-self.frame.size.width * 0.5 + life.frame.size.width * 0.5 + 10,
                                 self.frame.size.height * 0.5 - life.frame.size.height * 0.5 - 10);
+    life.zPosition = 2;
     
     [_HUD addChild:life];
     
@@ -254,6 +275,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     xSeparator.position = CGPointMake(life.position.x + life.frame.size.width * 0.5 + xSeparator.frame.size.width * 0.5 - 5 , life.position.y - 5 );
     
     [xSeparator setScale:0.5];
+    xSeparator.zPosition = 2;
     [_HUD addChild:xSeparator];
     
     _lifeLabel = [SKLabelNode labelNodeWithFontNamed:_fontName];
@@ -262,6 +284,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     _lifeLabel.position = CGPointMake(xSeparator.position.x + 15 , xSeparator.position.y - 5);
     _lifeLabel.text = [NSString stringWithFormat:@"%d",_numberOfLives];
     
+    _lifeLabel.zPosition = 2;
     [_HUD addChild:_lifeLabel];
     
     _labelScore = [SKLabelNode labelNodeWithFontNamed:_fontName];
@@ -270,6 +293,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     _labelScore.fontColor = [UIColor whiteColor];
     _labelScore.text = [NSString stringWithFormat:@"%d",_score];
     
+    _lifeLabel.zPosition = 2;
     [_HUD addChild:_labelScore];
     
     [self timer];
@@ -792,6 +816,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         }
     }];
     
+    
     if (_bat.position.x - _henry.position.x < 400 ) {
         [_bat attackPlayer:_henry];
     }
@@ -871,7 +896,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             SKSpriteNode *ground = [SKSpriteNode spriteNodeWithImageNamed:@"groundRamp"];
             ground.size = CGSizeMake(self.frame.size.width , 160);
             ground.position = CGPointMake(_currentGroundX, -self.frame.size.height * 0.5 + ground.frame.size.height * 0.5);
-            ground.physicsBody = [SKPhysicsBody bodyWithTexture:[SKTexture textureWithImageNamed:@"groundRamp"] size:CGSizeMake(ground.frame.size.width, ground.frame.size.height - 78)];
+            ground.physicsBody = [SKPhysicsBody bodyWithTexture:[SKTexture textureWithImageNamed:@"groundRamp"] size:CGSizeMake(ground.frame.size.width, ground.frame.size.height - 90)];
             ground.physicsBody.dynamic = NO;
             ground.physicsBody.categoryBitMask = GROUND_CATEGORY;
             [_world addChild:ground];
