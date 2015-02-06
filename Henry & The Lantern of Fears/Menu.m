@@ -53,7 +53,7 @@
             scene.scaleMode = SKSceneScaleModeAspectFill;
             
             // Present the scene.
-            SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+            SKTransition *reveal = [SKTransition fadeWithDuration:3];
             [self.view presentScene:scene transition: reveal];
 
         }

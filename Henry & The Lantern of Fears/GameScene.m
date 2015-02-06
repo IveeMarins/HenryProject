@@ -12,6 +12,7 @@
 #import "Kopp.h"
 #import "Ghost.h"
 #import "VictoryLight.h"
+#import "FasesMundo1.h"
 
 @interface GameScene ()
 
@@ -765,6 +766,8 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         [self.soundPlayer stop];
         [self.victoryMusicPlayer play];
         _win = YES;
+        
+        [self performSelector:@selector(endStage) withObject:self afterDelay:8];
     }
     
 }
@@ -917,6 +920,18 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     }
     
 }
-
+-(void)endStage{
+    
+    FasesMundo1 *scene = [[FasesMundo1 alloc] initWithSize:self.view.bounds.size];
+    
+    scene.anchorPoint = CGPointMake(0.5, 0.5);
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+    
+    // Present the scene.
+    SKTransition *reveal = [SKTransition fadeWithDuration:3];
+    [self.view presentScene:scene transition: reveal];
+    [self.victoryMusicPlayer stop];
+    
+}
 
 @end
