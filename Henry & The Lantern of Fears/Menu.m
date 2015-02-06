@@ -55,7 +55,7 @@
             lanternLightEmmitter.position = CGPointMake(self.frame.size.width * 0.5, self.frame.size.height * 0.5 - 50);
             lanternLightEmmitter.name = @"lanternLightParticle";
             //lanternLightEmmitter.particleScale = ;
-            lanternLightEmmitter.particleLifetime = 100000;
+            //lanternLightEmmitter.particleLifetime = 100000;
            
             //lanternLightEmmitter.particleSize = CGSizeMake(self.frame.size.width, self.frame.size.height);
             
@@ -69,14 +69,20 @@
             
             NSLog(@"mundou pro mundo");
             
-            Mundos *scene = [[Mundos alloc] initWithSize:self.view.bounds.size];
-            scene.scaleMode = SKSceneScaleModeAspectFill;
+            double delayInSeconds = 3.0;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                Mundos *scene = [[Mundos alloc] initWithSize:self.view.bounds.size];
+                scene.scaleMode = SKSceneScaleModeAspectFill;
+                
+                
+                
+                // Present the scene.
+                SKTransition *reveal = [SKTransition fadeWithDuration:1];
+                [self.view presentScene:scene transition: reveal];
+            });
             
-            
-            
-            // Present the scene.
-            SKTransition *reveal = [SKTransition fadeWithDuration:10];
-            [self.view presentScene:scene transition: reveal];
+
             
             
             
