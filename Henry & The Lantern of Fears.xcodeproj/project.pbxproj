@@ -39,10 +39,10 @@
 		25C7C5341A83ED550075A061 /* backgroundConfigButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C5331A83ED550075A061 /* backgroundConfigButton.png */; };
 		25C7C5361A83ED6C0075A061 /* henryLife.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C5351A83ED6C0075A061 /* henryLife.png */; };
 		25C7C5381A83EDAB0075A061 /* brasilImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C5371A83EDAB0075A061 /* brasilImage.png */; };
-		25C7C53A1A83EFBC0075A061 /* batFlying.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C5391A83EFBC0075A061 /* batFlying.atlas */; };
-		25C7C53D1A83F0560075A061 /* batDead.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C53C1A83F0560075A061 /* batDead.png */; };
 		25C7C53F1A84040E0075A061 /* henryDeath.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C53E1A84040E0075A061 /* henryDeath.atlas */; };
 		25C7C5411A8405640075A061 /* henryDeathLeft.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C5401A8405640075A061 /* henryDeathLeft.atlas */; };
+		25C7C5431A8441430075A061 /* batFlying.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C5421A8441430075A061 /* batFlying.atlas */; };
+		25C7C5451A8441530075A061 /* batDead.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C5441A8441530075A061 /* batDead.png */; };
 		25FB5C2B1A7AFD1000E1A2B6 /* run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 25FB5C2A1A7AFD1000E1A2B6 /* run.atlas */; };
 		25FB5C3F1A7B1CCA00E1A2B6 /* spriteHenryLantern.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FB5C3E1A7B1CCA00E1A2B6 /* spriteHenryLantern.png */; };
 		25FB5C411A7B200300E1A2B6 /* idle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 25FB5C401A7B200300E1A2B6 /* idle.atlas */; };
@@ -125,10 +125,10 @@
 		25C7C5331A83ED550075A061 /* backgroundConfigButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundConfigButton.png; sourceTree = "<group>"; };
 		25C7C5351A83ED6C0075A061 /* henryLife.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = henryLife.png; sourceTree = "<group>"; };
 		25C7C5371A83EDAB0075A061 /* brasilImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brasilImage.png; sourceTree = "<group>"; };
-		25C7C5391A83EFBC0075A061 /* batFlying.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = batFlying.atlas; sourceTree = "<group>"; };
-		25C7C53C1A83F0560075A061 /* batDead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batDead.png; sourceTree = "<group>"; };
 		25C7C53E1A84040E0075A061 /* henryDeath.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = henryDeath.atlas; sourceTree = "<group>"; };
 		25C7C5401A8405640075A061 /* henryDeathLeft.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = henryDeathLeft.atlas; sourceTree = "<group>"; };
+		25C7C5421A8441430075A061 /* batFlying.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = batFlying.atlas; sourceTree = "<group>"; };
+		25C7C5441A8441530075A061 /* batDead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batDead.png; sourceTree = "<group>"; };
 		25FB5C2A1A7AFD1000E1A2B6 /* run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = run.atlas; sourceTree = "<group>"; };
 		25FB5C3E1A7B1CCA00E1A2B6 /* spriteHenryLantern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spriteHenryLantern.png; sourceTree = "<group>"; };
 		25FB5C401A7B200300E1A2B6 /* idle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = idle.atlas; sourceTree = "<group>"; };
@@ -329,10 +329,10 @@
 		25C7C53B1A83EFCA0075A061 /* Bat */ = {
 			isa = PBXGroup;
 			children = (
-				25C7C53C1A83F0560075A061 /* batDead.png */,
+				25C7C5441A8441530075A061 /* batDead.png */,
+				25C7C5421A8441430075A061 /* batFlying.atlas */,
 				2506278C1A72B0E200325CEE /* Bat.h */,
 				2506278D1A72B0E200325CEE /* Bat.m */,
-				25C7C5391A83EFBC0075A061 /* batFlying.atlas */,
 			);
 			name = Bat;
 			sourceTree = "<group>";
@@ -444,6 +444,7 @@
 				250627961A72F54300325CEE /* spark.png in Resources */,
 				339EA2311A77FBB0003B0BBD /* groundBig.png in Resources */,
 				25C7C52C1A82BD7D0075A061 /* DyingEnemy.sks in Resources */,
+				25C7C5451A8441530075A061 /* batDead.png in Resources */,
 				25B658781A76937400836621 /* ghost.png in Resources */,
 				25FB5C2B1A7AFD1000E1A2B6 /* run.atlas in Resources */,
 				339EA2431A7927F9003B0BBD /* startScreenBackground.jpg in Resources */,
@@ -452,12 +453,12 @@
 				3386CF321A82BBE0005371BD /* KGLuckoftheIrish.ttf in Resources */,
 				339EA23E1A77FC77003B0BBD /* idle1.png in Resources */,
 				339EA24B1A7940DB003B0BBD /* worldScene.png in Resources */,
-				25C7C53A1A83EFBC0075A061 /* batFlying.atlas in Resources */,
 				339EA22A1A77E725003B0BBD /* WorldSelection.png in Resources */,
 				339EA24F1A7943F7003B0BBD /* kopp.png in Resources */,
 				25C7C5411A8405640075A061 /* henryDeathLeft.atlas in Resources */,
 				25C7C53F1A84040E0075A061 /* henryDeath.atlas in Resources */,
 				25C7C5261A82B8EB0075A061 /* bokeh.png in Resources */,
+				25C7C5431A8441430075A061 /* batFlying.atlas in Resources */,
 				25FCDB471A716B1E00B842F2 /* rightButton.png in Resources */,
 				3386CF2C1A828466005371BD /* soundOff.png in Resources */,
 				250627951A72F54300325CEE /* lanternLight.sks in Resources */,
@@ -482,7 +483,6 @@
 				25C7C5341A83ED550075A061 /* backgroundConfigButton.png in Resources */,
 				3BA8DEDF1A768A1700740706 /* backgroundTrees2.png in Resources */,
 				2570F0AA1A8283B00057E24C /* idleLeft.atlas in Resources */,
-				25C7C53D1A83F0560075A061 /* batDead.png in Resources */,
 				2570F0AC1A8283B50057E24C /* runLeft.atlas in Resources */,
 				339EA2491A7940CD003B0BBD /* cristalVerde.png in Resources */,
 				25C7C5321A83ED370075A061 /* estadosunidosImage.png in Resources */,
