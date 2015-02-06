@@ -61,13 +61,13 @@
     Ghost *_ghost;
     
     
-    BOOL _rightButtonPressed;
-    BOOL _leftButtonPressed;
-    BOOL _jumping;
+
+    BOOL _jumping; //TO control how many times henry can jump
     BOOL _moving;
     BOOL _lanternLit;
     BOOL _soundOn;
     BOOL _flipped; //If Henry's image is flipped to walk left
+    BOOL _win;
     
     
 }
@@ -370,7 +370,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
-    if (!_isDead) {
+    if (!_isDead && !_win) {
         
         
         for (UITouch *touch in touches) {
@@ -379,7 +379,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             
             if([n.name isEqualToString:@"rightButton"]){
                 
-                _rightButtonPressed = YES;
+                
                 _moving = YES;
                 [_henry removeActionForKey:@"idleAnimation"];
                 _flipped = NO;
@@ -388,7 +388,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             }
             else if([n.name isEqualToString:@"leftButton"]){
                 
-                _leftButtonPressed = YES;
+                
                 _moving = YES;
                 [_henry removeActionForKey:@"idleAnimation"];
                 _flipped = YES;
@@ -448,7 +448,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if (!_isDead) {
+    if (!_isDead && !_win) {
         
         
         for (UITouch *touch in touches) {
@@ -456,14 +456,14 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             SKNode *n = [_HUD nodeAtPoint:[touch locationInNode:_HUD]];
             
             if ([n.name isEqualToString:@"rightButton"]) {
-                _rightButtonPressed = NO;
+                
                 _moving = NO;
                 [_henry removeActionForKey:@"walkRight"];
                 [_henry removeActionForKey:@"walkLeft"];
                 [_henry idleAnimation];
             }
             else if ([n.name isEqualToString:@"leftButton"]) {
-                _leftButtonPressed = NO;
+                
                 _moving = NO;
                 [_henry removeActionForKey:@"walkRight"];
                 [_henry removeActionForKey:@"walkLeft"];
@@ -489,8 +489,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             }
             else if(![n.name isEqualToString:@"jumpButton"]){
                 
-                _rightButtonPressed = NO;
-                _leftButtonPressed = NO;
+                
                 _lanternLit = NO;
                 _moving = NO;
                 [_henry removeActionForKey:@"walkLeft"];
@@ -758,9 +757,14 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         
         
     }else if(firstBody.categoryBitMask == PLAYER_CATEGORY && secondBody.categoryBitMask == VICTORY_LIGHT_CATEGORY){
+        [_henry removeActionForKey:@"walkLeft"];
+        [_henry removeActionForKey:@"walkRight"];
+        [_henry removeActionForKey:@"walkAnimation"];
+        [_henry removeActionForKey:@"idleAnimation"];
         [self.musicPlayer stop];
         [self.soundPlayer stop];
         [self.victoryMusicPlayer play];
+        _win = YES;
     }
     
 }
@@ -805,7 +809,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     
     
     
-    positionInScene.x += 200;
+    positionInScene.x += 185;
     _world.position = CGPointMake(_world.position.x - positionInScene.x, _world.position.y);
     
     
