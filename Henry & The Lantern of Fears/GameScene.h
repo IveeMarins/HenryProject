@@ -15,4 +15,5 @@
 @property (nonatomic) int score;
 @property (strong, nonatomic) AVAudioPlayer *musicPlayer;
 @property (strong, nonatomic) AVAudioPlayer *soundPlayer;
+@property (strong, nonatomic) AVAudioPlayer *victoryMusicPlayer;
 @end

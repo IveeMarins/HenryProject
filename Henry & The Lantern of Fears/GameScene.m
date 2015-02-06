@@ -120,7 +120,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     
     //Creating HUD ( Holds the user interface )
     _HUD = [SKNode node];
-    
+    _HUD.zPosition = 2;
     [self addChild:_HUD];
     
     
@@ -279,6 +279,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     
     NSURL *url1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/nightForestSound.mp3", [[NSBundle mainBundle] resourcePath]]];
     NSURL *url2 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/nightForestMusic.mp3", [[NSBundle mainBundle] resourcePath]]];
+    NSURL *url3 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/victoryMusic.mp3", [[NSBundle mainBundle] resourcePath]]];
     
     NSError *error;
     
@@ -287,6 +288,9 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     
     self.musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url2 error:&error];
     self.musicPlayer.numberOfLoops = -1;
+    
+    self.victoryMusicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url3 error:&error];
+    self.victoryMusicPlayer.numberOfLoops = -1;
     
     if (!self.soundPlayer || !self.musicPlayer)
         NSLog([error localizedDescription]);
@@ -754,7 +758,9 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         
         
     }else if(firstBody.categoryBitMask == PLAYER_CATEGORY && secondBody.categoryBitMask == VICTORY_LIGHT_CATEGORY){
-        NSLog(@"win");
+        [self.musicPlayer stop];
+        [self.soundPlayer stop];
+        [self.victoryMusicPlayer play];
     }
     
 }

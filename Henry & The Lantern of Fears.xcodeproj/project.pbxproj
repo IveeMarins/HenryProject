@@ -45,6 +45,7 @@
 		25C7C5451A8441530075A061 /* batDead.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C5441A8441530075A061 /* batDead.png */; };
 		25C7C54B1A8443710075A061 /* VictoryLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C7C54A1A8443710075A061 /* VictoryLight.m */; };
 		25C7C54D1A845B2B0075A061 /* VictoryLightParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C54C1A845B2B0075A061 /* VictoryLightParticle.sks */; };
+		25C7C5531A846A820075A061 /* victoryMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C5521A846A820075A061 /* victoryMusic.mp3 */; };
 		25FB5C2B1A7AFD1000E1A2B6 /* run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 25FB5C2A1A7AFD1000E1A2B6 /* run.atlas */; };
 		25FB5C3F1A7B1CCA00E1A2B6 /* spriteHenryLantern.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FB5C3E1A7B1CCA00E1A2B6 /* spriteHenryLantern.png */; };
 		25FB5C411A7B200300E1A2B6 /* idle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 25FB5C401A7B200300E1A2B6 /* idle.atlas */; };
@@ -134,6 +135,7 @@
 		25C7C5491A8443710075A061 /* VictoryLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VictoryLight.h; path = ../VictoryLight.h; sourceTree = "<group>"; };
 		25C7C54A1A8443710075A061 /* VictoryLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VictoryLight.m; path = ../VictoryLight.m; sourceTree = "<group>"; };
 		25C7C54C1A845B2B0075A061 /* VictoryLightParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = VictoryLightParticle.sks; sourceTree = "<group>"; };
+		25C7C5521A846A820075A061 /* victoryMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = victoryMusic.mp3; sourceTree = "<group>"; };
 		25FB5C2A1A7AFD1000E1A2B6 /* run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = run.atlas; sourceTree = "<group>"; };
 		25FB5C3E1A7B1CCA00E1A2B6 /* spriteHenryLantern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spriteHenryLantern.png; sourceTree = "<group>"; };
 		25FB5C401A7B200300E1A2B6 /* idle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = idle.atlas; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 				339EA2291A77E725003B0BBD /* WorldSelection.png */,
 				339EA22D1A77FBB0003B0BBD /* ground */,
 				250628011A75F8C000325CEE /* nightForestMusic.mp3 */,
+				25C7C5521A846A820075A061 /* victoryMusic.mp3 */,
 				250628031A75F8C400325CEE /* nightForestSound.mp3 */,
 				250627C81A75BA2C00325CEE /* Buttons and HUD */,
 				250627C71A75BA1000325CEE /* Background */,
@@ -475,6 +478,7 @@
 				3386CF2E1A82846E005371BD /* soundOn.png in Resources */,
 				339EA2331A77FBB0003B0BBD /* groundRamp.png in Resources */,
 				250628041A75F8C400325CEE /* nightForestSound.mp3 in Resources */,
+				25C7C5531A846A820075A061 /* victoryMusic.mp3 in Resources */,
 				250627BE1A758AF200325CEE /* gear.png in Resources */,
 				250628021A75F8C000325CEE /* nightForestMusic.mp3 in Resources */,
 				2540F82C1A71467A00AB4625 /* Images.xcassets in Resources */,
