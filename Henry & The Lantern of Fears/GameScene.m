@@ -148,7 +148,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     _bat = [Bat bat];
     _bat.position = CGPointMake(1000, 30);
     _bat.physicsBody.categoryBitMask = ENEMY_CATEGORY;
-    _bat.physicsBody.collisionBitMask = PLAYER_CATEGORY;
+    _bat.physicsBody.collisionBitMask = 0;
     _bat.physicsBody.contactTestBitMask = PLAYER_CATEGORY | KILL_ENEMY_CATEGORY;
     _bat.shadowCastBitMask = LIGHT_CATEGORY;
     _bat.zPosition = 1;
@@ -158,7 +158,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     _ghost = [Ghost ghost];
     _ghost.position = CGPointMake(700, 100);
     _ghost.physicsBody.categoryBitMask = ENEMY_CATEGORY;
-    _ghost.physicsBody.collisionBitMask = PLAYER_CATEGORY;
+    _ghost.physicsBody.collisionBitMask = 0;
     _ghost.physicsBody.contactTestBitMask = PLAYER_CATEGORY | KILL_ENEMY_CATEGORY;
     _ghost.shadowCastBitMask = LIGHT_CATEGORY;
     _ghost.zPosition = 1;
@@ -680,7 +680,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     
     if (self.numberOfLives >= 0){
         
-        [self performSelector:@selector(clear) withObject:self afterDelay:4];
+        [self performSelector:@selector(clear) withObject:self afterDelay:5];
         
     }else{
         

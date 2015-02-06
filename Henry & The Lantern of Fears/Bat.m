@@ -12,6 +12,7 @@
 @implementation Bat{
     
     NSArray *_animationFrames;
+    BOOL _attacking;
 }
 
 +(id)bat
@@ -32,13 +33,52 @@
 
 -(void)attackPlayer:(Henry *)henry
 {
-    
-    
-    [self runAction:[SKAction repeatActionForever:[SKAction moveTo:henry.position duration:2]]];
+    if (!_attacking){
+        _attacking = YES;
+        
+        float currentX = self.position.x;
+        float currentY = self.position.y;
+        float afterSweepX = 0;
+        float afterSweepY = 0;
+        
+        
+        //Group of actions to make the bat do a sweep going left and down at the same time
+        SKAction *leftDownSweep = [SKAction group:@[[SKAction moveToX:self.position.x - 200 duration:2],
+                                                    [SKAction moveToY:self.position.y - 60  duration:2]]];
+        afterSweepX = self.position.x - 200;
+        afterSweepY = self.position.y - 60;
+        //To complete the movement we need to make him go up again and continue the movement to the left
+        SKAction *leftUpSweep = [SKAction group:@[[SKAction moveToX:afterSweepX - 200 duration:2],
+                                                  [SKAction moveToY:afterSweepY + 60 duration:2]]];
+        
+        //The same, but instead of going left he goes right, in case henry is at his right side
+        SKAction *rightDownSweep = [SKAction group:@[[SKAction moveToX:self.position.x + 200 duration:3],
+                                                     [SKAction moveToY:self.position.y - 60 duration:3]]];
+        afterSweepX = self.position.x + 200;
+        SKAction *rightUpSweep = [SKAction group:@[[SKAction moveToX:afterSweepX + 200 duration:3],
+                                                   [SKAction moveToY:afterSweepY + 60 duration:3]]];
+        
+        
+        if (henry.position.x < currentX) {
+            
+            [self runAction:[SKAction sequence:@[leftDownSweep,leftUpSweep]]];
+        }
+        else{
+            [self runAction:[SKAction sequence:@[rightDownSweep,rightUpSweep]]];
+            
+        }
+        [self performSelector:@selector(attackFinished) withObject:self afterDelay:5];
+    }
     
     
     
 }
+-(void)attackFinished
+{
+    _attacking = NO;
+    
+}
+
 
 -(void)animate{
     
@@ -57,6 +97,7 @@
 }
 -(void)death
 {
+    [self removeAllActions];
     self.physicsBody.categoryBitMask = 0;
     self.physicsBody.collisionBitMask = 0;
     [self removeActionForKey:@"flyAnimation"];
