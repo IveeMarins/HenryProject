@@ -75,16 +75,10 @@
                 Mundos *scene = [[Mundos alloc] initWithSize:self.view.bounds.size];
                 scene.scaleMode = SKSceneScaleModeAspectFill;
                 
-                
-                
                 // Present the scene.
                 SKTransition *reveal = [SKTransition fadeWithDuration:1];
                 [self.view presentScene:scene transition: reveal];
             });
-            
-
-            
-            
             
         }
     }
