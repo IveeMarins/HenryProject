@@ -78,8 +78,15 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 
 
 -(void)didMoveToView:(SKView *)view {
-    /* Setup your scene here */
     
+    //Defining Inicial Values
+    self.numberOfLives = 3;
+    self.score = 0;
+    
+    _time = 0;
+    _font = [UIFont fontWithName:@"KGLuckoftheIrish.ttf" size:100.0f];
+    _fontName = [NSString stringWithFormat:@"KGLuckoftheIrish"];
+    _currentLanguage = [NSString stringWithFormat: @"Portugues"];
     
     //Setting Delegate
     self.physicsWorld.contactDelegate = self;
@@ -237,35 +244,24 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     [xSeparator setScale:0.5];
     [_HUD addChild:xSeparator];
     
-    _lifeLabel = [SKLabelNode labelNodeWithFontNamed:@"DIN Alternate"];
+    _lifeLabel = [SKLabelNode labelNodeWithFontNamed:_fontName];
     _lifeLabel.fontColor = [UIColor whiteColor];
     _lifeLabel.fontSize = 25;
     _lifeLabel.position = CGPointMake(xSeparator.position.x + 15 , xSeparator.position.y - 5);
+    _lifeLabel.text = [NSString stringWithFormat:@"%d",_numberOfLives];
     
     [_HUD addChild:_lifeLabel];
     
-    _labelScore = [SKLabelNode labelNodeWithFontNamed:@"Helvetica"];
+    _labelScore = [SKLabelNode labelNodeWithFontNamed:_fontName];
     _labelScore.position = CGPointMake(_lifeLabel.position.x - 10, _lifeLabel.position.y - 30);
     _labelScore.fontSize = 20;
     _labelScore.fontColor = [UIColor whiteColor];
+    _labelScore.text = [NSString stringWithFormat:@"%d",_score];
     
     [_HUD addChild:_labelScore];
     
     [self timer];
     [self startTimer];
-    
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    //Defining Inicial Values
-    self.numberOfLives = 3;
-    self.score = 0;
-    _time = 0;
-    _font = [UIFont fontWithName:@"KGLuckoftheIrish.ttf" size:100.0f];
-    _fontName = [NSString stringWithFormat:@"KGLuckoftheIrish"];
-    _currentLanguage = [NSString stringWithFormat: @"Portugues"];
-    
-    
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     /////////////////////////////////////////////////////////Defining Sound/////////////////////////////////////////////////////////
     
@@ -298,9 +294,9 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 {
     _labelTimer = [SKLabelNode labelNodeWithText:@"00:00"];
     
-    _labelTimer.fontName = @"DKCoolCrayon";
+    _labelTimer.fontName = _fontName;
     _labelTimer.position = CGPointMake(0, _lifeLabel.position.y);
-    _labelTimer.fontSize = 20;
+    _labelTimer.fontSize = 30;
     _labelTimer.name = @"timer";
     _labelTimer.fontColor = [UIColor whiteColor];
     _labelTimer.zPosition = 1;
@@ -503,7 +499,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
                 [self backgroundButtons];
                 
                 
-                _tituloLabelButton.text = @"Configurações:";
+                _tituloLabelButton.text = @"Configurações";
                 
                 _currentLanguageImage = [SKSpriteNode spriteNodeWithImageNamed:@""];
                 _currentLanguageImage.position = CGPointMake(0,0);
@@ -629,7 +625,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     _tituloLabelButton.position = CGPointMake(0, 90);
     _tituloLabelButton.fontSize = 25;
     _tituloLabelButton.name = @"tituloLabel";
-    _tituloLabelButton.fontColor = [UIColor colorWithRed:36/255 green:64/255 blue:96/255 alpha:1];
+    _tituloLabelButton.fontColor = [UIColor colorWithRed:36.0f/255.0f green:64.0f/255.0f blue:96.0f/255.0f alpha:1];
     
     
     [self pauseGame];
