@@ -35,7 +35,7 @@
         buttonStart.name = @"start";
         [buttonStart setScale:0.8];
         [self addChild: buttonStart];
-        [self animateWithPulse: buttonStart];
+        [self animateWithPulse: _lanternInicial];
         
     }
     return self;
@@ -48,6 +48,7 @@
         SKNode *n = [self nodeAtPoint:[touch locationInNode:self]];
         if([n.name isEqualToString:@"start"])
         {
+
             NSString *lanternLightEmmiterPath = [[NSBundle mainBundle] pathForResource:@"LanternMagicFirstScreen" ofType:@"sks"];
             SKEmitterNode *lanternLightEmmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:lanternLightEmmiterPath];
             

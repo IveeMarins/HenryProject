@@ -13,5 +13,6 @@
 
 +(id)bat;
 -(void)attackPlayer:(Henry *)henry;
-+(int)giveScore;
+-(void)animate;
+-(void)death;
 @end

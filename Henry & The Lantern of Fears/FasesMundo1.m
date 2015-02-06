@@ -29,8 +29,9 @@
         _fasesBackground.size = CGSizeMake(self.scene.frame.size.width , self.scene.frame.size.height) ;
         [self addChild: _fasesBackground];
         
-        _fase1 = [SKSpriteNode spriteNodeWithImageNamed:@"magicStone"];
-        _fase1.position = CGPointMake(-275,130);
+        _fase1 = [SKSpriteNode spriteNodeWithImageNamed:@"cristalVerde"];
+        _fase1.position = CGPointMake(-self.frame.size.width * 0.5 + _fase1.frame.size.width * 0.35,
+                                      self.frame.size.height * 0.5 - _fase1.frame.size.height * 0.3);
         _fase1.size = CGSizeMake(80, 80);
         _fase1.name = @"fase1";
         
@@ -61,7 +62,6 @@
     for (UITouch *touch in touches) {
         SKNode *n = [self nodeAtPoint:[touch locationInNode:self]];
         if([n.name isEqualToString:@"fase1"]){
-            NSLog(@"entrou no jogo %@",n.name);
             
             SKShapeNode *rec = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(200,50)];
             rec.fillColor = [UIColor blackColor];
@@ -87,14 +87,13 @@
     for (UITouch *touch in touches) {
         SKNode *n = [self nodeAtPoint:[touch locationInNode:self]];
         if([n.name isEqualToString:@"fase1"]){
-            NSLog(@"entrou no jogo %@",n.name);
             
             GameScene *scene = [[GameScene alloc] initWithSize:self.view.bounds.size];
             scene.anchorPoint = CGPointMake(0.5, 0.5);
             scene.scaleMode = SKSceneScaleModeAspectFill;
             
             // Present the scene.
-            SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+            SKTransition *reveal = [SKTransition fadeWithDuration:3];
             [self.view presentScene:scene transition: reveal];
             
         }

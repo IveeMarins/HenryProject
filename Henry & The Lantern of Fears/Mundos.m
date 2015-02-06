@@ -88,14 +88,14 @@
     for (UITouch *touch in touches) {
         SKNode *n = [self nodeAtPoint:[touch locationInNode:self]];
         if([n.name isEqualToString:@"mundo1"]){
-            NSLog(@"entrou no jogo %@",n.name);
+           
             FasesMundo1 *scene = [[FasesMundo1 alloc] initWithSize:self.view.bounds.size];
-            //GameScene *scene = [[GameScene alloc] initWithSize:self.view.bounds.size];
+            
             scene.anchorPoint = CGPointMake(0.5, 0.5);
             scene.scaleMode = SKSceneScaleModeAspectFill;
             
             // Present the scene.
-            SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+            SKTransition *reveal = [SKTransition fadeWithDuration:3];
             [self.view presentScene:scene transition: reveal];
             
         }

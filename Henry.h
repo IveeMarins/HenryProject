@@ -19,4 +19,6 @@
 -(void)idleAnimation;
 -(void)idleAnimationLeft;
 -(void)pickLantern;
+-(void)deathAnimation;
+-(void)deathAnimationLeft;
 @end
