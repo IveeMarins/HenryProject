@@ -22,7 +22,6 @@
     
     Henry *henry = [Henry spriteNodeWithImageNamed:@"idle1"];
     henry.size = CGSizeMake(80, 100);
-    henry.zPosition = 1;
     
     SKSpriteNode *lightBlocker = [SKSpriteNode spriteNodeWithColor:[UIColor grayColor] size:CGSizeMake(1,20)];
     lightBlocker.zPosition = -10;

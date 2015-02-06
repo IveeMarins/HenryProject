@@ -43,6 +43,8 @@
 		25C7C5411A8405640075A061 /* henryDeathLeft.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C5401A8405640075A061 /* henryDeathLeft.atlas */; };
 		25C7C5431A8441430075A061 /* batFlying.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C5421A8441430075A061 /* batFlying.atlas */; };
 		25C7C5451A8441530075A061 /* batDead.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C5441A8441530075A061 /* batDead.png */; };
+		25C7C54B1A8443710075A061 /* VictoryLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C7C54A1A8443710075A061 /* VictoryLight.m */; };
+		25C7C54D1A845B2B0075A061 /* VictoryLightParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C54C1A845B2B0075A061 /* VictoryLightParticle.sks */; };
 		25FB5C2B1A7AFD1000E1A2B6 /* run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 25FB5C2A1A7AFD1000E1A2B6 /* run.atlas */; };
 		25FB5C3F1A7B1CCA00E1A2B6 /* spriteHenryLantern.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FB5C3E1A7B1CCA00E1A2B6 /* spriteHenryLantern.png */; };
 		25FB5C411A7B200300E1A2B6 /* idle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 25FB5C401A7B200300E1A2B6 /* idle.atlas */; };
@@ -129,6 +131,9 @@
 		25C7C5401A8405640075A061 /* henryDeathLeft.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = henryDeathLeft.atlas; sourceTree = "<group>"; };
 		25C7C5421A8441430075A061 /* batFlying.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = batFlying.atlas; sourceTree = "<group>"; };
 		25C7C5441A8441530075A061 /* batDead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batDead.png; sourceTree = "<group>"; };
+		25C7C5491A8443710075A061 /* VictoryLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VictoryLight.h; path = ../VictoryLight.h; sourceTree = "<group>"; };
+		25C7C54A1A8443710075A061 /* VictoryLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VictoryLight.m; path = ../VictoryLight.m; sourceTree = "<group>"; };
+		25C7C54C1A845B2B0075A061 /* VictoryLightParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = VictoryLightParticle.sks; sourceTree = "<group>"; };
 		25FB5C2A1A7AFD1000E1A2B6 /* run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = run.atlas; sourceTree = "<group>"; };
 		25FB5C3E1A7B1CCA00E1A2B6 /* spriteHenryLantern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spriteHenryLantern.png; sourceTree = "<group>"; };
 		25FB5C401A7B200300E1A2B6 /* idle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = idle.atlas; sourceTree = "<group>"; };
@@ -238,6 +243,7 @@
 		2540F80D1A71467A00AB4625 = {
 			isa = PBXGroup;
 			children = (
+				25C7C54C1A845B2B0075A061 /* VictoryLightParticle.sks */,
 				25C7C52B1A82BD7D0075A061 /* DyingEnemy.sks */,
 				25C7C5291A82BCCF0075A061 /* LanternMagicFirstScreen.sks */,
 				25C7C5241A82B8EB0075A061 /* bokeh.png */,
@@ -268,6 +274,8 @@
 				25FCDB401A714AF600B842F2 /* Henry.m */,
 				250627B11A75748200325CEE /* Kopp.h */,
 				250627B21A75748200325CEE /* Kopp.m */,
+				25C7C5491A8443710075A061 /* VictoryLight.h */,
+				25C7C54A1A8443710075A061 /* VictoryLight.m */,
 				2540F8201A71467A00AB4625 /* GameScene.h */,
 				2540F8211A71467A00AB4625 /* GameScene.m */,
 				2540F8231A71467A00AB4625 /* GameScene.sks */,
@@ -475,6 +483,7 @@
 				2540F8241A71467A00AB4625 /* GameScene.sks in Resources */,
 				25FB5C411A7B200300E1A2B6 /* idle.atlas in Resources */,
 				3BA8DEE71A769A3A00740706 /* ground.png in Resources */,
+				25C7C54D1A845B2B0075A061 /* VictoryLightParticle.sks in Resources */,
 				25FCDB4F1A717BF000B842F2 /* leftButton.png in Resources */,
 				2540F82A1A71467A00AB4625 /* Main.storyboard in Resources */,
 				25C7C5381A83EDAB0075A061 /* brasilImage.png in Resources */,
@@ -516,6 +525,7 @@
 				25B658761A7691F000836621 /* Ghost.m in Sources */,
 				2540F8221A71467A00AB4625 /* GameScene.m in Sources */,
 				25FCDB411A714AF600B842F2 /* Henry.m in Sources */,
+				25C7C54B1A8443710075A061 /* VictoryLight.m in Sources */,
 				2540F81C1A71467A00AB4625 /* main.m in Sources */,
 				250627B31A75748200325CEE /* Kopp.m in Sources */,
 				2506278E1A72B0E200325CEE /* Bat.m in Sources */,

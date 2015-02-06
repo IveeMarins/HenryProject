@@ -11,6 +11,7 @@
 #import "Bat.h"
 #import "Kopp.h"
 #import "Ghost.h"
+#import "VictoryLight.h"
 
 @interface GameScene ()
 
@@ -55,8 +56,10 @@
     NSString *_fontName;
     
     Henry *_henry;
+    VictoryLight *_victoryLight;
     Bat *_bat;
     Ghost *_ghost;
+    
     
     BOOL _rightButtonPressed;
     BOOL _leftButtonPressed;
@@ -73,6 +76,7 @@ static const uint32_t GROUND_CATEGORY = 0x1;
 static const uint32_t PLAYER_CATEGORY = 0x1 << 1;
 static const uint32_t ENEMY_CATEGORY = 0x1 << 2;
 static const uint32_t KILL_ENEMY_CATEGORY = 0x1 << 3;
+static const uint32_t VICTORY_LIGHT_CATEGORY = 0x1 << 28;
 static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 
 
@@ -145,7 +149,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     _henry = [Henry henry];
     _henry.physicsBody.categoryBitMask = PLAYER_CATEGORY;
     _henry.physicsBody.collisionBitMask = GROUND_CATEGORY;
-    _henry.physicsBody.contactTestBitMask = GROUND_CATEGORY | ENEMY_CATEGORY;
+    _henry.physicsBody.contactTestBitMask = GROUND_CATEGORY | ENEMY_CATEGORY | VICTORY_LIGHT_CATEGORY;
     
     [_world addChild:_henry];
     //Inserting Kopp
@@ -158,7 +162,6 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     _bat.physicsBody.collisionBitMask = 0;
     _bat.physicsBody.contactTestBitMask = PLAYER_CATEGORY | KILL_ENEMY_CATEGORY;
     _bat.shadowCastBitMask = LIGHT_CATEGORY;
-    _bat.zPosition = 1;
     
     [_world addChild:_bat];
     
@@ -168,9 +171,17 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     _ghost.physicsBody.collisionBitMask = 0;
     _ghost.physicsBody.contactTestBitMask = PLAYER_CATEGORY | KILL_ENEMY_CATEGORY;
     _ghost.shadowCastBitMask = LIGHT_CATEGORY;
-    _ghost.zPosition = 1;
     
     [_world addChild:_ghost];
+    
+    //Inserting Victory Light - Ending of stage
+    
+    _victoryLight = [VictoryLight victoryLight];
+    _victoryLight.size = self.size;
+    [_victoryLight insertElements];
+    _victoryLight.position = CGPointMake(_currentGroundX - self.frame.size.width, 0);
+    [_world addChild:_victoryLight];
+    
     
     //Inserting Hud Controls
     
@@ -742,6 +753,8 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         }
         
         
+    }else if(firstBody.categoryBitMask == PLAYER_CATEGORY && secondBody.categoryBitMask == VICTORY_LIGHT_CATEGORY){
+        NSLog(@"win");
     }
     
 }
