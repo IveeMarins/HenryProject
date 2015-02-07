@@ -62,19 +62,15 @@
         SKNode *n = [self nodeAtPoint:[touch locationInNode:self]];
         if([n.name isEqualToString:@"fase1"]){
             
-            SKShapeNode *rec = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(200,50)];
-            rec.fillColor = [UIColor blackColor];
-            rec.position = CGPointMake(0,10);
-            
-            _carregando = [SKLabelNode labelNodeWithFontNamed:@"Helvetica"];
+            NSString *fontName = [NSString stringWithFormat:@"KGLuckoftheIrish"];
+            _carregando = [SKLabelNode labelNodeWithFontNamed:fontName];
             _carregando.text = @"Carregando...";
             _carregando.fontColor = [UIColor whiteColor];
-            _carregando.fontSize = 30;
+            _carregando.fontSize = 50;
             _carregando.position = CGPointMake(0,0);
             _carregando.name = @"carregando";
             _carregando.zPosition = 1;
             
-            [_carregando addChild:rec];
             [self addChild:_carregando];
         }
         
