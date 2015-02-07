@@ -73,6 +73,7 @@
 		339EA24B1A7940DB003B0BBD /* worldScene.png in Resources */ = {isa = PBXBuildFile; fileRef = 339EA24A1A7940DB003B0BBD /* worldScene.png */; };
 		339EA24F1A7943F7003B0BBD /* kopp.png in Resources */ = {isa = PBXBuildFile; fileRef = 339EA24E1A7943F7003B0BBD /* kopp.png */; };
 		339EA2531A7BEC96003B0BBD /* FasesMundo1.m in Sources */ = {isa = PBXBuildFile; fileRef = 339EA2521A7BEC96003B0BBD /* FasesMundo1.m */; };
+		3B5422611A86560200B09840 /* MyPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B5422601A86560200B09840 /* MyPoint.m */; };
 		3BA8DEDF1A768A1700740706 /* backgroundTrees2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA8DEDE1A768A1700740706 /* backgroundTrees2.png */; };
 		3BA8DEE11A768A4D00740706 /* backgroundTrees.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA8DEE01A768A4D00740706 /* backgroundTrees.png */; };
 		3BA8DEE31A768AB000740706 /* backgroundMountain.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA8DEE21A768AB000740706 /* backgroundMountain.png */; };
@@ -172,6 +173,8 @@
 		339EA24E1A7943F7003B0BBD /* kopp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kopp.png; sourceTree = "<group>"; };
 		339EA2511A7BEC96003B0BBD /* FasesMundo1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasesMundo1.h; sourceTree = "<group>"; };
 		339EA2521A7BEC96003B0BBD /* FasesMundo1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasesMundo1.m; sourceTree = "<group>"; };
+		3B54225F1A86560200B09840 /* MyPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPoint.h; sourceTree = "<group>"; };
+		3B5422601A86560200B09840 /* MyPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPoint.m; sourceTree = "<group>"; };
 		3BA8DEDE1A768A1700740706 /* backgroundTrees2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundTrees2.png; sourceTree = "<group>"; };
 		3BA8DEE01A768A4D00740706 /* backgroundTrees.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundTrees.png; sourceTree = "<group>"; };
 		3BA8DEE21A768AB000740706 /* backgroundMountain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundMountain.png; sourceTree = "<group>"; };
@@ -302,6 +305,8 @@
 				250627A91A75712B00325CEE /* Henry */,
 				25FCDB5C1A729C3700B842F2 /* Enemies */,
 				2540F8191A71467A00AB4625 /* Supporting Files */,
+				3B54225F1A86560200B09840 /* MyPoint.h */,
+				3B5422601A86560200B09840 /* MyPoint.m */,
 			);
 			path = "Henry & The Lantern of Fears";
 			sourceTree = "<group>";
@@ -434,6 +439,7 @@
 				TargetAttributes = {
 					2540F8151A71467A00AB4625 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 26M9MN8LPE;
 					};
 					2540F8331A71467A00AB4625 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -550,6 +556,7 @@
 				2540F81C1A71467A00AB4625 /* main.m in Sources */,
 				250627B31A75748200325CEE /* Kopp.m in Sources */,
 				2506278E1A72B0E200325CEE /* Bat.m in Sources */,
+				3B5422611A86560200B09840 /* MyPoint.m in Sources */,
 				2E8CA2391A76C518005F41E5 /* Menu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -664,9 +671,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Henry & The Lantern of Fears/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -674,9 +685,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Henry & The Lantern of Fears/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

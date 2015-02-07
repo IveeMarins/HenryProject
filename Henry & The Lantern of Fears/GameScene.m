@@ -13,12 +13,16 @@
 #import "Ghost.h"
 #import "VictoryLight.h"
 #import "FasesMundo1.h"
+#import "MyPoint.h"
 
 @interface GameScene ()
 
 @property BOOL isStarted;
 @property BOOL isDead;
 @property BOOL isGamePaused;
+@property NSMutableArray *batPositionArray;
+@property NSMutableArray *ghostPositionArray;
+
 
 @end
 
@@ -37,7 +41,6 @@
     int _time;
     int _timeSec;
     int _timeMin;
-    
     
     SKSpriteNode *_sound;
     SKSpriteNode *_backgroundMenus;
@@ -58,18 +61,16 @@
     
     Henry *_henry;
     VictoryLight *_victoryLight;
-    Bat *_bat;
-    Ghost *_ghost;
+    //Bat *_bat;
+    //Ghost *_ghost;
     
-    
-
     BOOL _jumping; //TO control how many times henry can jump
     BOOL _moving;
     BOOL _lanternLit;
     BOOL _soundOn;
     BOOL _flipped; //If Henry's image is flipped to walk left
     BOOL _win;
-    
+    BOOL _isOpen;
     
 }
 
@@ -84,7 +85,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 
 -(void)didMoveToView:(SKView *)view {
     
-    //Defining Inicial Values
+    self.physicsWorld.contactDelegate = self;
     self.numberOfLives = 3;
     self.score = 0;
     
@@ -93,113 +94,154 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     _fontName = [NSString stringWithFormat:@"KGLuckoftheIrish"];
     _currentLanguage = [NSString stringWithFormat: @"Portugues"];
     
-    //Setting Delegate
-    self.physicsWorld.contactDelegate = self;
-    
-    ///////////////////////////////////////////////////////////Creating Layers//////////////////////////////////////////////////////////////
-    
-    //Creating background Layers (Holds the backgrounds)
-    _backgroundTreeLayer = [SKNode node];
-    _backgroundTreeLayer.zPosition = -2;
-    [self addChild:_backgroundTreeLayer];
-    
-    _backgroundTreeLayer2 = [SKNode node];
-    _backgroundTreeLayer2.zPosition = -3;
-    [self addChild:_backgroundTreeLayer2];
-    
-    _backgroundMountainLayer = [SKNode node];
-    _backgroundMountainLayer.zPosition = -4;
-    [self addChild:_backgroundMountainLayer];
-    
-    _backgroundSkyLayer = [SKNode node];
-    _backgroundSkyLayer.zPosition = -5;
-    [self addChild:_backgroundSkyLayer];
-    
-    //Creating World ( Holds the player, the ground, the enemies, etc )
     _world = [SKNode node];
     [self addChild:_world];
     
-    //Creating HUD ( Holds the user interface )
-    _HUD = [SKNode node];
-    _HUD.zPosition = 2;
-    [self addChild:_HUD];
+    [self setBackgrounds];
+    [self setGroundsAndWall];
+    [self setHUD];
+    
+    [self initializeBats];
+    [self initializeGhosts];
+    [self setSound];
+    [self insertHenryAndKopp];
+    [self inserVictoryLight];
+    
+    //Inserting Victory Light - Ending of stage
     
     
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+}
+
+-(void) inserVictoryLight{
+    _victoryLight = [VictoryLight victoryLight];
+    _victoryLight.size = self.size;
+    [_victoryLight insertElements];
+    _victoryLight.position = CGPointMake(_currentGroundX - self.frame.size.width, 0);
+    [_world addChild:_victoryLight];
+}
+
+-(void) insertHenryAndKopp{
     
-    ///////////////////////////////////////////////////////////Inserting Objects//////////////////////////////////////////////////////////////
-    
-    //Inserting Ground
-    _currentGroundX = 0;
-    SKSpriteNode *firstWall = [SKSpriteNode spriteNodeWithImageNamed:@"wall"];
-    firstWall.position = CGPointMake(-self.frame.size.width * 0.5, 0);
-    firstWall.size = CGSizeMake(24,self.frame.size.height);
-    firstWall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:firstWall.size];
-    firstWall.physicsBody.dynamic = NO;
-    firstWall.physicsBody.categoryBitMask = GROUND_CATEGORY;
-    [_world addChild:firstWall];
-    [self generateWorldWithImage:@"ground" repeat:3];
-    [self generateWorldWithImage:@"groundBig" repeat:2];
-    [self generateWorldWithImage:@"ground" repeat:1];
-    [self generateWorldWithImage:@"groundRamp" repeat:1];
-    [self generateWorldWithImage:@"spikes" repeat:1];
-    [self generateWorldWithImage:@"ground" repeat:2];
-    [self generateWorldWithImage:@"groundBig" repeat:2];
-    [self generateWorldWithImage:@"ground" repeat:2];
-    
-    SKSpriteNode *lastWall = [SKSpriteNode spriteNodeWithImageNamed:@"wall"];
-    lastWall.position = CGPointMake(_currentGroundX  - self.frame.size.width * 0.5, 0);
-    lastWall.size = CGSizeMake(24,self.frame.size.height);
-    lastWall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:firstWall.size];
-    lastWall.physicsBody.dynamic = NO;
-    lastWall.physicsBody.categoryBitMask = GROUND_CATEGORY;
-    [_world addChild:lastWall];
-    //Creating Background
-    [self generateBackgroundIn:_backgroundMountainLayer withImage:@"backgroundMountain" repeat:10];
-    [self generateBackgroundIn:_backgroundTreeLayer2 withImage:@"backgroundTrees2" repeat:10];
-    [self generateBackgroundIn:_backgroundTreeLayer withImage:@"backgroundTrees" repeat:10];
-    
-    SKSpriteNode *sky = [SKSpriteNode spriteNodeWithImageNamed:@"backgroundSky"];
-    sky.size = self.frame.size;
-    [_backgroundSkyLayer addChild:sky];
-    
-    //Inserting Player
     _henry = [Henry henry];
     _henry.physicsBody.categoryBitMask = PLAYER_CATEGORY;
     _henry.physicsBody.collisionBitMask = GROUND_CATEGORY;
     _henry.physicsBody.contactTestBitMask = GROUND_CATEGORY | ENEMY_CATEGORY | VICTORY_LIGHT_CATEGORY;
     _henry.zPosition = 1;
     [_world addChild:_henry];
-    //Inserting Kopp
+    
     Kopp *kopp = [Kopp kopp:_henry];
     
-    //Inserting Enemy
-    _bat = [Bat bat];
-    _bat.position = CGPointMake(1000, 30);
-    _bat.physicsBody.categoryBitMask = ENEMY_CATEGORY;
-    _bat.physicsBody.collisionBitMask = 0;
-    _bat.physicsBody.contactTestBitMask = PLAYER_CATEGORY | KILL_ENEMY_CATEGORY;
-    _bat.shadowCastBitMask = LIGHT_CATEGORY;
+}
+
+-(void) setSound{
     
-    [_world addChild:_bat];
+    NSURL *url1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/nightForestSound.mp3", [[NSBundle mainBundle] resourcePath]]];
+    NSURL *url2 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/nightForestMusic.mp3", [[NSBundle mainBundle] resourcePath]]];
+    NSURL *url3 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/victoryMusic.mp3", [[NSBundle mainBundle] resourcePath]]];
     
-    _ghost = [Ghost ghost];
-    _ghost.position = CGPointMake(700, 100);
-    _ghost.physicsBody.categoryBitMask = ENEMY_CATEGORY;
-    _ghost.physicsBody.collisionBitMask = 0;
-    _ghost.physicsBody.contactTestBitMask = PLAYER_CATEGORY | KILL_ENEMY_CATEGORY;
-    _ghost.shadowCastBitMask = LIGHT_CATEGORY;
+    NSError *error;
     
-    [_world addChild:_ghost];
+    self.soundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url1 error:&error];
+    self.soundPlayer.numberOfLoops = -1;
     
-    //Inserting Victory Light - Ending of stage
+    self.musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url2 error:&error];
+    self.musicPlayer.numberOfLoops = -1;
     
-    _victoryLight = [VictoryLight victoryLight];
-    _victoryLight.size = self.size;
-    [_victoryLight insertElements];
-    _victoryLight.position = CGPointMake(_currentGroundX - self.frame.size.width, 0);
-    [_world addChild:_victoryLight];
+    self.victoryMusicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url3 error:&error];
+    self.victoryMusicPlayer.numberOfLoops = -1;
     
+    if (!self.soundPlayer || !self.musicPlayer)
+        NSLog([error localizedDescription]);
+    else{
+        _soundOn= YES;
+        [self.soundPlayer play];
+        [self.musicPlayer play];
+    }
+    
+}
+
+-(void) initializeGhosts{
+    
+    _ghostPositionArray = [self initializeArrayByType:@"ghost"];
+    
+    for (NSObject *object in _ghostPositionArray) {
+        
+        MyPoint *point = (MyPoint*) object;
+        
+        Ghost *ghost = [Ghost ghost];
+        ghost.position = point.myPoint;
+        ghost.physicsBody.categoryBitMask = ENEMY_CATEGORY;
+        ghost.physicsBody.collisionBitMask = 0;
+        ghost.physicsBody.contactTestBitMask = PLAYER_CATEGORY | KILL_ENEMY_CATEGORY;
+        ghost.shadowCastBitMask = LIGHT_CATEGORY;
+        ghost.zPosition = 2;
+        
+        [_world addChild:ghost];
+        
+    };
+    
+}
+
+-(void) initializeBats{
+    
+    _batPositionArray = [self initializeArrayByType:@"bat"];
+    
+    for (NSObject *object in _batPositionArray) {
+        
+        MyPoint *point = (MyPoint*) object;
+        
+        Bat *bat = [Bat bat];
+        bat.position = point.myPoint;
+        bat.physicsBody.categoryBitMask = ENEMY_CATEGORY;
+        bat.physicsBody.collisionBitMask = 0;
+        bat.physicsBody.contactTestBitMask = PLAYER_CATEGORY | KILL_ENEMY_CATEGORY;
+        bat.shadowCastBitMask = LIGHT_CATEGORY;
+        bat.zPosition = 2;
+        
+        [_world addChild:bat];
+        
+    };
+    
+}
+
+-(NSMutableArray*) initializeArrayByType:(NSString*) type{
+    
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
+    int numberOfEnemys;
+    int constant_x;
+    CGPoint initialPoint;
+    
+    if ([type isEqualToString:@"bat"]){
+        initialPoint = CGPointMake(1000, 30);
+        numberOfEnemys = 5;
+        constant_x = 600;
+    }else{
+        initialPoint = CGPointMake(700, 100);
+        numberOfEnemys = 4;
+        constant_x = 1000;
+    }
+    
+    MyPoint *point = [[MyPoint alloc]Init: initialPoint];
+    [array addObject: point];
+    
+    for (int i = 0 ; i < numberOfEnemys; i++) {
+        
+        initialPoint.x += constant_x;
+        point = [[MyPoint alloc]Init: initialPoint];
+        
+        [array addObject: point];
+        
+    };
+    
+    return array;
+}
+
+-(void) setHUD{
+    
+    _HUD = [SKNode node];
+    _HUD.zPosition = 3;
+    [self addChild:_HUD];
     
     //Inserting Hud Controls
     
@@ -270,21 +312,22 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     
     [_HUD addChild:life];
     
-    SKSpriteNode *xSeparator = [SKSpriteNode spriteNodeWithImageNamed:@"x"];
-    xSeparator.size = CGSizeMake(life.frame.size.width*0.5, life.frame.size.height*0.5);
-    xSeparator.position = CGPointMake(life.position.x + life.frame.size.width * 0.5 + xSeparator.frame.size.width * 0.5 - 5 , life.position.y - 5 );
-    
-    [xSeparator setScale:0.5];
+    SKLabelNode *xSeparator = [SKLabelNode labelNodeWithFontNamed:_fontName];
+    xSeparator.fontColor = [UIColor whiteColor];
+    xSeparator.fontSize = 15;
+    xSeparator.position = CGPointMake(life.position.x + 25 , life.position.y - 15);
+    xSeparator.text = @"x";
     xSeparator.zPosition = 2;
+    
     [_HUD addChild:xSeparator];
     
     _lifeLabel = [SKLabelNode labelNodeWithFontNamed:_fontName];
     _lifeLabel.fontColor = [UIColor whiteColor];
     _lifeLabel.fontSize = 25;
-    _lifeLabel.position = CGPointMake(xSeparator.position.x + 15 , xSeparator.position.y - 5);
+    _lifeLabel.position = CGPointMake(xSeparator.position.x + 15 , xSeparator.position.y);
     _lifeLabel.text = [NSString stringWithFormat:@"%d",_numberOfLives];
-    
     _lifeLabel.zPosition = 2;
+    
     [_HUD addChild:_lifeLabel];
     
     _labelScore = [SKLabelNode labelNodeWithFontNamed:_fontName];
@@ -292,46 +335,73 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     _labelScore.fontSize = 20;
     _labelScore.fontColor = [UIColor whiteColor];
     _labelScore.text = [NSString stringWithFormat:@"%d",_score];
-    
     _lifeLabel.zPosition = 2;
+    
     [_HUD addChild:_labelScore];
     
     [self timer];
-    [self startTimer];
-    
-    /////////////////////////////////////////////////////////Defining Sound/////////////////////////////////////////////////////////
-    
-    
-    NSURL *url1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/nightForestSound.mp3", [[NSBundle mainBundle] resourcePath]]];
-    NSURL *url2 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/nightForestMusic.mp3", [[NSBundle mainBundle] resourcePath]]];
-    NSURL *url3 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/victoryMusic.mp3", [[NSBundle mainBundle] resourcePath]]];
-    
-    NSError *error;
-    
-    self.soundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url1 error:&error];
-    self.soundPlayer.numberOfLoops = -1;
-    
-    self.musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url2 error:&error];
-    self.musicPlayer.numberOfLoops = -1;
-    
-    self.victoryMusicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url3 error:&error];
-    self.victoryMusicPlayer.numberOfLoops = -1;
-    
-    if (!self.soundPlayer || !self.musicPlayer)
-        NSLog([error localizedDescription]);
-    else
-    {
-        _soundOn= YES;
-        [self.soundPlayer play];
-        [self.musicPlayer play];
-    }
-    
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
 }
 
-- (void)timer
-{
+-(void) setGroundsAndWall{
+    
+    _currentGroundX = 0;
+    SKSpriteNode *firstWall = [SKSpriteNode spriteNodeWithImageNamed:@"wall"];
+    firstWall.position = CGPointMake(-self.frame.size.width * 0.5, 0);
+    firstWall.size = CGSizeMake(24,self.frame.size.height);
+    firstWall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:firstWall.size];
+    firstWall.physicsBody.dynamic = NO;
+    firstWall.physicsBody.categoryBitMask = GROUND_CATEGORY;
+    [_world addChild:firstWall];
+    
+    [self generateWorldWithImage:@"ground" repeat:3];
+    [self generateWorldWithImage:@"groundBig" repeat:2];
+    [self generateWorldWithImage:@"ground" repeat:1];
+    [self generateWorldWithImage:@"groundRamp" repeat:1];
+    [self generateWorldWithImage:@"spikes" repeat:1];
+    [self generateWorldWithImage:@"ground" repeat:2];
+    [self generateWorldWithImage:@"groundBig" repeat:2];
+    [self generateWorldWithImage:@"ground" repeat:2];
+    
+    SKSpriteNode *lastWall = [SKSpriteNode spriteNodeWithImageNamed:@"wall"];
+    lastWall.position = CGPointMake(_currentGroundX  - self.frame.size.width * 0.5, 0);
+    lastWall.size = CGSizeMake(24,self.frame.size.height);
+    lastWall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:firstWall.size];
+    lastWall.physicsBody.dynamic = NO;
+    lastWall.physicsBody.categoryBitMask = GROUND_CATEGORY;
+    [_world addChild:lastWall];
+    
+}
+
+
+-(void) setBackgrounds{
+    
+    _backgroundTreeLayer = [SKNode node];
+    _backgroundTreeLayer.zPosition = -2;
+    [self addChild:_backgroundTreeLayer];
+    
+    _backgroundTreeLayer2 = [SKNode node];
+    _backgroundTreeLayer2.zPosition = -3;
+    [self addChild:_backgroundTreeLayer2];
+    
+    _backgroundMountainLayer = [SKNode node];
+    _backgroundMountainLayer.zPosition = -4;
+    [self addChild:_backgroundMountainLayer];
+    
+    _backgroundSkyLayer = [SKNode node];
+    _backgroundSkyLayer.zPosition = -5;
+    [self addChild:_backgroundSkyLayer];
+    
+    [self generateBackgroundIn:_backgroundMountainLayer withImage:@"backgroundMountain" repeat:10];
+    [self generateBackgroundIn:_backgroundTreeLayer2 withImage:@"backgroundTrees2" repeat:10];
+    [self generateBackgroundIn:_backgroundTreeLayer withImage:@"backgroundTrees" repeat:10];
+    
+    SKSpriteNode *sky = [SKSpriteNode spriteNodeWithImageNamed:@"backgroundSky"];
+    sky.size = self.frame.size;
+    [_backgroundSkyLayer addChild:sky];
+}
+
+- (void)timer{
     _labelTimer = [SKLabelNode labelNodeWithText:@"00:00"];
     
     _labelTimer.fontName = _fontName;
@@ -344,18 +414,20 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     [_labelTimer setScale:0.9];
     [_HUD addChild:_labelTimer];
     
+    [self startTimer];
+    
 }
--(void)startTimer
-{
+
+-(void)startTimer{
+    
     _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(increaseTimer) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSDefaultRunLoopMode];
 }
 
--(void)increaseTimer
-{
+-(void)increaseTimer{
     _time++;
     _timeSec++;
-
+    
     if (_timeSec == 60)
     {
         _timeSec = 0;
@@ -368,24 +440,19 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 }
 
 
-- (void)stopTimer
-{
+- (void)stopTimer{
     [_timer invalidate];
 }
 
--(void)setNumberOfLives:(int)numberOfLives
-{
+-(void)setNumberOfLives:(int)numberOfLives{
     
     _numberOfLives = numberOfLives;
     if (numberOfLives >= 0) {
         _lifeLabel.text = [NSString stringWithFormat:@"%d",numberOfLives];
     }
-    
-    
 }
 
--(void)setScore:(int)score
-{
+-(void)setScore:(int)score{
     _score = score;
     _labelScore.text = [NSString stringWithFormat:@"%d",score];
 }
@@ -463,7 +530,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     [_henry removeActionForKey:@"walkRight"];
     [_henry removeActionForKey:@"walkAnimation"];
     [_henry removeActionForKey:@"idleAnimation"];
-
+    
     _henry.position = CGPointMake(0, 0);
     [_world addChild:_henry];
     [_henry idleAnimation];
@@ -533,96 +600,93 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             }
             
             
-            if([n.name isEqualToString:@"configButton"] || [n.name isEqualToString:@"circle1"])
-            {
-                [self backgroundButtons];
+            if([n.name isEqualToString:@"configButton"]){
                 
-                
-                _tituloLabelButton.text = @"Configurações";
-                
-                _currentLanguageImage = [SKSpriteNode spriteNodeWithImageNamed:@""];
-                _currentLanguageImage.position = CGPointMake(0,0);
-                _currentLanguageImage.size = CGSizeMake(_sound.frame.size.width, _sound.frame.size.height);
-                _currentLanguageImage.zPosition = 1;
-                [self defineLanguage:_currentLanguage];
-                
-                
-                if (_soundOn == YES)
-                {
-                    _sound = [SKSpriteNode spriteNodeWithImageNamed:@"soundOn"];
+                if (!_isOpen){
+                    [self backgroundButtons];
+                    
+                    
+                    _tituloLabelButton.text = @"Configurações";
+                    
+                    _currentLanguageImage = [SKSpriteNode spriteNodeWithImageNamed:@""];
+                    _currentLanguageImage.position = CGPointMake(0,0);
+                    _currentLanguageImage.size = CGSizeMake(_sound.frame.size.width, _sound.frame.size.height);
+                    _currentLanguageImage.zPosition = 1;
+                    [self defineLanguage:_currentLanguage];
+                    
+                    
+                    if (_soundOn == YES)
+                    {
+                        _sound = [SKSpriteNode spriteNodeWithImageNamed:@"soundOn"];
+                    }
+                    else if( _soundOn == NO)
+                    {
+                        _sound = [SKSpriteNode spriteNodeWithImageNamed:@"soundOff"];
+                    }
+                    
+                    _sound.position = CGPointMake(0 + _backgroundMenus.frame.size.width * 0.25 ,_backgroundMenus.frame.size.height * 0.15);
+                    _sound.name = @"sound";
+                    _sound.zPosition = 1;
+                    [_sound setScale:0.2];
+                    
+                    _currentLanguageImage = [SKSpriteNode spriteNodeWithImageNamed:@""];
+                    _currentLanguageImage.position = CGPointMake(0 + _backgroundMenus.frame.size.width * 0.25 , 0 - _backgroundMenus.frame.size.height * 0.15);
+                    _currentLanguageImage.size = CGSizeMake(_sound.frame.size.width, _sound.frame.size.height);
+                    _currentLanguageImage.zPosition = 1;
+                    _currentLanguageImage.name = @"currentLanguageImage";
+                    [self defineLanguage:_currentLanguage];
+                    
+                    
+                    [_backgroundMenus addChild:_sound];
+                    [_backgroundMenus addChild:_currentLanguageImage];
+                    
+                    _isOpen = YES;
                 }
-                else if( _soundOn == NO)
-                {
-                    _sound = [SKSpriteNode spriteNodeWithImageNamed:@"soundOff"];
+                
+            }else if([n.name isEqualToString:@"encyclopediaButton"]){
+                
+                if (!_isOpen){
+                    [self backgroundButtons];
+                    _tituloLabelButton.text = @"Enciclopédia";
+                    
+                    _isOpen = YES;
                 }
                 
-                _sound.position = CGPointMake(0 + _backgroundMenus.frame.size.width * 0.25 ,_backgroundMenus.frame.size.height * 0.15);
-                _sound.name = @"sound";
-                _sound.zPosition = 1;
-                [_sound setScale:0.2];
                 
-                _currentLanguageImage = [SKSpriteNode spriteNodeWithImageNamed:@""];
-                _currentLanguageImage.position = CGPointMake(0 + _backgroundMenus.frame.size.width * 0.25 , 0 - _backgroundMenus.frame.size.height * 0.15);
-                _currentLanguageImage.size = CGSizeMake(_sound.frame.size.width, _sound.frame.size.height);
-                _currentLanguageImage.zPosition = 1;
-                _currentLanguageImage.name = @"currentLanguageImage";
-                [self defineLanguage:_currentLanguage];
+            }else if([n.name isEqualToString:@"changeStoneButton"] || [n.name isEqualToString:@"circle3"] ){
                 
+                if (!_isOpen){
+                    [self backgroundButtons];
+                    _tituloLabelButton.text = @"Pedras";
+                    
+                    _isOpen = YES;
+                }
                 
-                [_backgroundMenus addChild:_sound];
-                [_backgroundMenus addChild:_currentLanguageImage];
-            }
-            
-            else if([n.name isEqualToString:@"encyclopediaButton"] || [n.name isEqualToString:@"circle2"] )
-            {
-                
-                [self backgroundButtons];
-                _tituloLabelButton.text = @"Enciclopédia";
-                
-                
-            }
-            
-            else if([n.name isEqualToString:@"changeStoneButton"] || [n.name isEqualToString:@"circle3"] )
-            {
-                [self backgroundButtons];
-                _tituloLabelButton.text = @"Pedras";
-                
-            }
-            
-            
-            if ([n.name isEqualToString:@"x"])
-            {
+            }else if ([n.name isEqualToString:@"x"]){
                 [_backgroundMenus removeFromParent];
                 [self unpauseGame];
-            }
-            
-            else if ([n.name isEqualToString:@"sound"])
-            {
-                if (_soundOn == YES)
-                {
+                
+                _isOpen = NO;
+                
+            }else if ([n.name isEqualToString:@"sound"]){
+                if (_soundOn == YES){
                     _soundOn = NO;
                     [_sound setTexture:[SKTexture textureWithImageNamed:@"soundOff"]];
                     [self.musicPlayer stop];
                     [self.soundPlayer stop];
                 }
-                else if( _soundOn == NO)
-                {
+                else if( _soundOn == NO){
                     _soundOn =YES;
                     [_sound setTexture:[SKTexture textureWithImageNamed:@"soundOn"]];
                     [self.musicPlayer play];
                     [self.soundPlayer play];
                 }
-            }
-            
-            else if ( [n.name isEqualToString:@"currentLanguageImage"])
-            {
-                if ([_currentLanguage isEqualToString:@"Portugues"])
-                {
+            }else if ( [n.name isEqualToString:@"currentLanguageImage"]){
+                
+                if ([_currentLanguage isEqualToString:@"Portugues"]){
                     _currentLanguage = @"Ingles";
                     [self defineLanguage: _currentLanguage];
-                }
-                else if ([_currentLanguage isEqualToString:@"Ingles"])
-                {
+                }else if ([_currentLanguage isEqualToString:@"Ingles"]){
                     _currentLanguage = @"Portugues";
                     [self defineLanguage: _currentLanguage];
                 }
@@ -634,31 +698,28 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 }
 
 //Define Language
--(void)defineLanguage:(NSString *) currentLanguage
-{
-    if ([currentLanguage isEqualToString:@"Portugues"])
-    {
+-(void)defineLanguage:(NSString *) currentLanguage{
+
+    if ([currentLanguage isEqualToString:@"Portugues"]){
         [_currentLanguageImage setTexture: [SKTexture textureWithImageNamed:@"brasilImage"]];
-    }
-    else if ( [ currentLanguage isEqualToString:@"Ingles"])
-    {
+    }else if ( [ currentLanguage isEqualToString:@"Ingles"]){
         [_currentLanguageImage setTexture: [SKTexture textureWithImageNamed:@"estadosunidosImage"]];
     }
 }
 
 //Define BackgroundButtons
--(void)backgroundButtons
-{
+-(void)backgroundButtons{
+    
     _backgroundMenus = [SKSpriteNode spriteNodeWithImageNamed:@"backgroundConfigButton"];
     _backgroundMenus.position = CGPointMake(0, 0);
     _backgroundMenus.size = CGSizeMake(300, 250);
-    _backgroundMenus.zPosition = 1;
+    _backgroundMenus.zPosition = 2;
     
     _xMenu =[SKSpriteNode spriteNodeWithImageNamed:@"xButton"];
     _xMenu.position = CGPointMake(_backgroundMenus.frame.size.width * 0.5, _backgroundMenus.frame.size.height * 0.5);
-    _xMenu.size = CGSizeMake(25,25);
+    _xMenu.size = CGSizeMake(50,50);
     _xMenu.name = @"x";
-    _xMenu.zPosition = 1;
+    _xMenu.zPosition = 2;
     
     _tituloLabelButton = [SKLabelNode labelNodeWithFontNamed:_fontName];
     _tituloLabelButton.position = CGPointMake(0, 90);
@@ -674,23 +735,22 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 }
 
 //Função para pausar o game
--(void)pauseGame
-{
+-(void)pauseGame{
     _isGamePaused = YES; //Set pause flag to true
+    [_timer invalidate];
     self.paused = YES; //Pause scene and physics simulation
 }
 
 //função para despausar o game
--(void)unpauseGame
-{
+-(void)unpauseGame{
     _isGamePaused = NO; //Set pause flag to false
+    [self startTimer];
     self.paused = NO; //Resume scene and physics simulation
 }
 
--(void)henryDead
-{
+-(void)henryDead{
     _isDead = YES;
-
+    
     self.numberOfLives--;
     
     
@@ -726,10 +786,32 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         gameOverLabel.fontSize = 40;
         gameOverLabel.text = @"Game Over";
         [_HUD addChild:gameOverLabel];
-        [_henry removeActionForKey:@"walkLeft"];
-        [_henry removeActionForKey:@"walkRight"];
-        [_henry removeActionForKey:@"walkAnimation"];
-        [_henry removeActionForKey:@"idleAnimation"];
+//        [_henry removeActionForKey:@"walkLeft"];
+//        [_henry removeActionForKey:@"walkRight"];
+//        [_henry removeActionForKey:@"walkAnimation"];
+//        [_henry removeActionForKey:@"idleAnimation"];
+        
+        double delayInSeconds = 3.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            
+            [self removeAllChildren];
+            [self removeAllActions];
+            [self.musicPlayer stop];
+            [self.soundPlayer stop];
+            
+            FasesMundo1 *scene = [[FasesMundo1 alloc] initWithSize:self.view.bounds.size];
+            
+            scene.anchorPoint = CGPointMake(0.5, 0.5);
+            scene.scaleMode = SKSceneScaleModeAspectFill;
+            
+            // Present the scene.
+            SKTransition *reveal = [SKTransition fadeWithDuration:3];
+            [self.view presentScene:scene transition: reveal];
+        });
+        
+        
+        
         
     }
 }
@@ -757,22 +839,23 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     }
     else if(firstBody.categoryBitMask == PLAYER_CATEGORY && secondBody.categoryBitMask == ENEMY_CATEGORY){
         
-        if (_flipped) {
-            [_henry deathAnimationLeft];
+        if (!_isDead){
+            if (_flipped) {
+                [_henry deathAnimationLeft];
+            }
+            else{
+                [_henry deathAnimation];
+            }
+            [self henryDead];
         }
-        else{
-            [_henry deathAnimation];
-        }
-        [self henryDead];
         
     }else if(firstBody.categoryBitMask == ENEMY_CATEGORY && secondBody.categoryBitMask == KILL_ENEMY_CATEGORY){
-
+        
         if(_lanternLit){
-            
-            
-            if ([firstBody.node.name isEqualToString:@"bat"])
-            {
-                [_bat death];
+        
+            if ([firstBody.node.name isEqualToString:@"bat"]){
+                Bat *bat = (Bat*) firstBody.node;
+                [bat death];
                 
             }
             else if([firstBody.node.name isEqualToString:@"ghost"]){
@@ -797,8 +880,8 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 }
 
 
--(void)didSimulatePhysics
-{
+-(void)didSimulatePhysics{
+    
     if(!_isDead){
         [self centerOnNode:_henry];
     }
@@ -816,13 +899,19 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         }
     }];
     
+    [_world enumerateChildNodesWithName:@"bat" usingBlock:^(SKNode *node, BOOL *stop) {
+        if (node.position.x - _henry.position.x < 400 ) {
+            Bat *bat = (Bat*) node;
+            [bat attackPlayer:_henry];
+        }
+    }];
     
-    if (_bat.position.x - _henry.position.x < 400 ) {
-        [_bat attackPlayer:_henry];
-    }
-    if (_ghost.position.x - _henry.position.x < 300) {
-        [_ghost attackPlayer:_henry];
-    }
+    [_world enumerateChildNodesWithName:@"ghost" usingBlock:^(SKNode *node, BOOL *stop) {
+        if (node.position.x - _henry.position.x < 300 ) {
+            Ghost *ghost = (Ghost*) node;
+            [ghost attackPlayer:_henry];
+        }
+    }];
     
     [_henry enumerateChildNodesWithName:@"killerLine" usingBlock:^(SKNode *node, BOOL *stop) {
         node.position = CGPointMake(node.position.x,-20);
@@ -830,8 +919,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     
     
 }
--(void)centerOnNode:(SKNode *)node
-{
+-(void)centerOnNode:(SKNode *)node{
     
     CGPoint positionInScene = [self convertPoint:node.position fromNode:node.parent];
     
@@ -929,8 +1017,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     /* Called before each frame is rendered */
 }
 
--(void)generateBackgroundIn:(SKNode *)backgroundLayer withImage:(NSString *)backgroundImageName repeat:(int)times
-{
+-(void)generateBackgroundIn:(SKNode *)backgroundLayer withImage:(NSString *)backgroundImageName repeat:(int)times{
     
     CGFloat currentBackgroundX = 0;
     
@@ -945,6 +1032,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     }
     
 }
+
 -(void)endStage{
     
     FasesMundo1 *scene = [[FasesMundo1 alloc] initWithSize:self.view.bounds.size];

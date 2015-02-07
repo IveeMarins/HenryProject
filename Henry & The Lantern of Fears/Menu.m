@@ -27,13 +27,13 @@
         
         _lanternInicial = [SKSpriteNode spriteNodeWithImageNamed:@"lanternInicial"];
         _lanternInicial.position = CGPointMake(background.frame.size.width * 0.5, background.frame.size.height * 0.5 - 35);
-        [_lanternInicial setScale: 0.7];
+        [_lanternInicial setScale: 0.6];
         [self addChild: _lanternInicial];
         
         SKSpriteNode *buttonStart = [SKSpriteNode spriteNodeWithImageNamed:@"buttonStart"];
-        buttonStart.position = CGPointMake(_lanternInicial.position.x,_lanternInicial.position.y - 110);
+        buttonStart.position = CGPointMake(_lanternInicial.position.x,_lanternInicial.position.y - 90);
         buttonStart.name = @"start";
-        [buttonStart setScale:0.8];
+        [buttonStart setScale:0.5];
         [self addChild: buttonStart];
         [self animateWithPulse: _lanternInicial];
         
