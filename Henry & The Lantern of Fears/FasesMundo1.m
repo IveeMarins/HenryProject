@@ -24,15 +24,14 @@
         
         self.backgroundColor = [UIColor whiteColor];
         
-        _fasesBackground = [SKSpriteNode spriteNodeWithImageNamed:(@"WorldSelection")];
+        _fasesBackground = [SKSpriteNode spriteNodeWithImageNamed:(@"fasesScene")];
         _fasesBackground.position = CGPointMake(0,0);
         _fasesBackground.size = CGSizeMake(self.scene.frame.size.width , self.scene.frame.size.height) ;
         [self addChild: _fasesBackground];
         
-        _fase1 = [SKSpriteNode spriteNodeWithImageNamed:@"cristalVerde"];
-        _fase1.position = CGPointMake(-self.frame.size.width * 0.5 + _fase1.frame.size.width * 0.35,
-                                      self.frame.size.height * 0.5 - _fase1.frame.size.height * 0.3);
-        _fase1.size = CGSizeMake(80, 80);
+        _fase1 = [SKSpriteNode spriteNodeWithImageNamed:@"fase1"];
+        _fase1.position = CGPointMake(-200,60);
+        _fase1.size = CGSizeMake(65, 30);
         _fase1.name = @"fase1";
         
         [self addChild: _fase1];
