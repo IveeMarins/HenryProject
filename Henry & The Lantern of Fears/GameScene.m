@@ -624,13 +624,17 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
                         _sound = [SKSpriteNode spriteNodeWithImageNamed:@"soundOff"];
                     }
                     
-                    _sound.position = CGPointMake(0 + _backgroundMenus.frame.size.width * 0.25 ,_backgroundMenus.frame.size.height * 0.15);
+                    //_sound.position = CGPointMake(0 + _backgroundMenus.frame.size.width * 0.25 ,_backgroundMenus.frame.size.height * 0.15);
+                    
+                    _sound.position = CGPointMake(0,_backgroundMenus.frame.size.height * 0.15);
                     _sound.name = @"sound";
                     _sound.zPosition = 1;
                     [_sound setScale:0.2];
                     
                     _currentLanguageImage = [SKSpriteNode spriteNodeWithImageNamed:@""];
-                    _currentLanguageImage.position = CGPointMake(0 + _backgroundMenus.frame.size.width * 0.25 , 0 - _backgroundMenus.frame.size.height * 0.15);
+//                    _currentLanguageImage.position = CGPointMake(0 + _backgroundMenus.frame.size.width * 0.25 , 0 - _backgroundMenus.frame.size.height * 0.15);
+                    
+                    _currentLanguageImage.position = CGPointMake(0, 0 - _backgroundMenus.frame.size.height * 0.15);
                     _currentLanguageImage.size = CGSizeMake(_sound.frame.size.width, _sound.frame.size.height);
                     _currentLanguageImage.zPosition = 1;
                     _currentLanguageImage.name = @"currentLanguageImage";
