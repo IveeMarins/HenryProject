@@ -38,14 +38,6 @@
         [self addChild: _world1];
         [self animateWithPulse: _world1];
         
-//        _configuracao = [SKSpriteNode spriteNodeWithImageNamed:@"gear"];
-//        _configuracao.size = CGSizeMake(30, 30);
-//        _configuracao.position = CGPointMake( self.scene.frame.size.width *0.5 +300, self.scene.frame.size.height * 0.5 + 170);
-//        _configuracao.zPosition=1;
-//
-//        [self addChild:_configuracao];
-        
-        
     }
     return self;
 }

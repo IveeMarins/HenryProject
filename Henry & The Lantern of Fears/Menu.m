@@ -49,15 +49,19 @@
         if([n.name isEqualToString:@"start"])
         {
 
+            NSURL *url1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/startMagic.mp3", [[NSBundle mainBundle] resourcePath]]];
+            NSError *error;
+            
+            self.soundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url1 error:&error];
+            self.soundPlayer.numberOfLoops = 0;
+            [self.soundPlayer play];
+            
+            
             NSString *lanternLightEmmiterPath = [[NSBundle mainBundle] pathForResource:@"LanternMagicFirstScreen" ofType:@"sks"];
             SKEmitterNode *lanternLightEmmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:lanternLightEmmiterPath];
             
             lanternLightEmmitter.position = CGPointMake(self.frame.size.width * 0.5, self.frame.size.height * 0.5 - 50);
             lanternLightEmmitter.name = @"lanternLightParticle";
-            //lanternLightEmmitter.particleScale = ;
-            //lanternLightEmmitter.particleLifetime = 100000;
-           
-            //lanternLightEmmitter.particleSize = CGSizeMake(self.frame.size.width, self.frame.size.height);
             
             SKLightNode *lanternLight = [[SKLightNode alloc] init];
             lanternLight.name = @"lanternLight";
@@ -69,7 +73,7 @@
             
             NSLog(@"mundou pro mundo");
             
-            double delayInSeconds = 3.0;
+            double delayInSeconds = 3.5;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                 Mundos *scene = [[Mundos alloc] initWithSize:self.view.bounds.size];

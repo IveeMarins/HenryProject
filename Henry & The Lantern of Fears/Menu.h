@@ -7,7 +7,10 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface Menu : SKScene
+
+@property (strong, nonatomic) AVAudioPlayer *soundPlayer;
 
 @end

@@ -7,6 +7,7 @@
 // 
 
 #import <SpriteKit/SpriteKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface Henry : SKSpriteNode
 
@@ -21,4 +22,11 @@
 -(void)pickLantern;
 -(void)deathAnimation;
 -(void)deathAnimationLeft;
+@property (strong, nonatomic) AVAudioPlayer *soundPlayer;
 @end
+
+
+
+
+
+

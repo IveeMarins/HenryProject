@@ -229,6 +229,12 @@
 }
 -(void)deathAnimation{
     
+    NSURL *url1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/morteHenry.mp3", [[NSBundle mainBundle] resourcePath]]];
+    NSError *error;
+    
+    self.soundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url1 error:&error];
+    self.soundPlayer.numberOfLoops = 0;
+    
     NSMutableArray *deathFrames = [NSMutableArray array];
     SKTextureAtlas *deathHenryAtlas = [SKTextureAtlas atlasNamed:@"henryDeath"];
     for (int i = 1; i <= deathHenryAtlas.textureNames.count; i++) {
@@ -239,11 +245,19 @@
     
     _deathAnimationFrames = deathFrames;
     
+    [self.soundPlayer play];
+    
     [self runAction:[SKAction sequence:@[ [SKAction animateWithTextures:_deathAnimationFrames timePerFrame:0.2],[SKAction waitForDuration:2.2],[SKAction removeFromParent]]]];
     
     
 }
 -(void)deathAnimationLeft{
+    
+    NSURL *url1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/morteHenry.mp3", [[NSBundle mainBundle] resourcePath]]];
+    NSError *error;
+    
+    self.soundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url1 error:&error];
+    self.soundPlayer.numberOfLoops = 0;
     
     NSMutableArray *deathFrames = [NSMutableArray array];
     SKTextureAtlas *deathHenryAtlas = [SKTextureAtlas atlasNamed:@"henryDeathLeft"];
@@ -254,6 +268,8 @@
     }
     
     _deathAnimationFrames = deathFrames;
+    
+    [self.soundPlayer play];
     
     [self runAction:[SKAction sequence:@[ [SKAction animateWithTextures:_deathAnimationFrames timePerFrame:0.1],[SKAction waitForDuration:4],[SKAction removeFromParent]]]];
 }

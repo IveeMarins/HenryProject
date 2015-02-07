@@ -103,16 +103,24 @@
     [self removeActionForKey:@"flyAnimation"];
     [self setTexture:[SKTexture textureWithImageNamed:@"batDead"]];
     
+    NSURL *url1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/MorteBat.mp3", [[NSBundle mainBundle] resourcePath]]];
+    NSError *error;
+    
+    self.soundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url1 error:&error];
+    self.soundPlayer.numberOfLoops = 0;
+    [self.soundPlayer play];
+    
+    
     NSString *deathSmokePath = [[NSBundle mainBundle] pathForResource:@"DyingEnemy" ofType:@"sks"];
     SKEmitterNode *deathSmoke = [NSKeyedUnarchiver unarchiveObjectWithFile:deathSmokePath];
     
     [self addChild:deathSmoke];
     
-    SKAction *removeSmoke = [SKAction sequence:@[[SKAction waitForDuration:1.5], [SKAction removeFromParent]]];
+    SKAction *removeSmoke = [SKAction sequence:@[[SKAction waitForDuration:2.0], [SKAction removeFromParent]]];
     
     [deathSmoke runAction:removeSmoke];
     
-    SKAction *removeBat = [SKAction sequence:@[[SKAction waitForDuration:1.5], [SKAction removeFromParent]]];
+    SKAction *removeBat = [SKAction sequence:@[[SKAction waitForDuration:2.0], [SKAction removeFromParent]]];
     
     [self runAction:removeBat];
     

@@ -8,6 +8,7 @@
 
 #import <SpriteKit/SpriteKit.h>
 #import "Henry.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface Bat : SKSpriteNode
 
@@ -15,4 +16,5 @@
 -(void)attackPlayer:(Henry *)henry;
 -(void)animate;
 -(void)death;
+@property (strong, nonatomic) AVAudioPlayer *soundPlayer;
 @end
