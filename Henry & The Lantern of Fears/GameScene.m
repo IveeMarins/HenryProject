@@ -1000,9 +1000,10 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             SKSpriteNode *ground = [SKSpriteNode spriteNodeWithImageNamed:@"spikes"];
             ground.size = CGSizeMake(self.frame.size.width * 0.25 , 80);
             ground.position = CGPointMake(_currentGroundX - self.frame.size.width * 0.5 + ground.frame.size.width * 0.5, -self.frame.size.height * 0.5 + ground.frame.size.height * 0.5);
-            ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:ground.size];
+            ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(ground.size.width - 90, ground.size.height)];
             ground.physicsBody.dynamic = NO;
             ground.physicsBody.categoryBitMask = ENEMY_CATEGORY;
+            ground.physicsBody.collisionBitMask = PLAYER_CATEGORY;
             [_world addChild:ground];
             _currentGroundX += ground.frame.size.width;
             
