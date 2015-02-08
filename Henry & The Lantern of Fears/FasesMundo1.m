@@ -8,6 +8,7 @@
 
 #import "FasesMundo1.h"
 #import "GameScene.h"
+#import "Henry.h"
 
 @implementation FasesMundo1
 {
@@ -42,6 +43,14 @@
         
         [self addChild: _fase1];
         [self animateWithPulse: _fase1];
+        
+        Henry *henry = [Henry henry];
+        henry.physicsBody = nil;
+        henry.size = CGSizeMake(40, 50);
+        henry.position = CGPointMake(_fase1.position.x + 5, _fase1.position.y + henry.size.height * 0.5);
+        [henry walkRightAnimation];
+        [self addChild:henry];
+        
         
         _circle = [SKShapeNode shapeNodeWithCircleOfRadius:12.0];
         _circle.position = CGPointMake( self.scene.frame.size.width *0.5 +300, self.scene.frame.size.height * 0.5 + 170);

@@ -22,6 +22,7 @@
 -(void)pickLantern;
 -(void)deathAnimation;
 -(void)deathAnimationLeft;
+-(void)walkRightAnimation;
 @property (strong, nonatomic) AVAudioPlayer *soundPlayer;
 @end
 

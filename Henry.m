@@ -59,18 +59,7 @@
     
     SKAction *incrementRight = [SKAction repeatActionForever:[SKAction moveByX:40 y:0 duration:0.3]];
     
-    NSMutableArray *walkFrames = [NSMutableArray array];
-    SKTextureAtlas *walkHenryAtlas = [SKTextureAtlas atlasNamed:@"run"];
-    for (int i = 1; i <= walkHenryAtlas.textureNames.count; i++) {
-        NSString *textureName = [NSString stringWithFormat:@"run%d", i];
-        SKTexture *temp = [walkHenryAtlas textureNamed:textureName];
-        [walkFrames addObject:temp];
-    }
-    
-    _walkAnimationFrames = walkFrames;
-    
-    [self runAction: [SKAction repeatActionForever:[SKAction animateWithTextures:_walkAnimationFrames
-                                                                    timePerFrame:0.2]]withKey:@"walkAnimation"];
+    [self walkRightAnimation];
     
     [self runAction:incrementRight withKey:@"walkRight"];
     
@@ -94,6 +83,22 @@
     
     
 }
+-(void)walkRightAnimation
+{
+    NSMutableArray *walkFrames = [NSMutableArray array];
+    SKTextureAtlas *walkHenryAtlas = [SKTextureAtlas atlasNamed:@"run"];
+    for (int i = 1; i <= walkHenryAtlas.textureNames.count; i++) {
+        NSString *textureName = [NSString stringWithFormat:@"run%d", i];
+        SKTexture *temp = [walkHenryAtlas textureNamed:textureName];
+        [walkFrames addObject:temp];
+    }
+    
+    _walkAnimationFrames = walkFrames;
+    
+    [self runAction: [SKAction repeatActionForever:[SKAction animateWithTextures:_walkAnimationFrames
+                                                                    timePerFrame:0.2]]withKey:@"walkAnimation"];
+}
+
 -(void)walkLeft
 {
     
