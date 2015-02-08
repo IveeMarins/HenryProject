@@ -813,29 +813,29 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 //        [_henry removeActionForKey:@"walkAnimation"];
 //        [_henry removeActionForKey:@"idleAnimation"];
         
-        double delayInSeconds = 3.0;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            
-            [self removeAllChildren];
-            [self removeAllActions];
-            [self.musicPlayer stop];
-            [self.soundPlayer stop];
-            
-            FasesMundo1 *scene = [[FasesMundo1 alloc] initWithSize:self.view.bounds.size];
-            
-            scene.anchorPoint = CGPointMake(0.5, 0.5);
-            scene.scaleMode = SKSceneScaleModeAspectFill;
-            
-            // Present the scene.
-            SKTransition *reveal = [SKTransition fadeWithDuration:3];
-            [self.view presentScene:scene transition: reveal];
-        });
-        
+        [self performSelector:@selector(returnToStageSelection) withObject:self afterDelay:3];
         
         
         
     }
+}
+-(void)returnToStageSelection
+{
+    [self removeAllChildren];
+    [self removeAllActions];
+    [self.musicPlayer stop];
+    [self.soundPlayer stop];
+    
+    FasesMundo1 *scene = [[FasesMundo1 alloc] initWithSize:self.view.bounds.size];
+    
+    scene.anchorPoint = CGPointMake(0.5, 0.5);
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+    
+    // Present the scene.
+    SKTransition *reveal = [SKTransition fadeWithDuration:3];
+    [self.view presentScene:scene transition: reveal];
+    
+    
 }
 
 

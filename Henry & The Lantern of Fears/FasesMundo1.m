@@ -48,6 +48,7 @@
         henry.physicsBody = nil;
         henry.size = CGSizeMake(40, 50);
         henry.position = CGPointMake(_fase1.position.x + 5, _fase1.position.y + henry.size.height * 0.5);
+        henry.zPosition = 1;
         [henry walkRightAnimation];
         [self addChild:henry];
         
