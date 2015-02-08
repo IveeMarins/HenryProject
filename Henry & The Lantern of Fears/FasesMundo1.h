@@ -7,7 +7,8 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface FasesMundo1 : SKScene
-
+@property (strong, nonatomic) AVAudioPlayer *musicPlayer;
 @end

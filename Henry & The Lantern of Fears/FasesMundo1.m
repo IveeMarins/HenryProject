@@ -21,6 +21,12 @@
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         
+        NSURL *url1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/worldStageSelector.mp3", [[NSBundle mainBundle] resourcePath]]];
+        NSError *error;
+        
+        self.musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url1 error:&error];
+        self.musicPlayer.numberOfLoops = -1;
+        [self.musicPlayer play];
         
         self.backgroundColor = [UIColor whiteColor];
         
@@ -61,6 +67,8 @@
     for (UITouch *touch in touches) {
         SKNode *n = [self nodeAtPoint:[touch locationInNode:self]];
         if([n.name isEqualToString:@"fase1"]){
+            
+            [self.musicPlayer stop];
             
             NSString *fontName = [NSString stringWithFormat:@"KGLuckoftheIrish"];
             _carregando = [SKLabelNode labelNodeWithFontNamed:fontName];

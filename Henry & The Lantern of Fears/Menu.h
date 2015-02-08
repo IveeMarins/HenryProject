@@ -12,5 +12,6 @@
 @interface Menu : SKScene
 
 @property (strong, nonatomic) AVAudioPlayer *soundPlayer;
+@property (strong, nonatomic) AVAudioPlayer *musicPlayer;
 
 @end

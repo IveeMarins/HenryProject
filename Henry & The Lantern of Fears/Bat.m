@@ -37,10 +37,15 @@
         _attacking = YES;
         
         float currentX = self.position.x;
-        float currentY = self.position.y;
         float afterSweepX = 0;
         float afterSweepY = 0;
         
+        NSURL *url1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/BatSound.mp3", [[NSBundle mainBundle] resourcePath]]];
+        NSError *error;
+        
+        self.batSoundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url1 error:&error];
+        self.batSoundPlayer.numberOfLoops = 0;
+        [self.batSoundPlayer play];
         
         //Group of actions to make the bat do a sweep going left and down at the same time
         SKAction *leftDownSweep = [SKAction group:@[[SKAction moveToX:self.position.x - 200 duration:2],

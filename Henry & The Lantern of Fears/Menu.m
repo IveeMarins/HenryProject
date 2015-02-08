@@ -18,6 +18,14 @@
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size])
     {
+        //Adding Music
+        NSURL *url1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/startScreenMusic.mp3", [[NSBundle mainBundle] resourcePath]]];
+        NSError *error;
+        
+        self.musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url1 error:&error];
+        self.musicPlayer.numberOfLoops = -1;
+        [self.musicPlayer play];
+        
         //Adicionando: Background, Start e Lanterna
         SKSpriteNode *background;
         background = [SKSpriteNode spriteNodeWithImageNamed: @"telaInicial"];
@@ -49,6 +57,8 @@
         if([n.name isEqualToString:@"start"])
         {
 
+            [self.musicPlayer stop];
+            
             NSURL *url1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/startMagic.mp3", [[NSBundle mainBundle] resourcePath]]];
             NSError *error;
             

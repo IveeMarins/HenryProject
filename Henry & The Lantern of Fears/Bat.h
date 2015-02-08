@@ -17,4 +17,5 @@
 -(void)animate;
 -(void)death;
 @property (strong, nonatomic) AVAudioPlayer *soundPlayer;
+@property (strong, nonatomic) AVAudioPlayer *batSoundPlayer;
 @end

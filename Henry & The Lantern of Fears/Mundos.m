@@ -22,6 +22,13 @@
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         
+        //Adding Music
+        NSURL *url1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/worldStageSelector.mp3", [[NSBundle mainBundle] resourcePath]]];
+        NSError *error;
+        
+        self.musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url1 error:&error];
+        self.musicPlayer.numberOfLoops = -1;
+        [self.musicPlayer play];
         
         self.backgroundColor = [UIColor whiteColor];
         
