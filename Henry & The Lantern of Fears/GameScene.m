@@ -22,6 +22,9 @@
 @property BOOL isGamePaused;
 @property NSMutableArray *batPositionArray;
 @property NSMutableArray *ghostPositionArray;
+@property SKLabelNode *somOptionConfigButton;
+@property SKLabelNode *languageOptionConfigButton;
+
 
 
 @end
@@ -608,12 +611,6 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
                     
                     _tituloLabelButton.text = @"Configurações";
                     
-                    _currentLanguageImage = [SKSpriteNode spriteNodeWithImageNamed:@""];
-                    _currentLanguageImage.position = CGPointMake(0,0);
-                    _currentLanguageImage.size = CGSizeMake(_sound.frame.size.width, _sound.frame.size.height);
-                    _currentLanguageImage.zPosition = 1;
-                    [self defineLanguage:_currentLanguage];
-                    
                     
                     if (_soundOn == YES)
                     {
@@ -624,24 +621,38 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
                         _sound = [SKSpriteNode spriteNodeWithImageNamed:@"soundOff"];
                     }
                     
-                    //_sound.position = CGPointMake(0 + _backgroundMenus.frame.size.width * 0.25 ,_backgroundMenus.frame.size.height * 0.15);
-                    
                     _sound.position = CGPointMake(0,_backgroundMenus.frame.size.height * 0.15);
                     _sound.name = @"sound";
                     _sound.zPosition = 1;
                     [_sound setScale:0.2];
+                    [_backgroundMenus addChild:_sound];
                     
                     _currentLanguageImage = [SKSpriteNode spriteNodeWithImageNamed:@""];
-//                    _currentLanguageImage.position = CGPointMake(0 + _backgroundMenus.frame.size.width * 0.25 , 0 - _backgroundMenus.frame.size.height * 0.15);
-                    
-                    _currentLanguageImage.position = CGPointMake(0, 0 - _backgroundMenus.frame.size.height * 0.15);
+                    _currentLanguageImage.position = CGPointMake(0, 0 - _backgroundMenus.frame.size.height * 0.15 - 10);
                     _currentLanguageImage.size = CGSizeMake(_sound.frame.size.width, _sound.frame.size.height);
                     _currentLanguageImage.zPosition = 1;
                     _currentLanguageImage.name = @"currentLanguageImage";
                     [self defineLanguage:_currentLanguage];
                     
+                    _somOptionConfigButton = [SKLabelNode labelNodeWithFontNamed:_fontName];
+                    _somOptionConfigButton.text = @"Som:";
+                    _somOptionConfigButton.fontColor = [UIColor colorWithRed:36.0f/255.0f green:64.0f/255.0f blue:96.0f/255.0f alpha:1];
+                    _somOptionConfigButton.fontSize = 20;
+                    _somOptionConfigButton.zPosition = 2;
+                    _somOptionConfigButton.name = @"somOption";
+                    _somOptionConfigButton.position = CGPointMake(_sound.position.x, _sound.position.y + 20);
                     
-                    [_backgroundMenus addChild:_sound];
+                    [_backgroundMenus addChild:_somOptionConfigButton];
+                    
+                    _languageOptionConfigButton =[SKLabelNode labelNodeWithFontNamed:_fontName];
+                    _languageOptionConfigButton.text = @"Língua:";
+                    _languageOptionConfigButton.fontColor = [UIColor colorWithRed:36.0f/255.0f green:64.0f/255.0f blue:96.0f/255.0f alpha:1];
+                    _languageOptionConfigButton.fontSize = 20;
+                    _languageOptionConfigButton.zPosition = 2;
+                    _languageOptionConfigButton.name = @"linguaOption";
+                    _languageOptionConfigButton.position = CGPointMake(_currentLanguageImage.position.x, _currentLanguageImage.position.y + 20);
+                    [_backgroundMenus addChild:_languageOptionConfigButton];
+                    
                     [_backgroundMenus addChild:_currentLanguageImage];
                     
                     _isOpen = YES;
@@ -705,8 +716,15 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 -(void)defineLanguage:(NSString *) currentLanguage{
 
     if ([currentLanguage isEqualToString:@"Portugues"]){
+        [_tituloLabelButton setText:@"Configurações:"];
+        [_somOptionConfigButton setText:@"Som:"];
+        [_languageOptionConfigButton setText:@"Língua:"];
         [_currentLanguageImage setTexture: [SKTexture textureWithImageNamed:@"brasilImage"]];
-    }else if ( [ currentLanguage isEqualToString:@"Ingles"]){
+    }
+    else if ( [ currentLanguage isEqualToString:@"Ingles"]){
+        [_tituloLabelButton setText:@"Settings"];
+        [_somOptionConfigButton setText:@"Sound:"];
+        [_languageOptionConfigButton setText:@"Language:"];
         [_currentLanguageImage setTexture: [SKTexture textureWithImageNamed:@"estadosunidosImage"]];
     }
 }
