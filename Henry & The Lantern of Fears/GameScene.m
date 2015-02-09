@@ -124,7 +124,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 }
 -(void) setTutorial{
     _tutorial = [SKNode node];
-    _tutorial.zPosition = 1;
+    _tutorial.zPosition = 3;
     [self addChild:_tutorial];
 }
 
@@ -133,18 +133,18 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     
     [self pauseGame];
     
-    //[_HUD removeFromParent];
+    [_HUD removeFromParent];
     
     _tutorialBackground = [SKSpriteNode spriteNodeWithImageNamed:@"backgroundConfigButton"];
     _tutorialBackground.position = CGPointMake(0,0);
     _tutorialBackground.size = CGSizeMake(300, 250);
-    _tutorialBackground.zPosition = 1;
+    _tutorialBackground.zPosition = 3;
     
     _startLabel = [SKLabelNode labelNodeWithFontNamed:_fontName];
     _startLabel.position = CGPointMake(0, -_tutorialBackground.frame.size.height * 0.35);
-    _startLabel.fontSize = 25;
+    _startLabel.fontSize = 40;
     _startLabel.fontColor = [UIColor colorWithRed:36.0f/255.0f green:64.0f/255.0f blue:96.0f/255.0f alpha:1];
-    _startLabel.zPosition = 1;
+    _startLabel.zPosition = 3;
     _startLabel.name = @"startTutorial";
     _startLabel.text = @"Ok";
 
@@ -153,11 +153,11 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     _textTutorialLabel.fontSize = 25;
     _textTutorialLabel.fontColor = [UIColor colorWithRed:36.0f/255.0f green:64.0f/255.0f blue:96.0f/255.0f alpha:1];
     _textTutorialLabel.name = @"textTutorial";
-    _textTutorialLabel.zPosition = 1;
+    _textTutorialLabel.zPosition = 3;
     _textTutorialLabel.text = @"Olá, eu sou o Kopp!";
 
     SKSpriteNode *tutorialKopp = [SKSpriteNode spriteNodeWithImageNamed:@"kopp"];
-    tutorialKopp.zPosition = 1;
+    tutorialKopp.zPosition = 3;
     tutorialKopp.position = CGPointMake(-_tutorialBackground.frame.size.width * 0.5 -_tutorialBackground.frame.size.width *0.2, -_tutorialBackground.frame.size.height * 0.5 + _tutorialBackground.frame.size.height *0.1);
     tutorialKopp.size = CGSizeMake(tutorialKopp.size.width*0.9,tutorialKopp.size.height*0.9);
     
@@ -166,14 +166,14 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     tutorialLanternButton.name = @"lanternButton";
     tutorialLanternButton.position = CGPointMake(self.frame.size.width * 0.5 - 3 * tutorialLanternButton.frame.size.width * 0.5,
                                          -self.frame.size.height * 0.5 + tutorialLanternButton.frame.size.height * 0.5 + 10);
-    tutorialLanternButton.zPosition = 1;
+    tutorialLanternButton.zPosition = 3;
     
     [_tutorial addChild: _tutorialBackground];
     [_tutorialBackground addChild: _startLabel];
     [_tutorial addChild: _textTutorialLabel];
     [_tutorial addChild: tutorialKopp];
     [_tutorial addChild: tutorialLanternButton];
-    //[self animateWithPulse: tutorialLanternButton];
+    [self animateWithPulse: tutorialLanternButton];
     
 }
 
@@ -784,6 +784,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             else if ([n1.name isEqualToString:@"startTutorial"]) {
                 
                 [_tutorial removeFromParent];
+                [self setHUD];
                 [self unpauseGame];
                 
             }
