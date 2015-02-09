@@ -80,11 +80,8 @@
     BOOL _flipped; //If Henry's image is flipped to walk left
     BOOL _win;
     BOOL _isOpen;
-<<<<<<< HEAD
     int _contador;
-=======
     BOOL _tutorialOver;
->>>>>>> FETCH_HEAD
     
 }
 
