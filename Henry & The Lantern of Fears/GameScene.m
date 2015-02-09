@@ -39,6 +39,7 @@
     SKNode *_backgroundMountainLayer;
     SKNode *_backgroundSkyLayer;
     SKNode *_HUD;
+    SKNode *_tutorial;
     CGFloat _currentGroundX;
     
     int _time;
@@ -49,10 +50,13 @@
     SKSpriteNode *_backgroundMenus;
     SKSpriteNode *_xMenu;
     SKSpriteNode *_currentLanguageImage;
+    SKSpriteNode *_tutorialBackground;
+    SKLabelNode *_textTutorialLabel;
     
     SKLabelNode *_labelScore;
     SKLabelNode *_labelTimer;
     SKLabelNode *_tituloLabelButton;
+    SKLabelNode *_startLabel;
     
     NSMutableArray *_enemies;
     NSTimer *_timer;
@@ -74,6 +78,7 @@
     BOOL _flipped; //If Henry's image is flipped to walk left
     BOOL _win;
     BOOL _isOpen;
+    BOOL _tutorialOver;
     
 }
 
@@ -92,14 +97,17 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     self.numberOfLives = 3;
     self.score = 0;
     
+    _isGamePaused = NO;
+    _tutorialOver = NO;
     _time = 0;
     _font = [UIFont fontWithName:@"KGLuckoftheIrish.ttf" size:100.0f];
     _fontName = [NSString stringWithFormat:@"KGLuckoftheIrish"];
     _currentLanguage = [NSString stringWithFormat: @"Portugues"];
     
     _world = [SKNode node];
-    [self addChild:_world];
     
+    [self addChild:_world];
+    [self setTutorial];
     [self setBackgrounds];
     [self setGroundsAndWall];
     [self setHUD];
@@ -114,6 +122,70 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     
     
 }
+-(void) setTutorial{
+    _tutorial = [SKNode node];
+    _tutorial.zPosition = 1;
+    [self addChild:_tutorial];
+}
+
+-(void) tutorial{
+    _tutorialOver=YES;
+    
+    [self pauseGame];
+    
+    //[_HUD removeFromParent];
+    
+    _tutorialBackground = [SKSpriteNode spriteNodeWithImageNamed:@"backgroundConfigButton"];
+    _tutorialBackground.position = CGPointMake(0,0);
+    _tutorialBackground.size = CGSizeMake(300, 250);
+    _tutorialBackground.zPosition = 1;
+    
+    _startLabel = [SKLabelNode labelNodeWithFontNamed:_fontName];
+    _startLabel.position = CGPointMake(0, -_tutorialBackground.frame.size.height * 0.35);
+    _startLabel.fontSize = 25;
+    _startLabel.fontColor = [UIColor colorWithRed:36.0f/255.0f green:64.0f/255.0f blue:96.0f/255.0f alpha:1];
+    _startLabel.zPosition = 1;
+    _startLabel.name = @"startTutorial";
+    _startLabel.text = @"Ok";
+
+    _textTutorialLabel = [SKLabelNode labelNodeWithFontNamed:_fontName];
+    _textTutorialLabel.position = CGPointMake(0, _tutorialBackground.frame.size.height * 0.3);
+    _textTutorialLabel.fontSize = 25;
+    _textTutorialLabel.fontColor = [UIColor colorWithRed:36.0f/255.0f green:64.0f/255.0f blue:96.0f/255.0f alpha:1];
+    _textTutorialLabel.name = @"textTutorial";
+    _textTutorialLabel.zPosition = 1;
+    _textTutorialLabel.text = @"Olá, eu sou o Kopp!";
+
+    SKSpriteNode *tutorialKopp = [SKSpriteNode spriteNodeWithImageNamed:@"kopp"];
+    tutorialKopp.zPosition = 1;
+    tutorialKopp.position = CGPointMake(-_tutorialBackground.frame.size.width * 0.5 -_tutorialBackground.frame.size.width *0.2, -_tutorialBackground.frame.size.height * 0.5 + _tutorialBackground.frame.size.height *0.1);
+    tutorialKopp.size = CGSizeMake(tutorialKopp.size.width*0.9,tutorialKopp.size.height*0.9);
+    
+    SKSpriteNode *tutorialLanternButton = [SKSpriteNode spriteNodeWithImageNamed:@"lantern"];
+    tutorialLanternButton.size = CGSizeMake(60, 60);
+    tutorialLanternButton.name = @"lanternButton";
+    tutorialLanternButton.position = CGPointMake(self.frame.size.width * 0.5 - 3 * tutorialLanternButton.frame.size.width * 0.5,
+                                         -self.frame.size.height * 0.5 + tutorialLanternButton.frame.size.height * 0.5 + 10);
+    tutorialLanternButton.zPosition = 1;
+    
+    [_tutorial addChild: _tutorialBackground];
+    [_tutorialBackground addChild: _startLabel];
+    [_tutorial addChild: _textTutorialLabel];
+    [_tutorial addChild: tutorialKopp];
+    [_tutorial addChild: tutorialLanternButton];
+    //[self animateWithPulse: tutorialLanternButton];
+    
+}
+
+-(void)animateWithPulse:(SKNode *)node
+{
+    SKAction *disappear = [SKAction fadeAlphaTo:0.0 duration:1];
+    SKAction *appear = [SKAction fadeAlphaTo:1.0 duration:1];
+    SKAction *pulse = [SKAction sequence:@[disappear,appear]];
+    [node runAction:[SKAction repeatActionForever:pulse]];
+}
+
+
 
 -(void) inserVictoryLight{
     _victoryLight = [VictoryLight victoryLight];
@@ -522,6 +594,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
                 }
             }
             
+            
         }
     }
 }
@@ -549,6 +622,8 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         for (UITouch *touch in touches) {
             
             SKNode *n = [_HUD nodeAtPoint:[touch locationInNode:_HUD]];
+            
+            SKNode *n1 = [_tutorial nodeAtPoint:[touch locationInNode:_tutorial]];
             
             if ([n.name isEqualToString:@"rightButton"]) {
                 
@@ -705,9 +780,13 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
                     _currentLanguage = @"Portugues";
                     [self defineLanguage: _currentLanguage];
                 }
+            }
+            else if ([n1.name isEqualToString:@"startTutorial"]) {
+                
+                [_tutorial removeFromParent];
+                [self unpauseGame];
                 
             }
-            
         }
     }
 }
@@ -760,14 +839,16 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 -(void)pauseGame{
     _isGamePaused = YES; //Set pause flag to true
     [_timer invalidate];
-    self.paused = YES; //Pause scene and physics simulation
+    self.paused = YES;
+    _HUD.paused = YES;//Pause scene and physics simulation
 }
 
 //função para despausar o game
 -(void)unpauseGame{
     _isGamePaused = NO; //Set pause flag to false
     [self startTimer];
-    self.paused = NO; //Resume scene and physics simulation
+    self.paused = NO;
+    _HUD.paused = NO;//Resume scene and physics simulation
 }
 
 -(void)henryDead{
@@ -919,7 +1000,15 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             }
             [self henryDead];
         }
-    }];
+        if(_henry.position.x >300 && _tutorialOver==NO ){
+            
+            [self tutorial];
+            _tutorialOver = YES;
+        }
+        
+    }
+     
+     ];
     
     [_world enumerateChildNodesWithName:@"bat" usingBlock:^(SKNode *node, BOOL *stop) {
         if (node.position.x - _henry.position.x < 400 ) {
