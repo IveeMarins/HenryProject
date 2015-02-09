@@ -49,6 +49,7 @@
         henry.size = CGSizeMake(40, 50);
         henry.position = CGPointMake(_fase1.position.x + 5, _fase1.position.y + henry.size.height * 0.5);
         henry.zPosition = 1;
+        henry.name = @"henry";
         [henry walkRightAnimation];
         [self addChild:henry];
         
@@ -76,7 +77,7 @@
 {
     for (UITouch *touch in touches) {
         SKNode *n = [self nodeAtPoint:[touch locationInNode:self]];
-        if([n.name isEqualToString:@"fase1"]){
+        if([n.name isEqualToString:@"fase1"] || [n.name isEqualToString:@"henry"]){
             
             [self.musicPlayer stop];
             
@@ -99,7 +100,7 @@
 {
     for (UITouch *touch in touches) {
         SKNode *n = [self nodeAtPoint:[touch locationInNode:self]];
-        if([n.name isEqualToString:@"fase1"]){
+        if([n.name isEqualToString:@"fase1"] || [n.name isEqualToString:@"henry"]){
             
             GameScene *scene = [[GameScene alloc] initWithSize:self.view.bounds.size];
             scene.anchorPoint = CGPointMake(0.5, 0.5);
