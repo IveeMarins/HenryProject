@@ -140,11 +140,14 @@
 }
 -(void)jump
 {
-    if (_flipped) {
+    if (_flipped)
+    {
         [self.physicsBody applyImpulse:CGVectorMake(-28, 100)];
+        
     }
     else{
         [self.physicsBody applyImpulse:CGVectorMake(28, 100)];
+        
     }
     
     
@@ -158,7 +161,7 @@
     SKEmitterNode *lanternLightEmmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:lanternLightEmmiterPath];
     
     
-    lanternLightEmmitter.position = CGPointMake(self.frame.size.width * 0.5 - 3,-20);
+    lanternLightEmmitter.position = CGPointMake(self.frame.size.width * 0.5 - 7,-20);
     
     lanternLightEmmitter.name = @"lanternLightParticle";
     
@@ -179,7 +182,7 @@
     fakeLanternLight.falloff = 0.1;
     fakeLanternLight.ambientColor = [UIColor whiteColor];
     fakeLanternLight.lightColor = lanternLightEmmitter.particleColor;
-    fakeLanternLight.shadowColor = [[UIColor alloc] initWithRed:1.0 green:1.0 blue:1.0 alpha:0.3];
+    fakeLanternLight.shadowColor = [[UIColor alloc] initWithRed:89.0/255.0f green:161.0/255.0f  blue:87.0/255.0f  alpha:0.3];
     fakeLanternLight.name = @"fakeLanternLight";
     
     

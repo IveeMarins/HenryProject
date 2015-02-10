@@ -30,11 +30,16 @@
 		2554FEF11A870FE1006A0389 /* BatSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2554FEF01A870FE1006A0389 /* BatSound.mp3 */; };
 		2554FEF51A8716A7006A0389 /* startScreenMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2554FEF41A8716A7006A0389 /* startScreenMusic.mp3 */; };
 		2554FEF71A871787006A0389 /* worldStageSelector.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2554FEF61A871787006A0389 /* worldStageSelector.mp3 */; };
+		2554FEFD1A890FF6006A0389 /* Energy.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2554FEFC1A890FF6006A0389 /* Energy.sks */; };
+		2554FEFF1A892890006A0389 /* EnergyBig.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2554FEFE1A892890006A0389 /* EnergyBig.sks */; };
+		2554FF021A892B6A006A0389 /* Energy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2554FF011A892B6A006A0389 /* Energy.m */; };
+		2554FF041A893661006A0389 /* energy.png in Resources */ = {isa = PBXBuildFile; fileRef = 2554FF031A893661006A0389 /* energy.png */; };
 		2570F0A41A824DAF0057E24C /* spriteHenryLanternLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 2570F0A31A824DAF0057E24C /* spriteHenryLanternLeft.png */; };
 		2570F0AA1A8283B00057E24C /* idleLeft.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2570F0A91A8283B00057E24C /* idleLeft.atlas */; };
 		2570F0AC1A8283B50057E24C /* runLeft.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2570F0AB1A8283B50057E24C /* runLeft.atlas */; };
 		25B658761A7691F000836621 /* Ghost.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B658751A7691F000836621 /* Ghost.m */; };
 		25B658781A76937400836621 /* ghost.png in Resources */ = {isa = PBXBuildFile; fileRef = 25B658771A76937400836621 /* ghost.png */; };
+		25BFD23F1A895B1C00684FB7 /* energyExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 25BFD23E1A895B1C00684FB7 /* energyExplosion.sks */; };
 		25C7C5261A82B8EB0075A061 /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C5241A82B8EB0075A061 /* bokeh.png */; };
 		25C7C52A1A82BCCF0075A061 /* LanternMagicFirstScreen.sks in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C5291A82BCCF0075A061 /* LanternMagicFirstScreen.sks */; };
 		25C7C52C1A82BD7D0075A061 /* DyingEnemy.sks in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C52B1A82BD7D0075A061 /* DyingEnemy.sks */; };
@@ -141,12 +146,18 @@
 		2554FEF01A870FE1006A0389 /* BatSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BatSound.mp3; sourceTree = "<group>"; };
 		2554FEF41A8716A7006A0389 /* startScreenMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = startScreenMusic.mp3; sourceTree = "<group>"; };
 		2554FEF61A871787006A0389 /* worldStageSelector.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = worldStageSelector.mp3; sourceTree = "<group>"; };
+		2554FEFC1A890FF6006A0389 /* Energy.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Energy.sks; sourceTree = "<group>"; };
+		2554FEFE1A892890006A0389 /* EnergyBig.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = EnergyBig.sks; sourceTree = "<group>"; };
+		2554FF001A892B6A006A0389 /* Energy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Energy.h; sourceTree = "<group>"; };
+		2554FF011A892B6A006A0389 /* Energy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Energy.m; sourceTree = "<group>"; };
+		2554FF031A893661006A0389 /* energy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = energy.png; sourceTree = "<group>"; };
 		2570F0A31A824DAF0057E24C /* spriteHenryLanternLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spriteHenryLanternLeft.png; sourceTree = "<group>"; };
 		2570F0A91A8283B00057E24C /* idleLeft.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = idleLeft.atlas; sourceTree = "<group>"; };
 		2570F0AB1A8283B50057E24C /* runLeft.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = runLeft.atlas; sourceTree = "<group>"; };
 		25B658741A7691F000836621 /* Ghost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ghost.h; sourceTree = "<group>"; };
 		25B658751A7691F000836621 /* Ghost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ghost.m; sourceTree = "<group>"; };
 		25B658771A76937400836621 /* ghost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ghost.png; sourceTree = "<group>"; };
+		25BFD23E1A895B1C00684FB7 /* energyExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = energyExplosion.sks; sourceTree = "<group>"; };
 		25C7C5241A82B8EB0075A061 /* bokeh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bokeh.png; sourceTree = "<group>"; };
 		25C7C5291A82BCCF0075A061 /* LanternMagicFirstScreen.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LanternMagicFirstScreen.sks; sourceTree = "<group>"; };
 		25C7C52B1A82BD7D0075A061 /* DyingEnemy.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DyingEnemy.sks; sourceTree = "<group>"; };
@@ -292,6 +303,9 @@
 		2540F80D1A71467A00AB4625 = {
 			isa = PBXGroup;
 			children = (
+				25BFD23E1A895B1C00684FB7 /* energyExplosion.sks */,
+				2554FEFE1A892890006A0389 /* EnergyBig.sks */,
+				2554FEFC1A890FF6006A0389 /* Energy.sks */,
 				25C7C54C1A845B2B0075A061 /* VictoryLightParticle.sks */,
 				25C7C52B1A82BD7D0075A061 /* DyingEnemy.sks */,
 				25C7C5291A82BCCF0075A061 /* LanternMagicFirstScreen.sks */,
@@ -337,6 +351,8 @@
 				2EE9EF521A76CADF00A6A3B0 /* Mundos.m */,
 				339EA2511A7BEC96003B0BBD /* FasesMundo1.h */,
 				339EA2521A7BEC96003B0BBD /* FasesMundo1.m */,
+				2554FF001A892B6A006A0389 /* Energy.h */,
+				2554FF011A892B6A006A0389 /* Energy.m */,
 				2540F8281A71467A00AB4625 /* Main.storyboard */,
 				2540F82B1A71467A00AB4625 /* Images.xcassets */,
 				250627A91A75712B00325CEE /* Henry */,
@@ -355,6 +371,7 @@
 				3BF898891A86A406000C809E /* fasesScene.png */,
 				3BF898871A869D4B000C809E /* worldScene.png */,
 				25C7C5581A851AFD0075A061 /* buttonStart.png */,
+				2554FF031A893661006A0389 /* energy.png */,
 				25C7C5561A851AEE0075A061 /* lanternInicial.png */,
 				25C7C5541A851AB60075A061 /* telaInicial.png */,
 				3386CF2D1A82846E005371BD /* soundOn.png */,
@@ -501,11 +518,11 @@
 				TargetAttributes = {
 					2540F8151A71467A00AB4625 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 57CV2KEP2D;
+						DevelopmentTeam = 26M9MN8LPE;
 					};
 					2540F8331A71467A00AB4625 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 57CV2KEP2D;
+						DevelopmentTeam = 26M9MN8LPE;
 						TestTargetID = 2540F8151A71467A00AB4625;
 					};
 				};
@@ -554,6 +571,7 @@
 				339EA24F1A7943F7003B0BBD /* kopp.png in Resources */,
 				25C7C5411A8405640075A061 /* henryDeathLeft.atlas in Resources */,
 				25C7C53F1A84040E0075A061 /* henryDeath.atlas in Resources */,
+				2554FEFF1A892890006A0389 /* EnergyBig.sks in Resources */,
 				3BF898821A867BDF000C809E /* Icon-76.png in Resources */,
 				25C7C5261A82B8EB0075A061 /* bokeh.png in Resources */,
 				3BF898851A867BDF000C809E /* Icon-Small@2x.png in Resources */,
@@ -568,9 +586,11 @@
 				339EA2331A77FBB0003B0BBD /* groundRamp.png in Resources */,
 				3BF8988A1A86A406000C809E /* fasesScene.png in Resources */,
 				2554FEEF1A853A68006A0389 /* wall.png in Resources */,
+				2554FEFD1A890FF6006A0389 /* Energy.sks in Resources */,
 				250628041A75F8C400325CEE /* nightForestSound.mp3 in Resources */,
 				25C7C5531A846A820075A061 /* victoryMusic.mp3 in Resources */,
 				3BF898801A867BDF000C809E /* Icon-60@2x.png in Resources */,
+				25BFD23F1A895B1C00684FB7 /* energyExplosion.sks in Resources */,
 				250627BE1A758AF200325CEE /* gear.png in Resources */,
 				2554FEF71A871787006A0389 /* worldStageSelector.mp3 in Resources */,
 				250628021A75F8C000325CEE /* nightForestMusic.mp3 in Resources */,
@@ -602,6 +622,7 @@
 				250627C01A758F3F00325CEE /* book.png in Resources */,
 				3BF8987D1A867BDF000C809E /* Icon-40.png in Resources */,
 				2570F0A41A824DAF0057E24C /* spriteHenryLanternLeft.png in Resources */,
+				2554FF041A893661006A0389 /* energy.png in Resources */,
 				250627C21A7593AB00325CEE /* magicStone.png in Resources */,
 				25C7C5301A83ECE40075A061 /* xButton.png in Resources */,
 				3BA8DEE11A768A4D00740706 /* backgroundTrees.png in Resources */,
@@ -627,6 +648,7 @@
 			files = (
 				25FCDB561A72905C00B842F2 /* Enemy.m in Sources */,
 				2540F8271A71467A00AB4625 /* GameViewController.m in Sources */,
+				2554FF021A892B6A006A0389 /* Energy.m in Sources */,
 				339EA2531A7BEC96003B0BBD /* FasesMundo1.m in Sources */,
 				2540F81F1A71467A00AB4625 /* AppDelegate.m in Sources */,
 				2EE9EF531A76CADF00A6A3B0 /* Mundos.m in Sources */,

@@ -14,6 +14,7 @@
 #import "VictoryLight.h"
 #import "FasesMundo1.h"
 #import "MyPoint.h"
+#import "Energy.h"
 
 @interface GameScene ()
 
@@ -22,6 +23,7 @@
 @property BOOL isGamePaused;
 @property NSMutableArray *batPositionArray;
 @property NSMutableArray *ghostPositionArray;
+@property NSMutableArray *energyPositionArray;
 @property SKLabelNode *somOptionConfigButton;
 @property SKLabelNode *languageOptionConfigButton;
 
@@ -78,6 +80,7 @@
     BOOL _flipped; //If Henry's image is flipped to walk left
     BOOL _win;
     BOOL _isOpen;
+    int _contador;
     BOOL _tutorialOver;
     
 }
@@ -86,6 +89,7 @@ static const uint32_t GROUND_CATEGORY = 0x1;
 static const uint32_t PLAYER_CATEGORY = 0x1 << 1;
 static const uint32_t ENEMY_CATEGORY = 0x1 << 2;
 static const uint32_t KILL_ENEMY_CATEGORY = 0x1 << 3;
+static const uint32_t ENERGY_CATEGORY = 0x1 << 4;
 static const uint32_t VICTORY_LIGHT_CATEGORY = 0x1 << 28;
 static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 
@@ -112,6 +116,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     [self setGroundsAndWall];
     [self setHUD];
     
+    [self initializeEnergy];
     [self initializeBats];
     [self initializeGhosts];
     [self setSound];
@@ -119,7 +124,6 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     [self inserVictoryLight];
     
     //Inserting Victory Light - Ending of stage
-    
     
 }
 -(void) setTutorial{
@@ -290,6 +294,47 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     
 }
 
+-(void) initializeEnergy{
+    
+    _energyPositionArray = [self initializeArrayByType:@"energy"];
+    
+    int energyCount = 4;
+    
+    for (NSObject *object in _energyPositionArray){
+        int padding = 0 ;
+        
+        for (int i = 0; i < energyCount; i++){
+            
+            MyPoint *point = (MyPoint*) object;
+            Energy *energy = [Energy energy];
+            
+            CGPoint position = point.myPoint;
+            position.x += padding;
+            point = [[MyPoint alloc]Init: position];
+            
+            energy.position = point.myPoint;
+            energy.physicsBody.categoryBitMask = ENERGY_CATEGORY;
+            energy.physicsBody.collisionBitMask = 0;
+            energy.physicsBody.contactTestBitMask = PLAYER_CATEGORY;
+            energy.zPosition = 2;
+            
+            padding += 30;
+            [_world addChild:energy];
+            
+        }
+        
+        if (energyCount == 4){
+            energyCount = 3;
+        }else{
+            energyCount = 4;
+        }
+
+        
+    }
+    
+    
+}
+
 -(void) initializeGhosts{
     
     _ghostPositionArray = [self initializeArrayByType:@"ghost"];
@@ -338,24 +383,28 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     
     NSMutableArray *array = [[NSMutableArray alloc] init];
     
-    int numberOfEnemys;
+    int numberOfElements;
     int constant_x;
     CGPoint initialPoint;
     
     if ([type isEqualToString:@"bat"]){
         initialPoint = CGPointMake(1000, 30);
-        numberOfEnemys = 5;
+        numberOfElements = 7;
         constant_x = 600;
-    }else{
+    }else if([type isEqualToString:@"ghost"]){
         initialPoint = CGPointMake(700, 100);
-        numberOfEnemys = 4;
+        numberOfElements = 6;
         constant_x = 1000;
+    }else if([type isEqualToString:@"energy"]){
+        initialPoint = CGPointMake(300, 35);
+        numberOfElements = 10;
+        constant_x = 800;
     }
     
     MyPoint *point = [[MyPoint alloc]Init: initialPoint];
     [array addObject: point];
     
-    for (int i = 0 ; i < numberOfEnemys; i++) {
+    for (int i = 0 ; i < numberOfElements; i++) {
         
         initialPoint.x += constant_x;
         point = [[MyPoint alloc]Init: initialPoint];
@@ -461,13 +510,19 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     [_HUD addChild:_lifeLabel];
     
     _labelScore = [SKLabelNode labelNodeWithFontNamed:_fontName];
-    _labelScore.position = CGPointMake(_lifeLabel.position.x - 10, _lifeLabel.position.y - 30);
+    _labelScore.position = CGPointMake(_lifeLabel.position.x - 10, _lifeLabel.position.y - 40);
     _labelScore.fontSize = 20;
     _labelScore.fontColor = [UIColor whiteColor];
     _labelScore.text = [NSString stringWithFormat:@"%d",_score];
     _lifeLabel.zPosition = 2;
     
     [_HUD addChild:_labelScore];
+    
+    NSString *energyEmmiterPath = [[NSBundle mainBundle] pathForResource:@"Energy" ofType:@"sks"];
+    SKEmitterNode *energyEmmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:energyEmmiterPath];
+    energyEmmitter.position = CGPointMake(life.position.x, _labelScore.position.y + 5);
+    
+    [_HUD addChild:energyEmmitter];
     
     [self timer];
     
@@ -1035,6 +1090,12 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
         
         [self performSelector:@selector(endStage) withObject:self afterDelay:8];
     }
+    else if(firstBody.categoryBitMask == PLAYER_CATEGORY && secondBody.categoryBitMask == ENERGY_CATEGORY){
+     
+        Energy *energy = (Energy *) secondBody.node;
+        [energy collectToPosition:firstBody.node.position];
+        self.score++;
+    }
     
 }
 
@@ -1079,9 +1140,17 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
             [ghost attackPlayer:_henry];
         }
     }];
-    
+    _contador = 0;
     [_henry enumerateChildNodesWithName:@"killerLine" usingBlock:^(SKNode *node, BOOL *stop) {
-        node.position = CGPointMake(node.position.x,-20);
+
+        if (_flipped) {
+            node.position = CGPointMake((_henry.frame.size.width * 0.5 + 5 + 5*_contador) * (-1),-20);
+            _contador++;
+        }
+        else{
+        node.position = CGPointMake(_henry.frame.size.width * 0.5 + 5 + 5*_contador,-20);
+        _contador++;
+        }
     }];
     
     
