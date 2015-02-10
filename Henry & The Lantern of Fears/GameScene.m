@@ -141,7 +141,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     _tutorialBackground.zPosition = 3;
     
     _startLabel = [SKLabelNode labelNodeWithFontNamed:_fontName];
-    _startLabel.position = CGPointMake(0, -_tutorialBackground.frame.size.height * 0.35);
+    _startLabel.position = CGPointMake(_tutorialBackground.frame.size.width * 0.12, -_tutorialBackground.frame.size.height * 0.4);
     _startLabel.fontSize = 40;
     _startLabel.fontColor = [UIColor colorWithRed:36.0f/255.0f green:64.0f/255.0f blue:96.0f/255.0f alpha:1];
     _startLabel.zPosition = 3;
@@ -149,13 +149,62 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     _startLabel.text = @"Ok";
 
     _textTutorialLabel = [SKLabelNode labelNodeWithFontNamed:_fontName];
-    _textTutorialLabel.position = CGPointMake(0, _tutorialBackground.frame.size.height * 0.3);
-    _textTutorialLabel.fontSize = 25;
+    _textTutorialLabel.position = CGPointMake(_tutorialBackground.frame.size.width * 0.12, _tutorialBackground.frame.size.height * 0.38);
+    _textTutorialLabel.fontSize = 22;
     _textTutorialLabel.fontColor = [UIColor colorWithRed:36.0f/255.0f green:64.0f/255.0f blue:96.0f/255.0f alpha:1];
     _textTutorialLabel.name = @"textTutorial";
     _textTutorialLabel.zPosition = 3;
-    _textTutorialLabel.text = @"Olá, eu sou o Kopp!";
+    _textTutorialLabel.text = [NSString stringWithFormat:@"Olá, eu sou o Kopp!"];
 
+    SKLabelNode *textTutorialLabel1 = [SKLabelNode labelNodeWithFontNamed:_fontName];
+    textTutorialLabel1.position = CGPointMake(_tutorialBackground.frame.size.width * 0.12, _tutorialBackground.frame.size.height * 0.38 - _textTutorialLabel.frame.size.height);
+    textTutorialLabel1.fontSize = 22;
+    textTutorialLabel1.fontColor = [UIColor colorWithRed:36.0f/255.0f green:64.0f/255.0f blue:96.0f/255.0f alpha:1];
+    textTutorialLabel1.name = @"textTutorial1";
+    textTutorialLabel1.zPosition = 3;
+    textTutorialLabel1.text = [NSString stringWithFormat:@"Não fique com medo."];
+
+    SKLabelNode *textTutorialLabel2 = [SKLabelNode labelNodeWithFontNamed:_fontName];
+    textTutorialLabel2.position = CGPointMake(_tutorialBackground.frame.size.width * 0.12, _tutorialBackground.frame.size.height * 0.38 - (_textTutorialLabel.frame.size.height * 2));
+    textTutorialLabel2.fontSize = 22;
+    textTutorialLabel2.fontColor = [UIColor colorWithRed:36.0f/255.0f green:64.0f/255.0f blue:96.0f/255.0f alpha:1];
+    textTutorialLabel2.name = @"textTutorial2";
+    textTutorialLabel2.zPosition = 3;
+    textTutorialLabel2.text = [NSString stringWithFormat:@"A lanterna que você tem"];
+    
+    SKLabelNode *textTutorialLabel3 = [SKLabelNode labelNodeWithFontNamed:_fontName];
+    textTutorialLabel3.position = CGPointMake(_tutorialBackground.frame.size.width * 0.12, _tutorialBackground.frame.size.height * 0.38 - (_textTutorialLabel.frame.size.height * 3));
+    textTutorialLabel3.fontSize = 22;
+    textTutorialLabel3.fontColor = [UIColor colorWithRed:36.0f/255.0f green:64.0f/255.0f blue:96.0f/255.0f alpha:1];
+    textTutorialLabel3.name = @"textTutorial3";
+    textTutorialLabel3.zPosition = 3;
+    textTutorialLabel3.text = [NSString stringWithFormat:@"nas mãos gera uma"];
+    
+    SKLabelNode *textTutorialLabel4 = [SKLabelNode labelNodeWithFontNamed:_fontName];
+    textTutorialLabel4.position = CGPointMake(_tutorialBackground.frame.size.width * 0.12, _tutorialBackground.frame.size.height * 0.38 - (_textTutorialLabel.frame.size.height * 4));
+    textTutorialLabel4.fontSize = 22;
+    textTutorialLabel4.fontColor = [UIColor colorWithRed:36.0f/255.0f green:64.0f/255.0f blue:96.0f/255.0f alpha:1];
+    textTutorialLabel4.name = @"textTutorial4";
+    textTutorialLabel4.zPosition = 3;
+    textTutorialLabel4.text = [NSString stringWithFormat:@"luz muito poderosa!"];
+    
+    SKLabelNode *textTutorialLabel5 = [SKLabelNode labelNodeWithFontNamed:_fontName];
+    textTutorialLabel5.position = CGPointMake(_tutorialBackground.frame.size.width * 0.12, _tutorialBackground.frame.size.height * 0.38 - (_textTutorialLabel.frame.size.height * 5));
+    textTutorialLabel5.fontSize = 22;
+    textTutorialLabel5.fontColor = [UIColor colorWithRed:36.0f/255.0f green:64.0f/255.0f blue:96.0f/255.0f alpha:1];
+    textTutorialLabel5.name = @"textTutorial5";
+    textTutorialLabel5.zPosition = 3;
+    textTutorialLabel5.text = [NSString stringWithFormat:@"Combine-a com a sua coragem"];
+    
+    SKLabelNode *textTutorialLabel6 = [SKLabelNode labelNodeWithFontNamed:_fontName];
+    textTutorialLabel6.position = CGPointMake(_tutorialBackground.frame.size.width * 0.12, _tutorialBackground.frame.size.height * 0.38 - (_textTutorialLabel.frame.size.height * 6));
+    textTutorialLabel6.fontSize = 22;
+    textTutorialLabel6.fontColor = [UIColor colorWithRed:36.0f/255.0f green:64.0f/255.0f blue:96.0f/255.0f alpha:1];
+    textTutorialLabel6.name = @"textTutorial5";
+    textTutorialLabel6.zPosition = 3;
+    textTutorialLabel6.text = [NSString stringWithFormat:@"e supere seus medos!"];
+
+    
     SKSpriteNode *tutorialKopp = [SKSpriteNode spriteNodeWithImageNamed:@"kopp"];
     tutorialKopp.zPosition = 3;
     tutorialKopp.position = CGPointMake(-_tutorialBackground.frame.size.width * 0.5 -_tutorialBackground.frame.size.width *0.2, -_tutorialBackground.frame.size.height * 0.5 + _tutorialBackground.frame.size.height *0.1);
@@ -171,6 +220,12 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     [_tutorial addChild: _tutorialBackground];
     [_tutorialBackground addChild: _startLabel];
     [_tutorial addChild: _textTutorialLabel];
+    [_tutorial addChild: textTutorialLabel1];
+    [_tutorial addChild: textTutorialLabel2];
+    [_tutorial addChild: textTutorialLabel3];
+    [_tutorial addChild: textTutorialLabel4];
+    [_tutorial addChild: textTutorialLabel5];
+    [_tutorial addChild: textTutorialLabel6];
     [_tutorial addChild: tutorialKopp];
     [_tutorial addChild: tutorialLanternButton];
     [self animateWithPulse: tutorialLanternButton];
