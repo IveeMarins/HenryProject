@@ -58,6 +58,8 @@
 		25C7C5551A851AB60075A061 /* telaInicial.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C5541A851AB60075A061 /* telaInicial.png */; };
 		25C7C5571A851AEE0075A061 /* lanternInicial.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C5561A851AEE0075A061 /* lanternInicial.png */; };
 		25C7C5591A851AFD0075A061 /* buttonStart.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C7C5581A851AFD0075A061 /* buttonStart.png */; };
+		25DE9A551A8D008200E21C98 /* energyCollect.wav in Resources */ = {isa = PBXBuildFile; fileRef = 25DE9A541A8D008200E21C98 /* energyCollect.wav */; };
+		25DE9A8A1A8D0AA000E21C98 /* Werewolf.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DE9A891A8D0AA000E21C98 /* Werewolf.m */; };
 		25FB5C2B1A7AFD1000E1A2B6 /* run.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 25FB5C2A1A7AFD1000E1A2B6 /* run.atlas */; };
 		25FB5C3F1A7B1CCA00E1A2B6 /* spriteHenryLantern.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FB5C3E1A7B1CCA00E1A2B6 /* spriteHenryLantern.png */; };
 		25FB5C411A7B200300E1A2B6 /* idle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 25FB5C401A7B200300E1A2B6 /* idle.atlas */; };
@@ -177,6 +179,9 @@
 		25C7C5541A851AB60075A061 /* telaInicial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = telaInicial.png; sourceTree = "<group>"; };
 		25C7C5561A851AEE0075A061 /* lanternInicial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lanternInicial.png; sourceTree = "<group>"; };
 		25C7C5581A851AFD0075A061 /* buttonStart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonStart.png; sourceTree = "<group>"; };
+		25DE9A541A8D008200E21C98 /* energyCollect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = energyCollect.wav; sourceTree = "<group>"; };
+		25DE9A881A8D0AA000E21C98 /* Werewolf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Werewolf.h; sourceTree = "<group>"; };
+		25DE9A891A8D0AA000E21C98 /* Werewolf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Werewolf.m; sourceTree = "<group>"; };
 		25FB5C2A1A7AFD1000E1A2B6 /* run.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = run.atlas; sourceTree = "<group>"; };
 		25FB5C3E1A7B1CCA00E1A2B6 /* spriteHenryLantern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spriteHenryLantern.png; sourceTree = "<group>"; };
 		25FB5C401A7B200300E1A2B6 /* idle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = idle.atlas; sourceTree = "<group>"; };
@@ -381,6 +386,7 @@
 				339EA2421A7927F9003B0BBD /* startScreenBackground.jpg */,
 				339EA22D1A77FBB0003B0BBD /* terrain */,
 				250628011A75F8C000325CEE /* nightForestMusic.mp3 */,
+				25DE9A541A8D008200E21C98 /* energyCollect.wav */,
 				2554FEF61A871787006A0389 /* worldStageSelector.mp3 */,
 				2554FEF41A8716A7006A0389 /* startScreenMusic.mp3 */,
 				25C7C5521A846A820075A061 /* victoryMusic.mp3 */,
@@ -434,6 +440,8 @@
 				25B658771A76937400836621 /* ghost.png */,
 				25B658741A7691F000836621 /* Ghost.h */,
 				25B658751A7691F000836621 /* Ghost.m */,
+				25DE9A881A8D0AA000E21C98 /* Werewolf.h */,
+				25DE9A891A8D0AA000E21C98 /* Werewolf.m */,
 			);
 			name = Enemies;
 			sourceTree = "<group>";
@@ -518,11 +526,11 @@
 				TargetAttributes = {
 					2540F8151A71467A00AB4625 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 26M9MN8LPE;
+						DevelopmentTeam = FAKA3ZSP37;
 					};
 					2540F8331A71467A00AB4625 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 26M9MN8LPE;
+						DevelopmentTeam = FAKA3ZSP37;
 						TestTargetID = 2540F8151A71467A00AB4625;
 					};
 				};
@@ -564,6 +572,7 @@
 				25FB5C2B1A7AFD1000E1A2B6 /* run.atlas in Resources */,
 				339EA2431A7927F9003B0BBD /* startScreenBackground.jpg in Resources */,
 				25C7C52A1A82BCCF0075A061 /* LanternMagicFirstScreen.sks in Resources */,
+				25DE9A551A8D008200E21C98 /* energyCollect.wav in Resources */,
 				339EA2321A77FBB0003B0BBD /* spikes.png in Resources */,
 				3386CF321A82BBE0005371BD /* KGLuckoftheIrish.ttf in Resources */,
 				339EA23E1A77FC77003B0BBD /* idle1.png in Resources */,
@@ -646,6 +655,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25DE9A8A1A8D0AA000E21C98 /* Werewolf.m in Sources */,
 				25FCDB561A72905C00B842F2 /* Enemy.m in Sources */,
 				2540F8271A71467A00AB4625 /* GameViewController.m in Sources */,
 				2554FF021A892B6A006A0389 /* Energy.m in Sources */,
