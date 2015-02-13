@@ -124,9 +124,6 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     [self insertHenryAndKopp];
     [self inserVictoryLight];
     
-    Werewolf *werewolf = [Werewolf werewolf];
-    werewolf.position = CGPointMake(300,0);
-    [_world addChild:werewolf];
 }
 -(void) setTutorial{
     _tutorial = [SKNode node];

@@ -20,10 +20,9 @@
 
 +(id)werewolf{
     
-    Werewolf *werewolf = [Werewolf spriteNodeWithColor:[UIColor purpleColor] size:CGSizeMake(20, 20)];
-    
+    Werewolf *werewolf = [Werewolf spriteNodeWithImageNamed:@"werewolf"];
+    werewolf.size = CGSizeMake(191,150);
     werewolf.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:werewolf.size];
-    werewolf.physicsBody.affectedByGravity = NO;
     werewolf.physicsBody.allowsRotation = NO;
     werewolf.name = @"werewolf";
     [werewolf move];
@@ -32,12 +31,17 @@
 }
 -(void)move
 {
-        
-        SKAction *runWithLimits = [SKAction sequence:@[[SKAction moveByX:self.position.x - 200 y:0 duration:4],
-                                                       [SKAction moveByX:self.position.y + 200 y:0 duration:4]]];
-        
-        
-        [self runAction: [SKAction repeatActionForever:runWithLimits]];
+    CGFloat werewolfScale = self.xScale;
+    
+    SKAction *runLeft = [SKAction sequence:@[[SKAction moveByX:self.position.x - 200 y:0 duration:4],
+                                                  [SKAction scaleXTo:werewolfScale * -1 duration:0]]];
+    
+    werewolfScale = self.xScale * -1;
+    
+    SKAction *runRight = [SKAction sequence:@[[SKAction moveByX:self.position.x + 200 y:0 duration:4],
+                                             [SKAction scaleXTo:werewolfScale * -1 duration:0]]];
+    
+    [self runAction: [SKAction repeatActionForever:[SKAction sequence:@[runLeft,runRight]]]];
     
         
 }
