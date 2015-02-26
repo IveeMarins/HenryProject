@@ -32,6 +32,8 @@
     self.energyEmmiter = [NSKeyedUnarchiver unarchiveObjectWithFile:energyEmmiterPath];
     [self addChild:self.energyEmmiter];
     
+    [self runAction:[SKAction playSoundFileNamed:@"energyCollect.wav" waitForCompletion:NO]];
+    
     [self runAction:[SKAction sequence:@[[SKAction waitForDuration:1.5],[SKAction removeFromParent]]]];
     
 }

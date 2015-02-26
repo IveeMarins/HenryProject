@@ -15,11 +15,15 @@
 #import "FasesMundo1.h"
 #import "MyPoint.h"
 #import "Energy.h"
+<<<<<<< HEAD
 #import "HUD.h"
 #import "SoundDefiner.h"
 #import "BackgroundGenerator.h"
 #import "FaseVitoria.h"
 
+=======
+#import "Werewolf.h"
+>>>>>>> FETCH_HEAD
 
 @interface GameScene ()
 
@@ -122,8 +126,6 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     [self setSound];
     [self insertHenryAndKopp];
     [self inserVictoryLight];
-    
-    //Inserting Victory Light - Ending of stage
     
 }
 -(void) setTutorial{
@@ -459,7 +461,6 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     firstWall.size = CGSizeMake(24,self.frame.size.height);
     firstWall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:firstWall.size];
     firstWall.physicsBody.dynamic = NO;
-    firstWall.physicsBody.categoryBitMask = GROUND_CATEGORY;
     [_world addChild:firstWall];
     
     [self generateWorldWithImage:@"ground" repeat:3];
@@ -476,7 +477,6 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     lastWall.size = CGSizeMake(24,self.frame.size.height);
     lastWall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:firstWall.size];
     lastWall.physicsBody.dynamic = NO;
-    lastWall.physicsBody.categoryBitMask = GROUND_CATEGORY;
     [_world addChild:lastWall];
     
 }
