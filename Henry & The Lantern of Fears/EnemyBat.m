@@ -1,25 +1,28 @@
 //
-//  Bat.m
+//  EnemyBat.m
 //  Henry & The Lantern of Fears
 //
-//  Created by Adriano Alves Ribeiro Gonçalves on 1/23/15.
+//  Created by Ivee Mendes Marins on 2/25/15.
 //  Copyright (c) 2015 ABHI. All rights reserved.
 //
 
-#import "Bat.h"
+#import "EnemyBat.h"
 #import "Henry.h"
 
-@implementation Bat
+@implementation EnemyBat
+
 {
     
     NSArray *_animationFrames;
     BOOL _attacking;
 }
 
-+(id)bat
+
++(id)createEnemy
 {
+    [super createEnemy];
     
-    Bat *bat = [Bat spriteNodeWithImageNamed:@"bat"];
+    EnemyBat *bat = [EnemyBat spriteNodeWithImageNamed:@"bat"];
     
     bat.size = CGSizeMake(56, 60);
     
@@ -34,6 +37,7 @@
 
 -(void)attackPlayer:(Henry *)henry
 {
+    [super attackPlayer:henry];
     if (!_attacking){
         _attacking = YES;
         
@@ -44,9 +48,9 @@
         NSURL *url1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/BatSound.mp3", [[NSBundle mainBundle] resourcePath]]];
         NSError *error;
         
-        self.batSoundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url1 error:&error];
-        self.batSoundPlayer.numberOfLoops = 0;
-        [self.batSoundPlayer play];
+        self.EnemySoundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url1 error:&error];
+        self.EnemySoundPlayer.numberOfLoops = 0;
+        [self.EnemySoundPlayer play];
         
         //Group of actions to make the bat do a sweep going left and down at the same time
         SKAction *leftDownSweep = [SKAction group:@[[SKAction moveToX:self.position.x - 200 duration:2],
@@ -87,7 +91,8 @@
 
 
 -(void)animate{
-    
+ 
+    [super animate];
     NSMutableArray *flyingFrames = [NSMutableArray array];
     SKTextureAtlas *flyingBatAtlas = [SKTextureAtlas atlasNamed:@"batFlying"];
     for (int i = 1; i <= flyingBatAtlas.textureNames.count; i++) {
@@ -103,6 +108,7 @@
 }
 -(void)death
 {
+    [super death];
     [self removeAllActions];
     self.physicsBody.categoryBitMask = 0;
     self.physicsBody.collisionBitMask = 0;
