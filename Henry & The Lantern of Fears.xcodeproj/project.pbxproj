@@ -83,9 +83,12 @@
 		339EA2491A7940CD003B0BBD /* cristalVerde.png in Resources */ = {isa = PBXBuildFile; fileRef = 339EA2481A7940CD003B0BBD /* cristalVerde.png */; };
 		339EA24F1A7943F7003B0BBD /* kopp.png in Resources */ = {isa = PBXBuildFile; fileRef = 339EA24E1A7943F7003B0BBD /* kopp.png */; };
 		339EA2531A7BEC96003B0BBD /* FasesMundo1.m in Sources */ = {isa = PBXBuildFile; fileRef = 339EA2521A7BEC96003B0BBD /* FasesMundo1.m */; };
+		33EE4D9A1AA6359E00860802 /* StageGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EE4D991AA6359E00860802 /* StageGenerator.m */; };
+		33EE4D9D1AA6466300860802 /* Stage1.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EE4D9C1AA6466300860802 /* Stage1.m */; };
+		33EE4DA01AA6580B00860802 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EE4D9F1AA6580B00860802 /* Constants.m */; };
+		33EE4DA31AA6606600860802 /* GroundDefiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EE4DA21AA6606600860802 /* GroundDefiner.m */; };
 		33F105151A9CBC2B004E7A8C /* SoundDefiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F105141A9CBC2B004E7A8C /* SoundDefiner.m */; };
 		33F1051B1A9E0B33004E7A8C /* EnemyBat.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F1051A1A9E0B33004E7A8C /* EnemyBat.m */; };
-		33F105251A9E37B2004E7A8C /* FaseVitoria.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F105241A9E37B2004E7A8C /* FaseVitoria.m */; };
 		33F105281A9F86D0004E7A8C /* BackgroundGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F105271A9F86D0004E7A8C /* BackgroundGenerator.m */; };
 		3B5422611A86560200B09840 /* MyPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B5422601A86560200B09840 /* MyPoint.m */; };
 		3BA8DEDF1A768A1700740706 /* backgroundTrees2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA8DEDE1A768A1700740706 /* backgroundTrees2.png */; };
@@ -213,12 +216,18 @@
 		339EA24E1A7943F7003B0BBD /* kopp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kopp.png; sourceTree = "<group>"; };
 		339EA2511A7BEC96003B0BBD /* FasesMundo1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasesMundo1.h; sourceTree = "<group>"; };
 		339EA2521A7BEC96003B0BBD /* FasesMundo1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasesMundo1.m; sourceTree = "<group>"; };
+		33EE4D981AA6359E00860802 /* StageGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageGenerator.h; sourceTree = "<group>"; };
+		33EE4D991AA6359E00860802 /* StageGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageGenerator.m; sourceTree = "<group>"; };
+		33EE4D9B1AA6466300860802 /* Stage1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stage1.h; sourceTree = "<group>"; };
+		33EE4D9C1AA6466300860802 /* Stage1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stage1.m; sourceTree = "<group>"; };
+		33EE4D9E1AA6580B00860802 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		33EE4D9F1AA6580B00860802 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		33EE4DA11AA6606600860802 /* GroundDefiner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroundDefiner.h; sourceTree = "<group>"; };
+		33EE4DA21AA6606600860802 /* GroundDefiner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroundDefiner.m; sourceTree = "<group>"; };
 		33F105131A9CBC2B004E7A8C /* SoundDefiner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundDefiner.h; sourceTree = "<group>"; };
 		33F105141A9CBC2B004E7A8C /* SoundDefiner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundDefiner.m; sourceTree = "<group>"; };
 		33F105191A9E0B33004E7A8C /* EnemyBat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemyBat.h; sourceTree = "<group>"; };
 		33F1051A1A9E0B33004E7A8C /* EnemyBat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnemyBat.m; sourceTree = "<group>"; };
-		33F105231A9E37B2004E7A8C /* FaseVitoria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaseVitoria.h; sourceTree = "<group>"; };
-		33F105241A9E37B2004E7A8C /* FaseVitoria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaseVitoria.m; sourceTree = "<group>"; };
 		33F105261A9F86D0004E7A8C /* BackgroundGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundGenerator.h; sourceTree = "<group>"; };
 		33F105271A9F86D0004E7A8C /* BackgroundGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundGenerator.m; sourceTree = "<group>"; };
 		3B54225F1A86560200B09840 /* MyPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPoint.h; sourceTree = "<group>"; };
@@ -353,22 +362,13 @@
 				25FCDB401A714AF600B842F2 /* Henry.m */,
 				250627B11A75748200325CEE /* Kopp.h */,
 				250627B21A75748200325CEE /* Kopp.m */,
-				25C7C5491A8443710075A061 /* VictoryLight.h */,
-				25C7C54A1A8443710075A061 /* VictoryLight.m */,
-				333191671A8CFE2400594E36 /* HUD.h */,
-				333191681A8CFE2400594E36 /* HUD.m */,
-				33F105131A9CBC2B004E7A8C /* SoundDefiner.h */,
-				33F105141A9CBC2B004E7A8C /* SoundDefiner.m */,
-				33F105261A9F86D0004E7A8C /* BackgroundGenerator.h */,
-				33F105271A9F86D0004E7A8C /* BackgroundGenerator.m */,
+				33EE4DA41AA6606D00860802 /* StagesTools */,
 				2540F8201A71467A00AB4625 /* GameScene.h */,
 				2540F8211A71467A00AB4625 /* GameScene.m */,
 				2540F8231A71467A00AB4625 /* GameScene.sks */,
 				2540F8251A71467A00AB4625 /* GameViewController.h */,
 				2540F8261A71467A00AB4625 /* GameViewController.m */,
 				2E8CA23A1A76C51F005F41E5 /* Menu.h */,
-				33F105231A9E37B2004E7A8C /* FaseVitoria.h */,
-				33F105241A9E37B2004E7A8C /* FaseVitoria.m */,
 				2E8CA2381A76C518005F41E5 /* Menu.m */,
 				2EE9EF511A76CADF00A6A3B0 /* Mundos.h */,
 				2EE9EF521A76CADF00A6A3B0 /* Mundos.m */,
@@ -471,6 +471,37 @@
 			);
 			name = terrain;
 			path = ground;
+			sourceTree = "<group>";
+		};
+		33EE4DA41AA6606D00860802 /* StagesTools */ = {
+			isa = PBXGroup;
+			children = (
+				25C7C5491A8443710075A061 /* VictoryLight.h */,
+				25C7C54A1A8443710075A061 /* VictoryLight.m */,
+				33F105131A9CBC2B004E7A8C /* SoundDefiner.h */,
+				33F105141A9CBC2B004E7A8C /* SoundDefiner.m */,
+				33EE4DA11AA6606600860802 /* GroundDefiner.h */,
+				33EE4DA21AA6606600860802 /* GroundDefiner.m */,
+				33F105261A9F86D0004E7A8C /* BackgroundGenerator.h */,
+				33F105271A9F86D0004E7A8C /* BackgroundGenerator.m */,
+				33EE4D9E1AA6580B00860802 /* Constants.h */,
+				33EE4D9F1AA6580B00860802 /* Constants.m */,
+				33EE4D981AA6359E00860802 /* StageGenerator.h */,
+				33EE4D991AA6359E00860802 /* StageGenerator.m */,
+				333191671A8CFE2400594E36 /* HUD.h */,
+				333191681A8CFE2400594E36 /* HUD.m */,
+				33EE4DA51AA6609800860802 /* Stages */,
+			);
+			name = StagesTools;
+			sourceTree = "<group>";
+		};
+		33EE4DA51AA6609800860802 /* Stages */ = {
+			isa = PBXGroup;
+			children = (
+				33EE4D9B1AA6466300860802 /* Stage1.h */,
+				33EE4D9C1AA6466300860802 /* Stage1.m */,
+			);
+			name = Stages;
 			sourceTree = "<group>";
 		};
 		33F1051C1A9E0B3B004E7A8C /* Enemy */ = {
@@ -684,15 +715,18 @@
 				2540F8271A71467A00AB4625 /* GameViewController.m in Sources */,
 				2554FF021A892B6A006A0389 /* Energy.m in Sources */,
 				339EA2531A7BEC96003B0BBD /* FasesMundo1.m in Sources */,
+				33EE4D9A1AA6359E00860802 /* StageGenerator.m in Sources */,
 				2540F81F1A71467A00AB4625 /* AppDelegate.m in Sources */,
 				2EE9EF531A76CADF00A6A3B0 /* Mundos.m in Sources */,
 				25B658761A7691F000836621 /* Ghost.m in Sources */,
+				33EE4D9D1AA6466300860802 /* Stage1.m in Sources */,
 				2540F8221A71467A00AB4625 /* GameScene.m in Sources */,
+				33EE4DA31AA6606600860802 /* GroundDefiner.m in Sources */,
+				33EE4DA01AA6580B00860802 /* Constants.m in Sources */,
 				25FCDB411A714AF600B842F2 /* Henry.m in Sources */,
 				33F105281A9F86D0004E7A8C /* BackgroundGenerator.m in Sources */,
 				25C7C54B1A8443710075A061 /* VictoryLight.m in Sources */,
 				2540F81C1A71467A00AB4625 /* main.m in Sources */,
-				33F105251A9E37B2004E7A8C /* FaseVitoria.m in Sources */,
 				33F1051B1A9E0B33004E7A8C /* EnemyBat.m in Sources */,
 				250627B31A75748200325CEE /* Kopp.m in Sources */,
 				2506278E1A72B0E200325CEE /* Bat.m in Sources */,

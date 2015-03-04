@@ -18,7 +18,6 @@
 #import "HUD.h"
 #import "SoundDefiner.h"
 #import "BackgroundGenerator.h"
-#import "FaseVitoria.h"
 
 
 @interface GameScene ()
@@ -252,8 +251,6 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     [_victoryLight insertElements];
     _victoryLight.position = CGPointMake(_currentGroundX - self.frame.size.width, 0);
     [_world addChild:_victoryLight];
-    
-    
 }
 
 -(void) insertHenryAndKopp{
@@ -276,7 +273,9 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     self.soundDefiner = [SoundDefiner createSoundDefiner];
     NSMutableArray *urls = [NSMutableArray array];
     
-    NSURL *url1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/nightForestMusic.mp3", [[NSBundle mainBundle] resourcePath]]];
+    NSString *musicname = @"%@/nightForestMusic.mp3";
+    
+    NSURL *url1 = [NSURL fileURLWithPath:[NSString stringWithFormat:musicname, [[NSBundle mainBundle] resourcePath]]];
     NSURL *url2 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/nightForestSound.mp3", [[NSBundle mainBundle] resourcePath]]];
     
     [urls addObject:url1];
@@ -285,38 +284,7 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     [self.soundDefiner setMusicWithNames:urls];
     
     [self.soundDefiner playMusic];
-
-    
-//    self.configBackgroundMusicFases = [ConfigBackgroundMusicFases createConfigWithSound1:@"%@/nightForestSound.mp3" WithSound2:@"%@/nightForestMusic.mp3"  WithSound3: @"%@/victoryMusic.mp3"];
-//    [self addChild: self.configBackgroundMusicFases];
-//    [self.configBackgroundMusicFases setSound];
-    
-//    self.hud = [HUD createHudWithScore:0 WithLives:3 ];
-//    [self addChild:self.hud];
-//    [self.hud setHudControls];
-//    NSURL *url1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/nightForestSound.mp3", [[NSBundle mainBundle] resourcePath]]];
-//    NSURL *url2 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/nightForestMusic.mp3", [[NSBundle mainBundle] resourcePath]]];
-//    NSURL *url3 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/victoryMusic.mp3", [[NSBundle mainBundle] resourcePath]]];
-//    
-//    NSError *error;
-//    
-//    self.soundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url1 error:&error];
-//    self.soundPlayer.numberOfLoops = -1;
-//    
-//    self.musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url2 error:&error];
-//    self.musicPlayer.numberOfLoops = -1;
-//    
-//    self.victoryMusicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url3 error:&error];
-//    self.victoryMusicPlayer.numberOfLoops = -1;
-//    
-//    if (!self.soundPlayer || !self.musicPlayer)
-//        NSLog([error localizedDescription]);
-//    else{
-//        _soundOn= YES;
-//        [self.soundPlayer play];
-//        [self.musicPlayer play];
-//    }
-//    
+   
 }
 
 -(void) initializeEnergy{
@@ -382,7 +350,8 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     
 }
 
--(void) initializeBats{
+-(void) initializeBats
+{
     
     _batPositionArray = [self initializeArrayByType:@"bat"];
     
@@ -406,7 +375,8 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     
 }
 
--(NSMutableArray*) initializeArrayByType:(NSString*) type{
+-(NSMutableArray*) initializeArrayByType:(NSString*) type
+{
     
     NSMutableArray *array = [[NSMutableArray alloc] init];
     
@@ -443,7 +413,8 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
     return array;
 }
 
--(void) setHUD{
+-(void) setHUD
+{
     self.hud = [HUD createHudWithScore:0 WithLives:3 ];
     [self addChild:self.hud];
     [self.hud setHudControls];
@@ -451,7 +422,8 @@ static const uint32_t LIGHT_CATEGORY = 0x1 << 31;
 }
 
 
--(void) setGroundsAndWall{
+-(void) setGroundsAndWall
+{
     
     _currentGroundX = 0;
     SKSpriteNode *firstWall = [SKSpriteNode spriteNodeWithImageNamed:@"wall"];

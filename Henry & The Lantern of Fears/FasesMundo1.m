@@ -9,6 +9,7 @@
 #import "FasesMundo1.h"
 #import "GameScene.h"
 #import "Henry.h"
+#import "Stage1.h"
 
 @implementation FasesMundo1
 {
@@ -101,11 +102,15 @@
     for (UITouch *touch in touches) {
         SKNode *n = [self nodeAtPoint:[touch locationInNode:self]];
         if([n.name isEqualToString:@"fase1"] || [n.name isEqualToString:@"henry"]){
-            
-            GameScene *scene = [[GameScene alloc] initWithSize:self.view.bounds.size];
+
+            Stage1 *scene = [[Stage1 alloc] initWithSize:self.view.bounds.size];
             scene.anchorPoint = CGPointMake(0.5, 0.5);
             scene.scaleMode = SKSceneScaleModeAspectFill;
             
+//            GameScene *scene = [[GameScene alloc] initWithSize:self.view.bounds.size];
+//            scene.anchorPoint = CGPointMake(0.5, 0.5);
+//            scene.scaleMode = SKSceneScaleModeAspectFill;
+//            
             // Present the scene.
             SKTransition *reveal = [SKTransition fadeWithDuration:3];
             [self.view presentScene:scene transition: reveal];
